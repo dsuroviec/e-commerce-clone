@@ -21,6 +21,10 @@ app.post("/api/login", (req, res, next) => {
         .catch((error) => next(error));
 });
 
+// app.post('.api/createProduct', (req,res, next)=>{
+//     createProduct(req.body).then(())
+// })
+
 app.post("/api/signup", (req, res, next) => {
     createUser(req.body)
         .then((token) => {

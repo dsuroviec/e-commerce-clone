@@ -9,13 +9,13 @@ export const SignUp = () => {
     const { token, setToken } = useContext(TokenContext)!;
     // const [firstName, setFirstName] = useState<string>("");
     // const [lastName, setLastName] = useState<string>("");
-    // const [username, setUsername] = useState<string>("");
+    // const [email, setemail] = useState<string>("");
     // const [password, setPassword] = useState<string>("");
 
     interface Fields {
         firstName?: string;
         lastName?: string;
-        username?: string;
+        email?: string;
         password?: string;
     }
     // console.log(
@@ -25,10 +25,10 @@ export const SignUp = () => {
         initialValues: {
             firstName: "",
             lastName: "",
-            username: "",
+            email: "",
             password: "",
         },
-        validate: ({ firstName, lastName, username, password }) => {
+        validate: ({ firstName, lastName, email, password }) => {
             const errors: Fields = {};
 
             if (!firstName) {
@@ -39,11 +39,10 @@ export const SignUp = () => {
                 errors.lastName = "Required";
             }
 
-            if (!username) {
-                errors.username = "Required";
-            } else if (username.length < 5) {
-                errors.username =
-                    "Please make username more than 5 characters ";
+            if (!email) {
+                errors.email = "Required";
+            } else if (email.length < 5) {
+                errors.email = "Please make email more than 5 characters ";
             }
 
             if (!password) {
@@ -58,7 +57,7 @@ export const SignUp = () => {
             return errors;
         },
 
-        onSubmit: async ({ firstName, lastName, username, password }) => {
+        onSubmit: async ({ firstName, lastName, email, password }) => {
             const token = await fetch("/api/signup", {
                 method: "POST",
                 headers: {
@@ -67,7 +66,7 @@ export const SignUp = () => {
                 body: JSON.stringify({
                     firstName,
                     lastName,
-                    username,
+                    email,
                     password,
                 }),
             }).then((response) => {
@@ -126,17 +125,17 @@ export const SignUp = () => {
                         ) : null}
                     </label>
                     <label>
-                        <p>Username</p>
+                        <p>email</p>
                         <Input
-                            id="username"
-                            name="username"
+                            id="email"
+                            name="email"
                             type="text"
                             onChange={formik.handleChange}
-                            value={formik.values.username}
+                            value={formik.values.email}
                         />
-                        {formik.errors.username ? (
+                        {formik.errors.email ? (
                             <div className="text-red-600 text-xs ">
-                                {formik.errors.username}
+                                {formik.errors.email}
                             </div>
                         ) : null}
                     </label>

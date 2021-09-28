@@ -24,12 +24,12 @@ function App() {
     interface User {
         firstName: string | null;
         lastName: string | null;
-        username: string | null;
+        email: string | null;
     }
     const [user, setUser] = useState<User>({
         firstName: null,
         lastName: null,
-        username: null,
+        email: null,
     });
 
     useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
                     setUser({
                         firstName: user.firstname,
                         lastName: user.lastname,
-                        username: user.username,
+                        email: user.email,
                     });
                 }
             };

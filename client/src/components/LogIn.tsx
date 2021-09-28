@@ -5,28 +5,27 @@ import { useFormik } from "formik";
 import { Button } from "./Button";
 import { Input } from "./Input";
 export const LogIn = () => {
-    // const [username, setUsername] = useState<string | null>();
+    // const [email, setemail] = useState<string | null>();
     // const [password, setPassword] = useState<string | number>();
 
     const { token, setToken } = useContext(TokenContext)!;
 
     interface Fields {
-        username?: string;
+        email?: string;
         password?: string;
     }
     const formik = useFormik({
         initialValues: {
-            username: "",
+            email: "",
             password: "",
         },
-        validate: ({ username, password }) => {
+        validate: ({ email, password }) => {
             const errors: Fields = {};
 
-            if (!username) {
-                errors.username = "Required";
-            } else if (username.length < 5) {
-                errors.username =
-                    "Please make username more than 5 characters ";
+            if (!email) {
+                errors.email = "Required";
+            } else if (email.length < 5) {
+                errors.email = "Please make email more than 5 characters ";
             }
 
             if (!password) {
@@ -41,13 +40,13 @@ export const LogIn = () => {
             return errors;
         },
 
-        onSubmit: async ({ username, password }) => {
+        onSubmit: async ({ email, password }) => {
             const token = await fetch("/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ email, password }),
             }).then((response) => {
                 if (!response.ok) {
                     throw new Error();
@@ -73,17 +72,17 @@ export const LogIn = () => {
                 <h1 className="text-2xl mb-4">Log In</h1>
                 <form className="w-72" onSubmit={formik.handleSubmit}>
                     <label>
-                        <p>Username</p>
+                        <p>email</p>
                         <Input
-                            id="username"
-                            name="username"
+                            id="email"
+                            name="email"
                             type="text"
                             onChange={formik.handleChange}
-                            value={formik.values.username}
+                            value={formik.values.email}
                         />
-                        {formik.errors.username ? (
+                        {formik.errors.email ? (
                             <div className="text-red-600 text-xs ">
-                                {formik.errors.username}
+                                {formik.errors.email}
                             </div>
                         ) : null}
                     </label>
