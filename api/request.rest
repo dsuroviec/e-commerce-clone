@@ -1,6 +1,6 @@
 
 GET http://localhost:5000/api/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMyODM5MTg1LCJleHAiOjE2MzI4NDI3ODV9.Y3qsb37XabN8VXo7Dk2df-fn_wZGtOFIR9BJ0_6I05M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMyODM5MTg1LCJleHAiOjE2MzI4NDI3ODV9.Y3qsb37XabN8VXo7Dk2df-fn_wZGtOFIR9BJ0_6I05M 
 ###
 
 GET http://localhost:5000/api/me
