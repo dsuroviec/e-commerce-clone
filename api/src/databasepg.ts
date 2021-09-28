@@ -107,7 +107,7 @@ export const getCurrentUser = async (
     return user.rows[0];
 };
 
-export const getUsers = async () => {
-    const res = await pool.query(`Select * from users`);
+export const getProducts = async () => {
+    const res = await pool.query(`Select * from products`);
     return res.rows;
 };

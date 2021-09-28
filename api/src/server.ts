@@ -3,11 +3,11 @@ import _ from "lodash";
 const app = express();
 app.use(express.json());
 import {
-    getUsers,
     authenticateUser,
     createUser,
     getCurrentUser,
     authorizeRequest,
+    getProducts,
 } from "./databasepg";
 
 app.post("/api/login", (req, res, next) => {
@@ -21,9 +21,11 @@ app.post("/api/login", (req, res, next) => {
         .catch((error) => next(error));
 });
 
-// app.post('.api/createProduct', (req,res, next)=>{
-//     createProduct(req.body).then(())
-// })
+app.get("/api/products", (req, res, next) => {
+    getProducts()
+        .then((products) => res.send(products))
+        .catch((error) => next(error));
+});
 
 app.post("/api/signup", (req, res, next) => {
     createUser(req.body)

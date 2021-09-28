@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Redirect } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
+import { Button } from "./Button";
 
 export const Home = () => {
     const { token } = useContext(TokenContext)!;
@@ -23,6 +24,15 @@ export const Home = () => {
                     undefined,
                     { weekday: "long" }
                 )}`}</h1>
+                <Button
+                    onClick={async () =>
+                        await fetch("/api/products").then((response) =>
+                            response.json()
+                        )
+                    }
+                >
+                    get all products
+                </Button>
             </div>
         </>
     );
