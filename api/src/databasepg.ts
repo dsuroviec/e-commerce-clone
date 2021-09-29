@@ -9,30 +9,30 @@ const pool = new Pool({
     host: "localhost",
     user: "postgres",
     port: 5432,
-    password: "postgres",
+    password: "Darr3nnn",
     database: "postgres",
 });
 
 interface AuthenticateUserProps {
-    username: string;
+    email: string;
     password: string;
 }
 export const authenticateUser = async ({
-    username,
+    email,
     password,
 }: AuthenticateUserProps) => {
     const user = await pool.query({
-        name: "authenticate-username",
-        text: "SELECT id, username, firstname, lastname FROM users WHERE username=$1 ",
-        values: [username],
+        name: "authenticate-email",
+        text: "SELECT id, email, firstname, lastname FROM users WHERE email=$1 ",
+        values: [email],
     });
-    // If the username exists check the password
+    // If the email exists check the password
     if (user.rows.length) {
         const storedPassword = await pool
             .query({
                 name: "authenticate-password",
-                text: "SELECT password FROM users WHERE username=$1 ",
-                values: [username],
+                text: "SELECT password FROM users WHERE email=$1 ",
+                values: [email],
             })
             .then((response) => response.rows[0].password);
 
@@ -53,22 +53,22 @@ export const authenticateUser = async ({
 interface CreateUserProps {
     firstName: string;
     lastName: string;
-    username: string;
+    email: string;
     password: string;
 }
 
 export const createUser = async ({
     firstName,
     lastName,
-    username,
+    email,
     password,
 }: CreateUserProps) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const response = await pool.query({
         name: "create-user",
-        text: "INSERT INTO users (firstName, lastName, username, password) VALUES($1, $2, $3, $4) RETURNING *",
-        values: [firstName, lastName, username, hashedPassword],
+        text: "INSERT INTO users (firstName, lastName, email, password) VALUES($1, $2, $3, $4) RETURNING *",
+        values: [firstName, lastName, email, hashedPassword],
     });
 
     const accessTokenSecret = jwt.sign(
@@ -100,14 +100,14 @@ export const getCurrentUser = async (
 ) => {
     const user = await pool.query({
         name: "get-current-user",
-        text: "SELECT username, firstname, lastname FROM users WHERE id=$1 ",
+        text: "SELECT email, firstname, lastname FROM users WHERE id=$1 ",
         values: [id],
     });
 
     return user.rows[0];
 };
 
-export const getUsers = async () => {
-    const res = await pool.query(`Select * from users`);
+export const getProducts = async () => {
+    const res = await pool.query(`Select * from products`);
     return res.rows;
 };
