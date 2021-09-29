@@ -1,7 +1,6 @@
 
-GET http://localhost:5000/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUyLCJpYXQiOjE2MzI0ODk4NjUsImV4cCI6MTYzMjQ5MzQ2NX0.ljaQRuN8eNJVBsqND7KkPBQk436K3T4JIgiTv7qYsIU
-
+GET http://localhost:5000/api/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMyODM5MTg1LCJleHAiOjE2MzI4NDI3ODV9.Y3qsb37XabN8VXo7Dk2df-fn_wZGtOFIR9BJ0_6I05M 
 ###
 
 GET http://localhost:5000/api/me
@@ -14,7 +13,7 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "username":"ert",
-    "password":"ert"
+    "email":"commerce",
+    "password":"commerce"
     
 }
