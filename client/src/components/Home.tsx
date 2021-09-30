@@ -7,10 +7,7 @@ import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import { HiSun } from "react-icons/hi";
 import { HiMoon } from "react-icons/hi";
-import { Menu } from "@headlessui/react";
-import { Popover, Transition } from "@headlessui/react";
 import { HiChevronDown, HiMail, HiChatAlt2 } from "react-icons/hi";
-import React, { Fragment } from "react";
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
 
@@ -22,33 +19,63 @@ export const Home = () => {
     const [hoverHelpLink, setHoverHelpLink] = useState(false);
     const [hoverHelpOptions, setHoverHelpOptions] = useState(false);
     const [showHelpOptions, setShowHelpOptions] = useState(false);
-    let [referenceElement, setReferenceElement] =
+    const [hoverAccountLink, setHoverAccountLink] = useState(false);
+    const [hoverAccountOptions, setHoverAccountOptions] = useState(false);
+    const [showAccountOptions, setShowAccountOptions] = useState(true);
+    let [referenceHelpLink, setReferenceHelpLink] =
         useState<HTMLAnchorElement | null>(null);
-    let [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
+    let [popperHelpLink, setPopperHelpLink] = useState<HTMLDivElement | null>(
         null
     );
+    let [referenceAccountLink, setReferenceAccountLink] =
+        useState<HTMLAnchorElement | null>(null);
+    let [popperAccountLink, setPopperAccountLink] =
+        useState<HTMLDivElement | null>(null);
+
     const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(
         null
     );
 
-    let { styles, attributes } = usePopper(referenceElement, popperElement, {
-        // placement: "right",
-        modifiers: [
-            { name: "arrow", options: { element: arrowElement } },
-            { name: "offset", options: { offset: [-100, 8] } },
-        ],
-    });
-
-    useEffect(() => {
-        if (hoverHelpLink || hoverHelpOptions) {
-            setShowHelpOptions(true);
-        } else {
-            const hide = setTimeout(() => {
-                setShowHelpOptions(false);
-            }, 300);
-            return () => clearTimeout(hide);
+    let { styles: helpLinkStyles, attributes: helpLinkAttributes } = usePopper(
+        referenceHelpLink,
+        popperHelpLink,
+        {
+            modifiers: [
+                { name: "arrow", options: { element: arrowElement } },
+                { name: "offset", options: { offset: [-100, 8] } },
+            ],
         }
-    }, [hoverHelpLink, hoverHelpOptions]);
+    );
+
+    let { styles: accountLinkStyles, attributes: accountLinkAttributes } =
+        usePopper(referenceAccountLink, popperAccountLink, {
+            modifiers: [
+                { name: "arrow", options: { element: arrowElement } },
+                { name: "offset", options: { offset: [-100, 8] } },
+            ],
+        });
+
+    // useEffect(() => {
+    //     if (hoverHelpLink || hoverHelpOptions) {
+    //         setShowHelpOptions(true);
+    //     } else {
+    //         const hide = setTimeout(() => {
+    //             setShowHelpOptions(false);
+    //         }, 300);
+    //         return () => clearTimeout(hide);
+    //     }
+    // }, [hoverHelpLink, hoverHelpOptions]);
+
+    // useEffect(() => {
+    //     if (hoverAccountLink || hoverAccountOptions) {
+    //         setShowAccountOptions(true);
+    //     } else {
+    //         const hide = setTimeout(() => {
+    //             setShowAccountOptions(false);
+    //         }, 300);
+    //         return () => clearTimeout(hide);
+    //     }
+    // }, [hoverAccountLink, hoverAccountOptions]);
 
     return (
         <>
@@ -60,9 +87,8 @@ export const Home = () => {
                     <Input className="h-8 w-1/3"></Input>
 
                     <Link
-                        ref={setReferenceElement}
+                        ref={setReferenceHelpLink}
                         className="flex h-8"
-                        id="help-menu"
                         // onClick={() => redirect to help page}
                         to="/"
                         onMouseEnter={() => setHoverHelpLink(true)}
@@ -86,14 +112,14 @@ export const Home = () => {
                                         setHoverHelpOptions(false)
                                     }
                                     onFocus={() => setHoverHelpLink(true)}
-                                    ref={setPopperElement}
-                                    className=" relative w-80 bg-white      transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
-                                    style={styles.popper}
-                                    {...attributes.popper}
+                                    ref={setPopperHelpLink}
+                                    className="relative w-80 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                                    style={helpLinkStyles.popper}
+                                    {...helpLinkAttributes.popper}
                                 >
                                     <div
                                         ref={setArrowElement}
-                                        style={styles.arrow}
+                                        style={helpLinkStyles.arrow}
                                         data-arrow
                                     />
                                     <div className=" bg-white p-7">
@@ -153,6 +179,128 @@ export const Home = () => {
                                             className=" hover:underline"
                                         >
                                             Shipping Info
+                                        </Link>
+                                    </div>
+                                </div>
+                            </>,
+                            document.body
+                        )}
+                    <Link
+                        ref={setReferenceAccountLink}
+                        className="flex h-8"
+                        id="help-menu"
+                        // onClick={() => redirect to help page}
+                        to="/"
+                        onMouseEnter={() => setHoverAccountLink(true)}
+                        onMouseLeave={() => setHoverAccountLink(false)}
+                        onFocus={() => setHoverAccountLink(true)}
+                    >
+                        <span className="font-bold">your account</span>
+                        <HiChevronDown
+                            size={24}
+                            className="ml-2 text-yellow-300"
+                        />
+                    </Link>
+                    {showAccountOptions &&
+                        createPortal(
+                            <>
+                                <div
+                                    onMouseEnter={() =>
+                                        setHoverAccountOptions(true)
+                                    }
+                                    onMouseLeave={() => {
+                                        setHoverAccountOptions(false);
+                                    }}
+                                    onFocus={() => setHoverAccountLink(true)}
+                                    ref={setPopperAccountLink}
+                                    className=" relative w-60 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                                    style={accountLinkStyles.popper}
+                                    {...accountLinkAttributes.popper}
+                                >
+                                    <div
+                                        ref={setArrowElement}
+                                        style={accountLinkStyles.arrow}
+                                        data-arrow
+                                    />
+                                    <div className=" bg-white">
+                                        <div className=" border-b block p-3 m-auto ">
+                                            <button className="align-center w-full bg-yellow-500 text-white font-bold py-2 px-4 rounded">
+                                                <Link to="" />
+                                                Sign In
+                                            </button>
+                                            <p className="pt-3">
+                                                New Customer?&nbsp;&nbsp;
+                                                <Link
+                                                    to=""
+                                                    className="text-blue-500 hover:underline"
+                                                >
+                                                    Start Here
+                                                </Link>
+                                            </p>
+                                        </div>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1  text-blue-500"
+                                        >
+                                            Account
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        >
+                                            Orders
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        >
+                                            Manage Autoship
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 py-1 text-blue-500"
+                                        >
+                                            Favorites
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        >
+                                            Buy Again
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        >
+                                            Perscriptions
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        >
+                                            My Pet Health
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        >
+                                            Connect with a Vet
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        >
+                                            My Resources
+                                        </Link>
+                                        <Link
+                                            to=""
+                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                            onBlur={() => {
+                                                setHoverAccountOptions(false);
+                                                setHoverAccountLink(false);
+                                            }}
+                                        >
+                                            Create a Pet Profile
                                         </Link>
                                     </div>
                                 </div>
