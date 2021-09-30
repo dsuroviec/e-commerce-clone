@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
@@ -13,27 +13,42 @@ import { HiChevronDown, HiMail, HiChatAlt2 } from "react-icons/hi";
 import React, { Fragment } from "react";
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
-import ReactDOM from "react-dom";
 
 export const Home = () => {
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
+    const [renderOptions, setRenderOptions] = useState(false);
+    const [hoverHelpLink, setHoverHelpLink] = useState(false);
+    const [hoverHelpOptions, setHoverHelpOptions] = useState(false);
+    const [showHelpOptions, setShowHelpOptions] = useState(false);
     let [referenceElement, setReferenceElement] =
-        useState<HTMLButtonElement | null>(null);
+        useState<HTMLAnchorElement | null>(null);
     let [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
         null
     );
     const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(
         null
     );
+
     let { styles, attributes } = usePopper(referenceElement, popperElement, {
         // placement: "right",
         modifiers: [
             { name: "arrow", options: { element: arrowElement } },
-            { name: "offset", options: { offset: [-40, 8] } },
+            { name: "offset", options: { offset: [-100, 8] } },
         ],
     });
+
+    useEffect(() => {
+        if (hoverHelpLink || hoverHelpOptions) {
+            setShowHelpOptions(true);
+        } else {
+            const hide = setTimeout(() => {
+                setShowHelpOptions(false);
+            }, 300);
+            return () => clearTimeout(hide);
+        }
+    }, [hoverHelpLink, hoverHelpOptions]);
 
     return (
         <>
@@ -44,132 +59,109 @@ export const Home = () => {
                     </svg>
                     <Input className="h-8 w-1/3"></Input>
 
-                    <div className="w-96 max-w-sm px-4 ">
-                        <Popover className="relative">
-                            {({ open }) => (
-                                <>
-                                    <Popover.Button
-                                        ref={setReferenceElement}
-                                        className={`
-                                ${open ? "" : "text-opacity-90"}
-                               px-3 py-2 inline-flex hover:text-opacity-100`}
-                                    >
-                                        <span className="font-bold">
-                                            24/7 help
-                                        </span>
-
-                                        <HiChevronDown
-                                            size={24}
-                                            className={`${
-                                                open ? "" : "text-opacity-90"
-                                            } ml-2 text-yellow-300 group-hover:text-opacity-80 transition ease-in-out duration-150`}
-                                            aria-hidden="true"
-                                        />
-                                    </Popover.Button>
-                                    <Transition
-                                        enter="transition ease-out duration-200"
-                                        enterFrom="opacity-0"
-                                        enterTo="opacity-100"
-                                        leave="transition ease-in duration-150"
-                                        leaveFrom="opacity-100"
-                                        leaveTo="opacity-0"
-                                    >
-                                        <Popover.Overlay className="bg-black opacity-30 fixed inset-0" />
-                                    </Transition>
-                                    <Transition
-                                        enter="transition ease-out duration-200"
-                                        enterFrom="opacity-0"
-                                        enterTo="opacity-100"
-                                        leave="transition ease-in duration-150"
-                                        leaveFrom="opacity-100"
-                                        leaveTo="opacity-0"
-                                    >
-                                        <Popover.Overlay className="bg-black opacity-30 fixed inset-0" />
-                                    </Transition>
-                                    {createPortal(
-                                        <Transition
-                                            enter="transition ease-out duration-200"
-                                            enterFrom="opacity-0"
-                                            enterTo="opacity-100"
-                                            leave="transition ease-in duration-150"
-                                            leaveFrom="opacity-100"
-                                            leaveTo="opacity-0"
+                    <Link
+                        ref={setReferenceElement}
+                        className="flex h-8"
+                        id="help-menu"
+                        // onClick={() => redirect to help page}
+                        to="/"
+                        onMouseEnter={() => setHoverHelpLink(true)}
+                        onMouseLeave={() => setHoverHelpLink(false)}
+                        onFocus={() => setHoverHelpLink(true)}
+                    >
+                        <span className="font-bold">24/7 help</span>
+                        <HiChevronDown
+                            size={24}
+                            className="ml-2 text-yellow-300"
+                        />
+                    </Link>
+                    {showHelpOptions &&
+                        createPortal(
+                            <>
+                                <div
+                                    onMouseEnter={() =>
+                                        setHoverHelpOptions(true)
+                                    }
+                                    onMouseLeave={() =>
+                                        setHoverHelpOptions(false)
+                                    }
+                                    onFocus={() => setHoverHelpLink(true)}
+                                    ref={setPopperElement}
+                                    className=" relative w-80 bg-white      transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                                    style={styles.popper}
+                                    {...attributes.popper}
+                                >
+                                    <div
+                                        ref={setArrowElement}
+                                        style={styles.arrow}
+                                        data-arrow
+                                    />
+                                    <div className=" bg-white p-7">
+                                        <div className="m-auto flex justify-center ">
+                                            Get help from our experts 24/7
+                                        </div>
+                                        <Link
+                                            to=""
+                                            className="text-yellow-600 hover:underline font-medium text-3xl flex justify-center"
                                         >
-                                            <Popover.Panel
-                                                ref={setPopperElement}
-                                                style={styles.popper}
-                                                {...attributes.popper}
-                                                className=" w-80 bg-white "
-                                                data-popper-element
+                                            1-800-672-4399
+                                        </Link>
+                                    </div>
+                                    <div className="flex bg-gray-50">
+                                        <div className="flex-1 p-5 text-blue-500 border flex justify-center items-center">
+                                            <HiChatAlt2 size={30} />
+                                            &nbsp;
+                                            <Link
+                                                to=""
+                                                className="hover:underline "
                                             >
-                                                <div
-                                                    ref={setArrowElement}
-                                                    style={styles.arrow}
-                                                    data-arrow
-                                                />
-
-                                                <div className=" rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5">
-                                                    <div className="relative bg-white p-7">
-                                                        <div className="m-auto flex justify-center ">
-                                                            Get help from our
-                                                            experts 24/7
-                                                        </div>
-                                                        <span className="text-yellow-600 hover:underline font-medium text-3xl flex justify-center">
-                                                            1-800-672-4399
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex bg-gray-50">
-                                                        <div className="flex-1 p-5 text-blue-500 border flex justify-center items-center">
-                                                            <HiChatAlt2
-                                                                size={30}
-                                                            />
-                                                            &nbsp;
-                                                            <p className="hover:underline ">
-                                                                Chat Live
-                                                            </p>
-                                                        </div>
-                                                        <div className="flex-1 text-blue-500  p-5 border flex justify-center items-center">
-                                                            <HiMail size={30} />
-                                                            &nbsp;
-                                                            <p className="hover:underline">
-                                                                Contact Us
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div className=" text-blue-500 py-4 px-6 flex justify-between">
-                                                        <Link
-                                                            to="/"
-                                                            className="  hover:underline "
-                                                        >
-                                                            Track Order
-                                                        </Link>
-                                                        -
-                                                        <Link
-                                                            to="/"
-                                                            className=" hover:underline "
-                                                        >
-                                                            FAQs
-                                                        </Link>
-                                                        -
-                                                        <Link
-                                                            to="/"
-                                                            className=" hover:underline"
-                                                        >
-                                                            Shipping Info
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </Popover.Panel>
-                                        </Transition>,
-                                        document.body
-                                    )}
-                                </>
-                            )}
-                        </Popover>
-                    </div>
+                                                Chat Live
+                                            </Link>
+                                        </div>
+                                        <div className="flex-1 text-blue-500  p-5 border flex justify-center items-center">
+                                            <HiMail size={30} />
+                                            &nbsp;
+                                            <Link
+                                                to=""
+                                                className="hover:underline"
+                                            >
+                                                Contact Us
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className=" text-blue-500 py-4 px-6 flex justify-between">
+                                        <Link
+                                            to="/"
+                                            className="  hover:underline "
+                                        >
+                                            Track Order
+                                        </Link>
+                                        -
+                                        <Link
+                                            to="/"
+                                            className=" hover:underline "
+                                        >
+                                            FAQs
+                                        </Link>
+                                        -
+                                        <Link
+                                            onBlur={() => {
+                                                setHoverHelpOptions(false);
+                                                setHoverHelpLink(false);
+                                            }}
+                                            to="/"
+                                            className=" hover:underline"
+                                        >
+                                            Shipping Info
+                                        </Link>
+                                    </div>
+                                </div>
+                            </>,
+                            document.body
+                        )}
                 </div>
 
-                <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+                {/* <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
                     <div className="flex items-center flex-shrink-0  mr-6"></div>
                     <div className="block lg:hidden">
                         <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
@@ -182,8 +174,8 @@ export const Home = () => {
                                 <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                             </svg>
                         </button>
-                    </div>
-                    {/* <div className="absolute top-5 right-5 ">
+                    </div> */}
+                {/* <div className="absolute top-5 right-5 ">
                         <button
                             onClick={() => {
                                 if (theme === "dark") {
@@ -209,7 +201,7 @@ export const Home = () => {
                         </button>
                     </div> */}
 
-                    {token && (
+                {/* {token && (
                         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                             <div className="text-sm lg:flex-grow">
                                 <Link
@@ -237,7 +229,7 @@ export const Home = () => {
                             </div>
                         </div>
                     )}
-                </nav>
+                </nav> */}
             </section>
             {!token && <Redirect to="/login" />}
 
