@@ -10,18 +10,21 @@ import { HiMoon } from "react-icons/hi";
 import { HiChevronDown, HiMail, HiChatAlt2 } from "react-icons/hi";
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
+import { SSL_OP_NO_TLSv1_1 } from "constants";
 
 export const Home = () => {
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
-    const [renderOptions, setRenderOptions] = useState(false);
     const [hoverHelpLink, setHoverHelpLink] = useState(false);
     const [hoverHelpOptions, setHoverHelpOptions] = useState(false);
     const [showHelpOptions, setShowHelpOptions] = useState(false);
     const [hoverAccountLink, setHoverAccountLink] = useState(false);
     const [hoverAccountOptions, setHoverAccountOptions] = useState(false);
-    const [showAccountOptions, setShowAccountOptions] = useState(true);
+    const [showAccountOptions, setShowAccountOptions] = useState(false);
+    const [hoverYourCartLink, setHoverYourCartLink] = useState(false);
+    const [hoverYourCartOptions, setHoverYourCartOptions] = useState(false);
+    const [showYourCartOptions, setShowYourCartOptions] = useState(false);
     let [referenceHelpLink, setReferenceHelpLink] =
         useState<HTMLAnchorElement | null>(null);
     let [popperHelpLink, setPopperHelpLink] = useState<HTMLDivElement | null>(
@@ -30,6 +33,10 @@ export const Home = () => {
     let [referenceAccountLink, setReferenceAccountLink] =
         useState<HTMLAnchorElement | null>(null);
     let [popperAccountLink, setPopperAccountLink] =
+        useState<HTMLDivElement | null>(null);
+    let [referenceYourCartLink, setReferenceYourCartLink] =
+        useState<HTMLAnchorElement | null>(null);
+    let [popperYourCartLink, setPopperYourCartLink] =
         useState<HTMLDivElement | null>(null);
 
     const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(
@@ -42,7 +49,7 @@ export const Home = () => {
         {
             modifiers: [
                 { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-100, 8] } },
+                { name: "offset", options: { offset: [-140, 8] } },
             ],
         }
     );
@@ -51,31 +58,50 @@ export const Home = () => {
         usePopper(referenceAccountLink, popperAccountLink, {
             modifiers: [
                 { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-100, 8] } },
+                { name: "offset", options: { offset: [-70, 8] } },
             ],
         });
 
-    // useEffect(() => {
-    //     if (hoverHelpLink || hoverHelpOptions) {
-    //         setShowHelpOptions(true);
-    //     } else {
-    //         const hide = setTimeout(() => {
-    //             setShowHelpOptions(false);
-    //         }, 300);
-    //         return () => clearTimeout(hide);
-    //     }
-    // }, [hoverHelpLink, hoverHelpOptions]);
+    let { styles: yourCartLinkStyles, attributes: yourCartLinkAttributes } =
+        usePopper(referenceYourCartLink, popperYourCartLink, {
+            modifiers: [
+                { name: "arrow", options: { element: arrowElement } },
+                { name: "offset", options: { offset: [-140, 8] } },
+            ],
+        });
 
-    // useEffect(() => {
-    //     if (hoverAccountLink || hoverAccountOptions) {
-    //         setShowAccountOptions(true);
-    //     } else {
-    //         const hide = setTimeout(() => {
-    //             setShowAccountOptions(false);
-    //         }, 300);
-    //         return () => clearTimeout(hide);
-    //     }
-    // }, [hoverAccountLink, hoverAccountOptions]);
+    useEffect(() => {
+        if (hoverHelpLink || hoverHelpOptions) {
+            setShowHelpOptions(true);
+        } else {
+            const hide = setTimeout(() => {
+                setShowHelpOptions(false);
+            }, 300);
+            return () => clearTimeout(hide);
+        }
+    }, [hoverHelpLink, hoverHelpOptions]);
+
+    useEffect(() => {
+        if (hoverAccountLink || hoverAccountOptions) {
+            setShowAccountOptions(true);
+        } else {
+            const hide = setTimeout(() => {
+                setShowAccountOptions(false);
+            }, 300);
+            return () => clearTimeout(hide);
+        }
+    }, [hoverAccountLink, hoverAccountOptions]);
+
+    useEffect(() => {
+        if (hoverYourCartLink || hoverYourCartOptions) {
+            setShowYourCartOptions(true);
+        } else {
+            const hide = setTimeout(() => {
+                setShowYourCartOptions(true);
+            }, 300);
+            return () => clearTimeout(hide);
+        }
+    }, [hoverYourCartLink, hoverYourCartOptions]);
 
     return (
         <>
@@ -160,7 +186,7 @@ export const Home = () => {
                                             to="/"
                                             className="  hover:underline "
                                         >
-                                            Track Order
+                                            w-80 Track Order
                                         </Link>
                                         -
                                         <Link
@@ -188,7 +214,6 @@ export const Home = () => {
                     <Link
                         ref={setReferenceAccountLink}
                         className="flex h-8"
-                        id="help-menu"
                         // onClick={() => redirect to help page}
                         to="/"
                         onMouseEnter={() => setHoverAccountLink(true)}
@@ -203,106 +228,216 @@ export const Home = () => {
                     </Link>
                     {showAccountOptions &&
                         createPortal(
+                            <div
+                                ref={setPopperAccountLink}
+                                style={accountLinkStyles.popper}
+                                {...accountLinkAttributes.popper}
+                                onMouseEnter={() =>
+                                    setHoverAccountOptions(true)
+                                }
+                                onMouseLeave={() => {
+                                    setHoverAccountOptions(false);
+                                }}
+                                onFocus={() => setHoverAccountLink(true)}
+                                className=" bg-white 
+                                 w-min rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                            >
+                                <div
+                                    ref={setArrowElement}
+                                    style={accountLinkStyles.arrow}
+                                    data-arrow
+                                />
+                                <div className="h-60  overflow-y-auto">
+                                    <div className=" border-b p-3 ">
+                                        <button>
+                                            <Link to="" />
+                                            Sign In
+                                        </button>
+                                        <div className="pt-3 flex text-xs">
+                                            <span className="min-w-max">
+                                                New Customer?
+                                            </span>{" "}
+                                            &nbsp;
+                                            <Link
+                                                to=""
+                                                className="text-blue-500 min-w-max hover:underline"
+                                            >
+                                                Start Here
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1  text-blue-500"
+                                    >
+                                        Account
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                    >
+                                        Orders
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                    >
+                                        Manage Autoship
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 py-1 text-blue-500"
+                                    >
+                                        Favorites
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                    >
+                                        Buy Again
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                    >
+                                        Perscriptions
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                    >
+                                        My Pet Health
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                    >
+                                        Connect with a Vet
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                    >
+                                        My Resources
+                                    </Link>
+                                    <Link
+                                        to=""
+                                        className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
+                                        onBlur={() => {
+                                            setHoverAccountOptions(false);
+                                            setHoverAccountLink(false);
+                                        }}
+                                    >
+                                        Create a Pet Profile
+                                    </Link>
+                                </div>
+                            </div>,
+                            document.body
+                        )}
+                    <Link
+                        ref={setReferenceYourCartLink}
+                        className="flex h-8"
+                        // onClick={() => redirect to help page}
+                        to="/"
+                        onMouseEnter={() => setHoverYourCartLink(true)}
+                        onMouseLeave={() => setHoverYourCartLink(false)}
+                        onFocus={() => setHoverYourCartLink(true)}
+                    >
+                        <span className="font-bold">your cart</span>
+                        <HiChevronDown
+                            size={24}
+                            className="ml-2 text-yellow-300"
+                        />
+                    </Link>
+                    {showYourCartOptions &&
+                        createPortal(
                             <>
                                 <div
                                     onMouseEnter={() =>
-                                        setHoverAccountOptions(true)
+                                        setHoverYourCartOptions(true)
                                     }
                                     onMouseLeave={() => {
-                                        setHoverAccountOptions(false);
+                                        setHoverYourCartOptions(false);
                                     }}
-                                    onFocus={() => setHoverAccountLink(true)}
-                                    ref={setPopperAccountLink}
-                                    className=" relative w-60 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
-                                    style={accountLinkStyles.popper}
-                                    {...accountLinkAttributes.popper}
+                                    onFocus={() => setHoverYourCartLink(true)}
+                                    ref={setPopperYourCartLink}
+                                    className=" bg-white rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                                    style={yourCartLinkStyles.popper}
+                                    {...yourCartLinkAttributes.popper}
                                 >
                                     <div
                                         ref={setArrowElement}
-                                        style={accountLinkStyles.arrow}
+                                        style={yourCartLinkStyles.arrow}
                                         data-arrow
                                     />
-                                    <div className=" bg-white">
-                                        <div className=" border-b block p-3 m-auto ">
-                                            <button className="align-center w-full bg-yellow-500 text-white font-bold py-2 px-4 rounded">
-                                                <Link to="" />
-                                                Sign In
-                                            </button>
-                                            <p className="pt-3">
-                                                New Customer?&nbsp;&nbsp;
+                                    {true ? ( // Items in your cart? Show items
+                                        <>
+                                            <div className="bg-gray-50 p-4">
+                                                <div className="flex mb-4">
+                                                    <div className="flex-2 font-bold">
+                                                        Cart Subtotal:
+                                                        <span className="text-red-700">
+                                                            &nbsp; $80.80
+                                                        </span>
+                                                    </div>
+                                                    <Link
+                                                        to="/"
+                                                        className="w-full text-blue-500 flex flex-1 justify-end"
+                                                    >
+                                                        Edit Cart
+                                                    </Link>
+                                                </div>
+                                                <button className="align-center w-full m-auto bg-yellow-500 text-white font-bold py-2 px-4 rounded">
+                                                    <Link to="/">
+                                                        Proceed to Checkout
+                                                    </Link>
+                                                </button>
+                                            </div>
+                                            <div className="font-medium px-4 pt-4 flex justify-between">
+                                                <span>Recently Added:</span>
+                                                <span>{`Total Items (${"3"})`}</span>
+                                            </div>
+                                            {[2, 3, 4, 5].map((item) => (
+                                                <div className="w-80 flex border-b p-4">
+                                                    <img
+                                                        className="w-12 h-12 mt-1"
+                                                        src="https://d1e4pidl3fu268.cloudfront.net/4eed2f6d-4fe3-48a2-bc3f-709ff9e20d0a/TEST.jpg"
+                                                        alt="product"
+                                                    ></img>
+
+                                                    <div className="ml-4 text-sm">
+                                                        This is the desciption
+                                                        of the item and it is
+                                                        really cool because it
+                                                        smells like chicken
+                                                        <div className="block pt-1">
+                                                            <span className=" text-red-700 font-bold">
+                                                                $55.49
+                                                            </span>
+                                                            &nbsp; (Qty:1)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </>
+                                    ) : (
+                                        <div className="px-4 py-8 w-80">
+                                            <h1 className="font-medium pb-5">
+                                                Your Cart is Empty.
+                                            </h1>
+                                            <p>
+                                                Something missing?&nbsp;
                                                 <Link
                                                     to=""
                                                     className="text-blue-500 hover:underline"
                                                 >
-                                                    Start Here
+                                                    Sign in &nbsp;
                                                 </Link>
+                                                to see items you may have added
+                                                from another computer or device.
                                             </p>
                                         </div>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1  text-blue-500"
-                                        >
-                                            Account
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                        >
-                                            Orders
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                        >
-                                            Manage Autoship
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 py-1 text-blue-500"
-                                        >
-                                            Favorites
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                        >
-                                            Buy Again
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                        >
-                                            Perscriptions
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                        >
-                                            My Pet Health
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                        >
-                                            Connect with a Vet
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                        >
-                                            My Resources
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b block w-full hover:underline px-3 py-1 text-blue-500"
-                                            onBlur={() => {
-                                                setHoverAccountOptions(false);
-                                                setHoverAccountLink(false);
-                                            }}
-                                        >
-                                            Create a Pet Profile
-                                        </Link>
-                                    </div>
+                                    )}
                                 </div>
                             </>,
                             document.body

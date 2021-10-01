@@ -9,10 +9,6 @@
     height: 8px;
     background: inherit;
 }
-[data-hide] {
-    display: none;
-}
-
 [data-arrow] {
     visibility: hidden;
 }
