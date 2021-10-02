@@ -118,10 +118,10 @@ export const Home = () => {
                     </svg>
 
                     <Input className="h-full w-1/3"></Input>
-                    <div className="flex h-full">
+                    <div className="flex h-full py-2">
                         <Link
                             ref={setReferenceHelpLink}
-                            className="flex h-full border-r px-2 items-center"
+                            className="flex h-full border-r border-opacity-30 px-2 items-center"
                             // onClick={() => redirect to help page}
                             to="/"
                             onMouseEnter={() => setHoverHelpLink(true)}
@@ -220,7 +220,7 @@ export const Home = () => {
                             )}
                         <Link
                             ref={setReferenceAccountLink}
-                            className="flex h-full items-center border-r px-2"
+                            className="flex h-full items-center border-r border-opacity-30 px-2"
                             // onClick={() => redirect to help page}
                             to="/"
                             onMouseEnter={() => setHoverAccountLink(true)}
