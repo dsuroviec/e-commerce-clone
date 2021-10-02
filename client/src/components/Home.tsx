@@ -76,7 +76,7 @@ export const Home = () => {
         } else {
             const hide = setTimeout(() => {
                 setShowHelpOptions(false);
-            }, 300);
+            }, 200);
             return () => clearTimeout(hide);
         }
     }, [hoverHelpLink, hoverHelpOptions]);
@@ -87,7 +87,7 @@ export const Home = () => {
         } else {
             const hide = setTimeout(() => {
                 setShowAccountOptions(false);
-            }, 300);
+            }, 200);
             return () => clearTimeout(hide);
         }
     }, [hoverAccountLink, hoverAccountOptions]);
@@ -98,7 +98,7 @@ export const Home = () => {
         } else {
             const hide = setTimeout(() => {
                 setShowYourCartOptions(false);
-            }, 300);
+            }, 200);
             return () => clearTimeout(hide);
         }
     }, [hoverYourCartLink, hoverYourCartOptions]);
@@ -118,7 +118,7 @@ export const Home = () => {
                     </svg>
 
                     <Input className="h-full w-1/3"></Input>
-                    <div className="flex">
+                    <div className="flex h-full">
                         <Link
                             ref={setReferenceHelpLink}
                             className="flex h-full border-r px-2 items-center"
@@ -254,9 +254,9 @@ export const Home = () => {
                                         style={accountLinkStyles.arrow}
                                         data-arrow
                                     />
-                                    <div className="h-60  overflow-y-auto">
+                                    <div className="max-h-80 overflow-y-auto">
                                         <div className=" border-b p-3 ">
-                                            <button>
+                                            <button className="w-full m-auto bg-yellow-500 text-white font-bold py-2 px-4 rounded">
                                                 <Link to="" />
                                                 Sign In
                                             </button>
@@ -380,7 +380,7 @@ export const Home = () => {
                                             data-arrow
                                         />
                                         {true ? ( // Items in your cart? Show items
-                                            <div className="w-80">
+                                            <div className="w-80 max-h-80 overflow-y-auto">
                                                 <div className="bg-gray-50 p-4">
                                                     <div className="flex mb-4">
                                                         <div className="flex-2 font-bold">
