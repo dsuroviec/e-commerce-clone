@@ -371,7 +371,7 @@ export const Home = () => {
                                         data-arrow
                                     />
                                     {true ? ( // Items in your cart? Show items
-                                        <>
+                                        <div className="w-80">
                                             <div className="bg-gray-50 p-4">
                                                 <div className="flex mb-4">
                                                     <div className="flex-2 font-bold">
@@ -382,7 +382,7 @@ export const Home = () => {
                                                     </div>
                                                     <Link
                                                         to="/"
-                                                        className="w-full text-blue-500 flex flex-1 justify-end"
+                                                        className="w-full text-blue-500 hover:underline flex flex-1 justify-end"
                                                     >
                                                         Edit Cart
                                                     </Link>
@@ -398,28 +398,34 @@ export const Home = () => {
                                                 <span>{`Total Items (${"3"})`}</span>
                                             </div>
                                             {[2, 3, 4, 5].map((item) => (
-                                                <div className="w-80 flex border-b p-4">
-                                                    <img
-                                                        className="w-12 h-12 mt-1"
-                                                        src="https://d1e4pidl3fu268.cloudfront.net/4eed2f6d-4fe3-48a2-bc3f-709ff9e20d0a/TEST.jpg"
-                                                        alt="product"
-                                                    ></img>
-
-                                                    <div className="ml-4 text-sm">
-                                                        This is the desciption
-                                                        of the item and it is
-                                                        really cool because it
-                                                        smells like chicken
-                                                        <div className="block pt-1">
-                                                            <span className=" text-red-700 font-bold">
-                                                                $55.49
-                                                            </span>
-                                                            &nbsp; (Qty:1)
+                                                <div className=" border-b p-4">
+                                                    <Link
+                                                        to="/"
+                                                        className="flex"
+                                                    >
+                                                        <img
+                                                            className="w-12 h-12 mt-1"
+                                                            src="https://d1e4pidl3fu268.cloudfront.net/4eed2f6d-4fe3-48a2-bc3f-709ff9e20d0a/TEST.jpg"
+                                                            alt="product"
+                                                        ></img>
+                                                        <div className="ml-4 text-sm">
+                                                            This is the
+                                                            desciption of the
+                                                            item and it is
+                                                            really cool because
+                                                            it smells like
+                                                            chicken
+                                                            <div className="block pt-1">
+                                                                <span className=" text-red-700 font-bold">
+                                                                    $55.49
+                                                                </span>
+                                                                &nbsp; (Qty:1)
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </div>
                                             ))}
-                                        </>
+                                        </div>
                                     ) : (
                                         <div className="px-4 py-8 w-80">
                                             <h1 className="font-medium pb-5">
