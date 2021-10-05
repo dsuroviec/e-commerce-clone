@@ -193,7 +193,7 @@ export const Home = () => {
 
     return (
         <>
-            <section className="bg-blue-500 text-white text-xl pt-6 px-32 h-36">
+            <section className="pt-6 px-32 h-36 w-full bg-blue-500 text-xl text-white  ">
                 <div
                     id="topNav"
                     className=" flex justify-between items-center h-11"
@@ -587,156 +587,168 @@ export const Home = () => {
                             )}
                     </div>
                 </div>
-                <section id="bottomNav" className="mt-8"></section>
-                <div className="flex items-center justify-between font-bold">
-                    <div
-                        className="flex px-2 items-center "
-                        onMouseEnter={() => setHoverShopLink(true)}
-                        onMouseLeave={() => setHoverShopLink(false)}
-                        onFocus={() => setHoverShopLink(true)}
-                    >
-                        <Link to="/">
-                            <span className="font-bold">shop</span>
-                        </Link>
-                        <button
-                            ref={setReferenceShopLink}
-                            onClick={() => {
-                                setShowShopOptions(!showShopOptions);
-                            }}
-                        >
-                            <HiChevronDown
-                                size={24}
-                                className=" text-yellow-300  "
-                            />
-                        </button>
-                    </div>
-                    {showShopOptions &&
-                        createPortal(
-                            <>
-                                <div
-                                    onMouseEnter={() =>
-                                        setHoverShopOptions(true)
-                                    }
-                                    onMouseLeave={() =>
-                                        setHoverShopOptions(false)
-                                    }
-                                    onFocus={() => setHoverShopLink(true)}
-                                    ref={setPopperShopLink}
-                                    className="relative w-80 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
-                                    style={shopLinkStyles.popper}
-                                    {...shopLinkAttributes.popper}
+                {token && (
+                    <div id="bottomNav" className="mt-8">
+                        <div className="flex items-center justify-between font-bold">
+                            <div
+                                className="flex px-2 items-center "
+                                onMouseEnter={() => setHoverShopLink(true)}
+                                onMouseLeave={() => setHoverShopLink(false)}
+                                onFocus={() => setHoverShopLink(true)}
+                            >
+                                <Link to="/">
+                                    <span className="font-bold">shop</span>
+                                </Link>
+                                <button
+                                    ref={setReferenceShopLink}
+                                    onClick={() => {
+                                        setShowShopOptions(!showShopOptions);
+                                    }}
                                 >
-                                    <div
-                                        ref={setArrowElement}
-                                        style={shopLinkStyles.arrow}
-                                        data-arrow
+                                    <HiChevronDown
+                                        size={24}
+                                        className=" text-yellow-300  "
                                     />
-                                    <div>Hello!</div>
-                                </div>
-                            </>,
-                            document.body
-                        )}
-                    <div
-                        className="flex px-2 items-center "
-                        onMouseEnter={() => setHoverPharmacyLink(true)}
-                        onMouseLeave={() => setHoverPharmacyLink(false)}
-                        onFocus={() => setHoverPharmacyLink(true)}
-                    >
-                        <Link to="/">
-                            <span className="font-bold">pharmacy</span>
-                        </Link>
-                        <button
-                            ref={setReferencePharmacyLink}
-                            onClick={() => {
-                                setShowPharmacyOptions(!showPharmacyOptions);
-                            }}
-                        >
-                            <HiChevronDown
-                                size={24}
-                                className=" text-yellow-300  "
-                            />
-                        </button>
-                    </div>
-                    {showPharmacyOptions &&
-                        createPortal(
-                            <>
-                                <div
-                                    onMouseEnter={() =>
-                                        setHoverPharmacyOptions(true)
-                                    }
-                                    onMouseLeave={() =>
-                                        setHoverPharmacyOptions(false)
-                                    }
-                                    onFocus={() => setHoverPharmacyLink(true)}
-                                    ref={setPopperPharmacyLink}
-                                    className="relative w-80 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
-                                    style={pharmacyLinkStyles.popper}
-                                    {...pharmacyLinkAttributes.popper}
+                                </button>
+                            </div>
+                            {showShopOptions &&
+                                createPortal(
+                                    <>
+                                        <div
+                                            onMouseEnter={() =>
+                                                setHoverShopOptions(true)
+                                            }
+                                            onMouseLeave={() =>
+                                                setHoverShopOptions(false)
+                                            }
+                                            onFocus={() =>
+                                                setHoverShopLink(true)
+                                            }
+                                            ref={setPopperShopLink}
+                                            className="relative w-80 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                                            style={shopLinkStyles.popper}
+                                            {...shopLinkAttributes.popper}
+                                        >
+                                            <div
+                                                ref={setArrowElement}
+                                                style={shopLinkStyles.arrow}
+                                                data-arrow
+                                            />
+                                            <div>Hello!</div>
+                                        </div>
+                                    </>,
+                                    document.body
+                                )}
+                            <div
+                                className="flex px-2 items-center "
+                                onMouseEnter={() => setHoverPharmacyLink(true)}
+                                onMouseLeave={() => setHoverPharmacyLink(false)}
+                                onFocus={() => setHoverPharmacyLink(true)}
+                            >
+                                <Link to="/">
+                                    <span className="font-bold">pharmacy</span>
+                                </Link>
+                                <button
+                                    ref={setReferencePharmacyLink}
+                                    onClick={() => {
+                                        setShowPharmacyOptions(
+                                            !showPharmacyOptions
+                                        );
+                                    }}
                                 >
-                                    <div
-                                        ref={setArrowElement}
-                                        style={pharmacyLinkStyles.arrow}
-                                        data-arrow
+                                    <HiChevronDown
+                                        size={24}
+                                        className=" text-yellow-300  "
                                     />
-                                    <div>Hello!</div>
-                                </div>
-                            </>,
-                            document.body
-                        )}
-                    <Link to="/">brands</Link>
-                    <Link to="/">today's deals</Link>
-                    <Link to="/">chewy picks</Link>
-                    <div
-                        className="flex px-2 items-center "
-                        onMouseEnter={() => setHoverGiveBackLink(true)}
-                        onMouseLeave={() => setHoverGiveBackLink(false)}
-                        onFocus={() => setHoverGiveBackLink(true)}
-                    >
-                        <Link to="/">
-                            <span className="font-bold">give back</span>
-                        </Link>
-                        <button
-                            ref={setReferenceGiveBackLink}
-                            onClick={() => {
-                                setShowGiveBackOptions(!showGiveBackOptions);
-                            }}
-                        >
-                            <HiChevronDown
-                                size={24}
-                                className=" text-yellow-300  "
-                            />
-                        </button>
-                    </div>
-                    {showGiveBackOptions &&
-                        createPortal(
-                            <>
-                                <div
-                                    onMouseEnter={() =>
-                                        setHoverGiveBackOptions(true)
-                                    }
-                                    onMouseLeave={() =>
-                                        setHoverGiveBackOptions(false)
-                                    }
-                                    onFocus={() => setHoverGiveBackLink(true)}
-                                    ref={setPopperGiveBackLink}
-                                    className="relative w-80 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
-                                    style={giveBackLinkStyles.popper}
-                                    {...giveBackLinkAttributes.popper}
+                                </button>
+                            </div>
+                            {showPharmacyOptions &&
+                                createPortal(
+                                    <>
+                                        <div
+                                            onMouseEnter={() =>
+                                                setHoverPharmacyOptions(true)
+                                            }
+                                            onMouseLeave={() =>
+                                                setHoverPharmacyOptions(false)
+                                            }
+                                            onFocus={() =>
+                                                setHoverPharmacyLink(true)
+                                            }
+                                            ref={setPopperPharmacyLink}
+                                            className="relative w-80 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                                            style={pharmacyLinkStyles.popper}
+                                            {...pharmacyLinkAttributes.popper}
+                                        >
+                                            <div
+                                                ref={setArrowElement}
+                                                style={pharmacyLinkStyles.arrow}
+                                                data-arrow
+                                            />
+                                            <div>Hello!</div>
+                                        </div>
+                                    </>,
+                                    document.body
+                                )}
+                            <Link to="/">brands</Link>
+                            <Link to="/">today's deals</Link>
+                            <Link to="/">chewy picks</Link>
+                            <div
+                                className="flex px-2 items-center "
+                                onMouseEnter={() => setHoverGiveBackLink(true)}
+                                onMouseLeave={() => setHoverGiveBackLink(false)}
+                                onFocus={() => setHoverGiveBackLink(true)}
+                            >
+                                <Link to="/">
+                                    <span className="font-bold">give back</span>
+                                </Link>
+                                <button
+                                    ref={setReferenceGiveBackLink}
+                                    onClick={() => {
+                                        setShowGiveBackOptions(
+                                            !showGiveBackOptions
+                                        );
+                                    }}
                                 >
-                                    <div
-                                        ref={setArrowElement}
-                                        style={giveBackLinkStyles.arrow}
-                                        data-arrow
+                                    <HiChevronDown
+                                        size={24}
+                                        className=" text-yellow-300  "
                                     />
-                                    <div>Hello!</div>
-                                </div>
-                            </>,
-                            document.body
-                        )}
-                    <Link to="/">halloween shop</Link>
-                    <Link to="/">FREE 1-3 DAY SHIPPING OVER $49</Link>
-                </div>
-
+                                </button>
+                            </div>
+                            {showGiveBackOptions &&
+                                createPortal(
+                                    <>
+                                        <div
+                                            onMouseEnter={() =>
+                                                setHoverGiveBackOptions(true)
+                                            }
+                                            onMouseLeave={() =>
+                                                setHoverGiveBackOptions(false)
+                                            }
+                                            onFocus={() =>
+                                                setHoverGiveBackLink(true)
+                                            }
+                                            ref={setPopperGiveBackLink}
+                                            className="relative w-80 bg-white transition-opacity ease-in duration-300 rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
+                                            style={giveBackLinkStyles.popper}
+                                            {...giveBackLinkAttributes.popper}
+                                        >
+                                            <div
+                                                ref={setArrowElement}
+                                                style={giveBackLinkStyles.arrow}
+                                                data-arrow
+                                            />
+                                            <div>Hello!</div>
+                                        </div>
+                                    </>,
+                                    document.body
+                                )}
+                            <Link to="/">halloween shop</Link>
+                            <Link to="/">FREE 1-3 DAY SHIPPING OVER $49</Link>
+                        </div>
+                    </div>
+                )}
                 {/* <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
                     <div className="flex items-center flex-shrink-0  mr-6"></div>
                     <div className="block lg:hidden">
@@ -807,7 +819,7 @@ export const Home = () => {
                     )}
                 </nav> */}
             </section>
-            {!token && <Redirect to="/login" />}
+            {/* {!token && <Redirect to="/login" />} */}
 
             {/* <div
                 style={{
