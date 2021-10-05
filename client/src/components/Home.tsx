@@ -10,7 +10,6 @@ import { HiMoon } from "react-icons/hi";
 import { HiChevronDown, HiMail, HiChatAlt2 } from "react-icons/hi";
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
-import { SSL_OP_NO_TLSv1_1 } from "constants";
 
 export const Home = () => {
     const { token, setToken } = useContext(TokenContext)!;
@@ -26,16 +25,16 @@ export const Home = () => {
     const [hoverYourCartOptions, setHoverYourCartOptions] = useState(false);
     const [showYourCartOptions, setShowYourCartOptions] = useState(false);
     let [referenceHelpLink, setReferenceHelpLink] =
-        useState<HTMLAnchorElement | null>(null);
+        useState<HTMLButtonElement | null>(null);
     let [popperHelpLink, setPopperHelpLink] = useState<HTMLDivElement | null>(
         null
     );
     let [referenceAccountLink, setReferenceAccountLink] =
-        useState<HTMLAnchorElement | null>(null);
+        useState<HTMLButtonElement | null>(null);
     let [popperAccountLink, setPopperAccountLink] =
         useState<HTMLDivElement | null>(null);
     let [referenceYourCartLink, setReferenceYourCartLink] =
-        useState<HTMLAnchorElement | null>(null);
+        useState<HTMLButtonElement | null>(null);
     let [popperYourCartLink, setPopperYourCartLink] =
         useState<HTMLDivElement | null>(null);
 
@@ -49,7 +48,7 @@ export const Home = () => {
         {
             modifiers: [
                 { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-140, 8] } },
+                { name: "offset", options: { offset: [-150, 8] } },
             ],
         }
     );
@@ -58,7 +57,7 @@ export const Home = () => {
         usePopper(referenceAccountLink, popperAccountLink, {
             modifiers: [
                 { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-70, 8] } },
+                { name: "offset", options: { offset: [-80, 8] } },
             ],
         });
 
@@ -66,7 +65,7 @@ export const Home = () => {
         usePopper(referenceYourCartLink, popperYourCartLink, {
             modifiers: [
                 { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-140, 8] } },
+                { name: "offset", options: { offset: [-150, 8] } },
             ],
         });
 
@@ -118,22 +117,30 @@ export const Home = () => {
                     </svg>
 
                     <Input className="h-full w-1/3"></Input>
-                    <div className="flex h-full py-2">
-                        <Link
-                            ref={setReferenceHelpLink}
-                            className="flex h-full border-r border-opacity-30 px-2 items-center"
+                    <div className="flex h-full py-2 items-center">
+                        <div
+                            className="flex h-full px-2 items-center"
                             // onClick={() => redirect to help page}
-                            to="/"
+
                             onMouseEnter={() => setHoverHelpLink(true)}
                             onMouseLeave={() => setHoverHelpLink(false)}
                             onFocus={() => setHoverHelpLink(true)}
                         >
-                            <span className="font-bold">24/7 help</span>
-                            <HiChevronDown
-                                size={24}
-                                className="ml-2 text-yellow-300"
-                            />
-                        </Link>
+                            <Link to="/">
+                                <span className="font-bold">24/7 help</span>
+                            </Link>
+                            <button
+                                ref={setReferenceHelpLink}
+                                onClick={() => {
+                                    setShowHelpOptions(!showHelpOptions);
+                                }}
+                            >
+                                <HiChevronDown
+                                    size={24}
+                                    className=" text-yellow-300 border-r border-opacity-30 "
+                                />
+                            </button>
+                        </div>
                         {showHelpOptions &&
                             createPortal(
                                 <>
@@ -219,20 +226,31 @@ export const Home = () => {
                                 document.body
                             )}
                         <Link
-                            ref={setReferenceAccountLink}
-                            className="flex h-full items-center border-r border-opacity-30 px-2"
+                            className="h-full px-2 items-center "
                             // onClick={() => redirect to help page}
                             to="/"
                             onMouseEnter={() => setHoverAccountLink(true)}
                             onMouseLeave={() => setHoverAccountLink(false)}
                             onFocus={() => setHoverAccountLink(true)}
                         >
-                            <span className="font-bold">your account</span>
+                            <span className="text-sm block">
+                                {token && `Hi ${user.firstName}`}
+                            </span>
+                            <div className="flex ">
+                                <span className="font-bold">your account</span>
+                            </div>
+                        </Link>
+                        <button
+                            ref={setReferenceAccountLink}
+                            onClick={() =>
+                                setShowAccountOptions(!showAccountOptions)
+                            }
+                        >
                             <HiChevronDown
                                 size={24}
-                                className="ml-2 text-yellow-300"
+                                className="text-yellow-300 border-r border-opacity-30"
                             />
-                        </Link>
+                        </button>
                         {showAccountOptions &&
                             createPortal(
                                 <div
@@ -341,25 +359,33 @@ export const Home = () => {
                                 </div>,
                                 document.body
                             )}
-                        <Link
-                            ref={setReferenceYourCartLink}
+                        <div
                             className="flex h-full px-2 items-center"
                             // onClick={() => redirect to help page}
-                            to="/"
                             onMouseEnter={() => setHoverYourCartLink(true)}
                             onMouseLeave={() => setHoverYourCartLink(false)}
                             onFocus={() => setHoverYourCartLink(true)}
                         >
-                            <span className="font-bold">your cart</span>
-                            <HiChevronDown
-                                size={24}
-                                className="ml-2 text-yellow-300 "
-                            />
-                        </Link>
+                            <Link to="/">
+                                <span className="font-bold">your cart</span>
+                            </Link>
+                            <button
+                                ref={setReferenceYourCartLink}
+                                onClick={() =>
+                                    setShowYourCartOptions(!showYourCartOptions)
+                                }
+                            >
+                                <HiChevronDown
+                                    size={24}
+                                    className=" text-yellow-300 "
+                                />
+                            </button>
+                        </div>
                         {showYourCartOptions &&
                             createPortal(
                                 <>
                                     <div
+                                        ref={setPopperYourCartLink}
                                         onMouseEnter={() =>
                                             setHoverYourCartOptions(true)
                                         }
@@ -369,7 +395,6 @@ export const Home = () => {
                                         onFocus={() =>
                                             setHoverYourCartLink(true)
                                         }
-                                        ref={setPopperYourCartLink}
                                         className=" bg-white rounded-b-sm shadow-lg ring-1 ring-black ring-opacity-5"
                                         style={yourCartLinkStyles.popper}
                                         {...yourCartLinkAttributes.popper}
