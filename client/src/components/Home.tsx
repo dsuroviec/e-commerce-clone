@@ -5,7 +5,7 @@ import UserContext from "../contexts/UserContext";
 import { Button } from "./Button";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
-
+import _ from "lodash";
 import {
     HiChevronDown,
     HiMail,
@@ -39,7 +39,19 @@ export const Home = () => {
     const [hoverShopLink, setHoverShopLink] = useState(false);
     const [hoverShopOptions, setHoverShopOptions] = useState(false);
     const [showShopOptions, setShowShopOptions] = useState(false);
+    const heroCarouselImages = [
+        "autoshipping.jpg",
+        "buy-a-bag.jpg",
+        "disney-collection.jpg",
+        "e-gift-card.jpg",
+        "gift-card.jpg",
+        "halloween.jpg",
+    ];
+    const [carouselIndex, setCarouselIndex] = useState(0);
 
+    const [currentHeroImage, setCurrentHeroImage] = useState(
+        heroCarouselImages[carouselIndex]
+    );
     const [hoverPharmacyLink, setHoverPharmacyLink] = useState(false);
     const [hoverPharmacyOptions, setHoverPharmacyOptions] = useState(false);
     const [showPharmacyOptions, setShowPharmacyOptions] = useState(false);
@@ -127,7 +139,6 @@ export const Home = () => {
                 { name: "offset", options: { offset: [-90, 8] } },
             ],
         });
-
     useEffect(() => {
         if (hoverHelpLink || hoverHelpOptions) {
             setShowHelpOptions(true);
@@ -194,6 +205,19 @@ export const Home = () => {
         }
     }, [hoverGiveBackLink, hoverGiveBackOptions]);
 
+    useEffect(() => {
+        const carouselInterval = setInterval(() => {
+            if (carouselIndex < 5) {
+                setCarouselIndex(carouselIndex + 1);
+            } else {
+                setCarouselIndex(0);
+            }
+
+            setCurrentHeroImage(heroCarouselImages[carouselIndex]);
+            clearInterval(carouselInterval);
+        }, 1000);
+    }, [carouselIndex]);
+
     return (
         <>
             <section
@@ -232,7 +256,6 @@ export const Home = () => {
                     ></Input>
                 </div>
             </section>
-
             <section className="hidden 2xl:pt-6 2xl:h-36 2xl:text-xl 2xl:text-white">
                 <div
                     id="topNav"
@@ -812,6 +835,18 @@ export const Home = () => {
                     ></img>
                 </button>
             </div>
+            <picture>
+                <img src={currentHeroImage} alt="buy a bag"></img>
+            </picture>
+            <div className="flex justify-center">
+                <button onClick={() => setCarouselIndex(0)}>img</button>&nbsp;
+                <button onClick={() => setCarouselIndex(1)}>img</button>&nbsp;
+                <button onClick={() => setCarouselIndex(2)}>img</button>&nbsp;
+                <button onClick={() => setCarouselIndex(3)}>img</button>&nbsp;
+                <button onClick={() => setCarouselIndex(4)}>img</button>&nbsp;
+                <button onClick={() => setCarouselIndex(5)}>img</button>&nbsp;
+            </div>
+
             {/* <nav className="flex flex-wrap items-center justify-between p-6 bg-teal-500">
                     <div className="flex items-center flex-shrink-0 mr-6"></div>
                     <div className="block lg:hidden">
@@ -851,7 +886,6 @@ export const Home = () => {
                             )}
                         </button>
                     </div> */}
-
             {/* {token && (
                         <div className="flex-grow block w-full lg:flex lg:items-center lg:w-auto">
                             <div className="text-sm lg:flex-grow">
@@ -881,9 +915,7 @@ export const Home = () => {
                         </div>
                     )}
                 </nav> */}
-
             {/* {!token && <Redirect to="/login" />} */}
-
             {/* <div
                 style={{
                     textAlign: "center",
