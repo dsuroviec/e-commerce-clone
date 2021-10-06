@@ -6,6 +6,7 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import clsx from "clsx";
 import {
     HiChevronDown,
     HiMail,
@@ -16,6 +17,8 @@ import {
     HiMenu,
     HiSearch,
     HiUser,
+    HiChevronLeft,
+    HiChevronRight,
 } from "react-icons/hi";
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
@@ -27,6 +30,7 @@ export const Home = () => {
     const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(
         null
     );
+
     const [hoverHelpLink, setHoverHelpLink] = useState(false);
     const [hoverHelpOptions, setHoverHelpOptions] = useState(false);
     const [showHelpOptions, setShowHelpOptions] = useState(false);
@@ -39,23 +43,10 @@ export const Home = () => {
     const [hoverShopLink, setHoverShopLink] = useState(false);
     const [hoverShopOptions, setHoverShopOptions] = useState(false);
     const [showShopOptions, setShowShopOptions] = useState(false);
-    const heroCarouselImages = [
-        "autoshipping.jpg",
-        "buy-a-bag.jpg",
-        "disney-collection.jpg",
-        "e-gift-card.jpg",
-        "gift-card.jpg",
-        "halloween.jpg",
-    ];
     const [carouselIndex, setCarouselIndex] = useState(0);
-
-    const [currentHeroImage, setCurrentHeroImage] = useState(
-        heroCarouselImages[carouselIndex]
-    );
     const [hoverPharmacyLink, setHoverPharmacyLink] = useState(false);
     const [hoverPharmacyOptions, setHoverPharmacyOptions] = useState(false);
     const [showPharmacyOptions, setShowPharmacyOptions] = useState(false);
-
     const [hoverGiveBackLink, setHoverGiveBackLink] = useState(false);
     const [hoverGiveBackOptions, setHoverGiveBackOptions] = useState(false);
     const [showGiveBackOptions, setShowGiveBackOptions] = useState(false);
@@ -98,6 +89,7 @@ export const Home = () => {
             ],
         }
     );
+    console.log(carouselIndex);
     let { styles: accountLinkStyles, attributes: accountLinkAttributes } =
         usePopper(referenceAccountLink, popperAccountLink, {
             modifiers: [
@@ -204,19 +196,23 @@ export const Home = () => {
             return () => clearTimeout(hide);
         }
     }, [hoverGiveBackLink, hoverGiveBackOptions]);
-
+    const [isCarouselIntervalDisabled, setIsCauroselIntervalDisabled] =
+        useState(false);
     useEffect(() => {
-        const carouselInterval = setInterval(() => {
-            if (carouselIndex < 5) {
-                setCarouselIndex(carouselIndex + 1);
-            } else {
-                setCarouselIndex(0);
-            }
+        if (isCarouselIntervalDisabled) return;
 
-            setCurrentHeroImage(heroCarouselImages[carouselIndex]);
-            clearInterval(carouselInterval);
-        }, 1000);
-    }, [carouselIndex]);
+        if (carouselIndex === 5) {
+            const carouselInterval = setInterval(() => {
+                setCarouselIndex(0);
+            }, 2000);
+            return () => clearInterval(carouselInterval);
+        } else {
+            const carouselInterval = setInterval(() => {
+                setCarouselIndex(carouselIndex + 1);
+            }, 2000);
+            return () => clearInterval(carouselInterval);
+        }
+    }, [carouselIndex, isCarouselIntervalDisabled]);
 
     return (
         <>
@@ -835,18 +831,68 @@ export const Home = () => {
                     ></img>
                 </button>
             </div>
-            <picture>
-                <img src={currentHeroImage} alt="buy a bag"></img>
-            </picture>
-            <div className="flex justify-center">
-                <button onClick={() => setCarouselIndex(0)}>img</button>&nbsp;
-                <button onClick={() => setCarouselIndex(1)}>img</button>&nbsp;
-                <button onClick={() => setCarouselIndex(2)}>img</button>&nbsp;
-                <button onClick={() => setCarouselIndex(3)}>img</button>&nbsp;
-                <button onClick={() => setCarouselIndex(4)}>img</button>&nbsp;
-                <button onClick={() => setCarouselIndex(5)}>img</button>&nbsp;
+            <div className="relative">
+                <button
+                    onClick={() => {
+                        setIsCauroselIntervalDisabled(true);
+                        if (carouselIndex > 0) {
+                            setCarouselIndex(carouselIndex - 1);
+                        } else {
+                            setCarouselIndex(5);
+                        }
+                    }}
+                    className="absolute text-white text-opacity-60 inset-y-1/2"
+                >
+                    <HiChevronLeft size={40} />
+                </button>
+                <picture>
+                    <img
+                        src={
+                            [
+                                "autoshipping.jpg",
+                                "buy-a-bag.jpg",
+                                "disney-collection.jpg",
+                                "e-gift-card.jpg",
+                                "gift-card.jpg",
+                                "halloween.jpg",
+                            ][carouselIndex]
+                        }
+                        alt="buy a bag"
+                    ></img>
+                </picture>
+                <button
+                    onClick={() => {
+                        setIsCauroselIntervalDisabled(true);
+                        if (carouselIndex < 5) {
+                            setCarouselIndex(carouselIndex + 1);
+                        } else {
+                            setCarouselIndex(0);
+                        }
+                    }}
+                    className="absolute right-0 text-white text-opacity-60 top-1/2"
+                >
+                    <HiChevronRight size={40} />
+                </button>
             </div>
-
+            <div className="flex justify-center p-1">
+                {[0, 1, 2, 3, 4, 5].map((index) => (
+                    <button
+                        key={index}
+                        className={clsx(
+                            "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
+                            {
+                                "bg-chewyBlue": index === carouselIndex,
+                                "border-chewyOrange": index === carouselIndex,
+                            }
+                        )}
+                        onClick={() => {
+                            setIsCauroselIntervalDisabled(true);
+                            setCarouselIndex(index);
+                        }}
+                    ></button>
+                ))}
+            </div>
+            css transition groups
             {/* <nav className="flex flex-wrap items-center justify-between p-6 bg-teal-500">
                     <div className="flex items-center flex-shrink-0 mr-6"></div>
                     <div className="block lg:hidden">
