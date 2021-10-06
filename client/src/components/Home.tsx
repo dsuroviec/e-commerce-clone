@@ -198,7 +198,7 @@ export const Home = () => {
         <>
             <section
                 id="mobile-nav"
-                className="w-full p-1 font-medium text-white bg-chewyred sm:hidden"
+                className="w-full p-1 font-medium text-white bg-chewyBlue sm:hidden"
             >
                 <div className="flex items-center justify-between h-10 px-1.5 ">
                     <div id="menu">
@@ -223,7 +223,7 @@ export const Home = () => {
                 </div>
                 <div className="relative flex items-center">
                     <HiSearch
-                        className="absolute text-textBlue right-3"
+                        className="absolute text-chewyBlue-dark right-3"
                         size={24}
                     />
                     <Input
@@ -795,15 +795,21 @@ export const Home = () => {
                 )}
             </section>
             {/* ----------------this starts first section after navbar assuming no token--------- */}
-            <div className="w-full h-auto p-1 border-b ">
-                <button>
-                    <span className="px-2 py-1 font-bold text-white bg-yellow-500 rounded-2xl">
+            <div className="p-1 border-b ">
+                <button className="flex items-center justify-center w-full">
+                    <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
                         Save 35%
                     </span>
                     &nbsp;
-                    <span className="font-medium">on your first</span>&nbsp;
-                    &nbsp;
-                    <span>Autoship</span>
+                    <span className="font-medium text-chewyBlue-evenDarker">
+                        on your first
+                    </span>
+                    &nbsp; &nbsp;
+                    <img
+                        className="w-20"
+                        src="autoship-logo.svg"
+                        alt="autoship"
+                    ></img>
                 </button>
             </div>
             {/* <nav className="flex flex-wrap items-center justify-between p-6 bg-teal-500">
