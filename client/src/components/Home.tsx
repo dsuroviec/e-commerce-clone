@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Popper } from "./Popper";
 import { Redirect } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
@@ -252,7 +253,8 @@ export const Home = () => {
                     ></Input>
                 </div>
             </section>
-            <section className="hidden 2xl:pt-6 2xl:h-36 2xl:text-xl 2xl:text-white">
+
+            <section className="bg-blue-500 2xl:pt-6 2xl:h-36 2xl:text-xl 2xl:text-white">
                 <div
                     id="topNav"
                     className="justify-between hidden sm:flex 2xl:h-11 2xl:flex 2xl:justify-between 2xl:items-center"
@@ -266,113 +268,59 @@ export const Home = () => {
 
                     <Input className=" 2xl:h-full 2xl:w-1/3"></Input>
                     <div className=" 2xl:flex 2xl:items-center">
-                        <div
-                            className=" 2xl:flex 2xl:px-2 2xl:items-center 2xl:border-r 2xl:border-opacity-30"
-                            // onClick={() => redirect to help page}
-
-                            onMouseEnter={() => setHoverHelpLink(true)}
-                            onMouseLeave={() => setHoverHelpLink(false)}
-                            onFocus={() => setHoverHelpLink(true)}
-                        >
-                            <Link to="/">
-                                <span className="2xl:font-bold">24/7 help</span>
-                            </Link>
-                            <button
-                                ref={setReferenceHelpLink}
-                                onClick={() => {
-                                    setShowHelpOptions(!showHelpOptions);
-                                }}
-                            >
-                                <HiChevronDown
-                                    size={24}
-                                    className="2xl:text-yellow-300 "
-                                />
-                            </button>
-                        </div>
-                        {showHelpOptions &&
-                            createPortal(
-                                <>
-                                    <div
-                                        onMouseEnter={() =>
-                                            setHoverHelpOptions(true)
-                                        }
-                                        onMouseLeave={() =>
-                                            setHoverHelpOptions(false)
-                                        }
-                                        onFocus={() => setHoverHelpLink(true)}
-                                        ref={setPopperHelpLink}
-                                        className="bg-white 2xl:rounded-b-sm 2xl:shadow-lg 2xl:w-80 2xl:ring-1 2xl:ring-black 2xl:ring-opacity-5"
-                                        style={helpLinkStyles.popper}
-                                        {...helpLinkAttributes.popper}
+                        <Popper>
+                            <div className="bg-white 2xl:p-7">
+                                <div className="2xl:flex 2xl:justify-center 2xl:m-auto ">
+                                    Get help from our experts 24/7
+                                </div>
+                                <Link
+                                    to=""
+                                    className="2xl:flex 2xl:justify-center 2xl:text-3xl 2xl:font-medium 2xl:text-yellow-600 2xl:hover:underline"
+                                >
+                                    1-800-672-4399
+                                </Link>
+                            </div>
+                            <div className="2xl:flex 2xl:bg-gray-50">
+                                <div className="border 2xl:flex 2xl:items-center 2xl:justify-center 2xl:flex-1 2xl:p-5 2xl:text-blue-500">
+                                    <HiChatAlt2 size={30} />
+                                    &nbsp;
+                                    <Link
+                                        to=""
+                                        className="2xl:hover:underline "
                                     >
-                                        <div
-                                            ref={setArrowElement}
-                                            style={helpLinkStyles.arrow}
-                                            data-arrow
-                                        />
-                                        <div className="bg-white 2xl:p-7">
-                                            <div className="2xl:flex 2xl:justify-center 2xl:m-auto ">
-                                                Get help from our experts 24/7
-                                            </div>
-                                            <Link
-                                                to=""
-                                                className="2xl:flex 2xl:justify-center 2xl:text-3xl 2xl:font-medium 2xl:text-yellow-600 2xl:hover:underline"
-                                            >
-                                                1-800-672-4399
-                                            </Link>
-                                        </div>
-                                        <div className="2xl:flex 2xl:bg-gray-50">
-                                            <div className="border 2xl:flex 2xl:items-center 2xl:justify-center 2xl:flex-1 2xl:p-5 2xl:text-blue-500">
-                                                <HiChatAlt2 size={30} />
-                                                &nbsp;
-                                                <Link
-                                                    to=""
-                                                    className="2xl:hover:underline "
-                                                >
-                                                    Chat Live
-                                                </Link>
-                                            </div>
-                                            <div className="2xl:flex 2xl:items-center 2xl:justify-center 2xl:flex-1 2xl:p-5 2xl:text-blue-500 2xl:border">
-                                                <HiMail size={30} />
-                                                &nbsp;
-                                                <Link
-                                                    to=""
-                                                    className="2xl:hover:underline"
-                                                >
-                                                    Contact Us
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="2xl:flex 2xl:justify-between 2xl:px-6 2xl:py-4 2xl:text-blue-500 ">
-                                            <Link
-                                                to="/"
-                                                className="2xl:hover:underline"
-                                            >
-                                                w-80 Track Order
-                                            </Link>
-                                            -
-                                            <Link
-                                                to="/"
-                                                className=" 2xl:hover:underline"
-                                            >
-                                                FAQs
-                                            </Link>
-                                            -
-                                            <Link
-                                                onBlur={() => {
-                                                    setHoverHelpOptions(false);
-                                                    setHoverHelpLink(false);
-                                                }}
-                                                to="/"
-                                                className=" 2xl:hover:underline"
-                                            >
-                                                Shipping Info
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </>,
-                                document.body
-                            )}
+                                        Chat Live
+                                    </Link>
+                                </div>
+                                <div className="2xl:flex 2xl:items-center 2xl:justify-center 2xl:flex-1 2xl:p-5 2xl:text-blue-500 2xl:border">
+                                    <HiMail size={30} />
+                                    &nbsp;
+                                    <Link to="" className="2xl:hover:underline">
+                                        Contact Us
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="2xl:flex 2xl:justify-between 2xl:px-6 2xl:py-4 2xl:text-blue-500 ">
+                                <Link to="/" className="2xl:hover:underline">
+                                    Track Order
+                                </Link>
+                                -
+                                <Link to="/" className=" 2xl:hover:underline">
+                                    FAQs
+                                </Link>
+                                -
+                                <Link
+                                    onBlur={() => {
+                                        setHoverHelpOptions(false);
+                                        setHoverHelpLink(false);
+                                    }}
+                                    to="/"
+                                    className=" 2xl:hover:underline"
+                                >
+                                    Shipping Info
+                                </Link>
+                            </div>
+                        </Popper>
+
                         <div
                             className="2xl:flex 2xl:border-r 2xl:border-opacity-30"
                             onMouseEnter={() => setHoverAccountLink(true)}
@@ -892,7 +840,8 @@ export const Home = () => {
                     ></button>
                 ))}
             </div>
-            css transition groups
+
+            {/* css transition groups */}
             {/* <nav className="flex flex-wrap items-center justify-between p-6 bg-teal-500">
                     <div className="flex items-center flex-shrink-0 mr-6"></div>
                     <div className="block lg:hidden">
