@@ -1,15 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Popper } from "./Popper";
-import { Redirect } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
-import { Button } from "./Button";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import clsx from "clsx";
 import {
-    HiChevronDown,
     HiMail,
     HiChatAlt2,
     HiShoppingCart,
@@ -21,182 +18,13 @@ import {
     HiChevronLeft,
     HiChevronRight,
 } from "react-icons/hi";
-import { usePopper } from "react-popper";
-import { createPortal } from "react-dom";
 
 export const Home = () => {
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
-    const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(
-        null
-    );
-
-    const [hoverHelpLink, setHoverHelpLink] = useState(false);
-    const [hoverHelpOptions, setHoverHelpOptions] = useState(false);
-    const [showHelpOptions, setShowHelpOptions] = useState(false);
-    const [hoverAccountLink, setHoverAccountLink] = useState(false);
-    const [hoverAccountOptions, setHoverAccountOptions] = useState(false);
-    const [showAccountOptions, setShowAccountOptions] = useState(false);
-    const [hoverYourCartLink, setHoverYourCartLink] = useState(false);
-    const [hoverYourCartOptions, setHoverYourCartOptions] = useState(false);
-    const [showYourCartOptions, setShowYourCartOptions] = useState(false);
-    const [hoverShopLink, setHoverShopLink] = useState(false);
-    const [hoverShopOptions, setHoverShopOptions] = useState(false);
-    const [showShopOptions, setShowShopOptions] = useState(false);
     const [carouselIndex, setCarouselIndex] = useState(0);
-    const [hoverPharmacyLink, setHoverPharmacyLink] = useState(false);
-    const [hoverPharmacyOptions, setHoverPharmacyOptions] = useState(false);
-    const [showPharmacyOptions, setShowPharmacyOptions] = useState(false);
-    const [hoverGiveBackLink, setHoverGiveBackLink] = useState(false);
-    const [hoverGiveBackOptions, setHoverGiveBackOptions] = useState(false);
-    const [showGiveBackOptions, setShowGiveBackOptions] = useState(false);
 
-    let [referenceHelpLink, setReferenceHelpLink] =
-        useState<HTMLButtonElement | null>(null);
-    let [referenceAccountLink, setReferenceAccountLink] =
-        useState<HTMLButtonElement | null>(null);
-    let [referenceYourCartLink, setReferenceYourCartLink] =
-        useState<HTMLButtonElement | null>(null);
-    let [referenceShopLink, setReferenceShopLink] =
-        useState<HTMLButtonElement | null>(null);
-    let [referencePharmacyLink, setReferencePharmacyLink] =
-        useState<HTMLButtonElement | null>(null);
-    let [referenceGiveBackLink, setReferenceGiveBackLink] =
-        useState<HTMLButtonElement | null>(null);
-
-    let [popperHelpLink, setPopperHelpLink] = useState<HTMLDivElement | null>(
-        null
-    );
-    let [popperAccountLink, setPopperAccountLink] =
-        useState<HTMLDivElement | null>(null);
-    let [popperYourCartLink, setPopperYourCartLink] =
-        useState<HTMLDivElement | null>(null);
-    let [popperShopLink, setPopperShopLink] = useState<HTMLDivElement | null>(
-        null
-    );
-    let [popperPharmacyLink, setPopperPharmacyLink] =
-        useState<HTMLDivElement | null>(null);
-    let [popperGiveBackLink, setPopperGiveBackLink] =
-        useState<HTMLDivElement | null>(null);
-
-    let { styles: helpLinkStyles, attributes: helpLinkAttributes } = usePopper(
-        referenceHelpLink,
-        popperHelpLink,
-        {
-            modifiers: [
-                { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-150, 8] } },
-            ],
-        }
-    );
-    console.log(carouselIndex);
-    let { styles: accountLinkStyles, attributes: accountLinkAttributes } =
-        usePopper(referenceAccountLink, popperAccountLink, {
-            modifiers: [
-                { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-80, 8] } },
-            ],
-        });
-    let { styles: yourCartLinkStyles, attributes: yourCartLinkAttributes } =
-        usePopper(referenceYourCartLink, popperYourCartLink, {
-            modifiers: [
-                { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-150, 8] } },
-            ],
-        });
-    let { styles: shopLinkStyles, attributes: shopLinkAttributes } = usePopper(
-        referenceShopLink,
-        popperShopLink,
-        {
-            placement: "bottom-start",
-            modifiers: [
-                { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-50, 8] } },
-            ],
-        }
-    );
-    let { styles: pharmacyLinkStyles, attributes: pharmacyLinkAttributes } =
-        usePopper(referencePharmacyLink, popperPharmacyLink, {
-            placement: "bottom-start",
-            modifiers: [
-                { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-94, 8] } },
-            ],
-        });
-    let { styles: giveBackLinkStyles, attributes: giveBackLinkAttributes } =
-        usePopper(referenceGiveBackLink, popperGiveBackLink, {
-            placement: "bottom-start",
-            modifiers: [
-                { name: "arrow", options: { element: arrowElement } },
-                { name: "offset", options: { offset: [-90, 8] } },
-            ],
-        });
-    useEffect(() => {
-        if (hoverHelpLink || hoverHelpOptions) {
-            setShowHelpOptions(true);
-        } else {
-            const hide = setTimeout(() => {
-                setShowHelpOptions(false);
-            }, 200);
-            return () => clearTimeout(hide);
-        }
-    }, [hoverHelpLink, hoverHelpOptions]);
-
-    useEffect(() => {
-        if (hoverAccountLink || hoverAccountOptions) {
-            setShowAccountOptions(true);
-        } else {
-            const hide = setTimeout(() => {
-                setShowAccountOptions(false);
-            }, 200);
-            return () => clearTimeout(hide);
-        }
-    }, [hoverAccountLink, hoverAccountOptions]);
-
-    useEffect(() => {
-        if (hoverYourCartLink || hoverYourCartOptions) {
-            setShowYourCartOptions(true);
-        } else {
-            const hide = setTimeout(() => {
-                setShowYourCartOptions(false);
-            }, 200);
-            return () => clearTimeout(hide);
-        }
-    }, [hoverYourCartLink, hoverYourCartOptions]);
-
-    useEffect(() => {
-        if (hoverShopLink || hoverShopOptions) {
-            setShowShopOptions(true);
-        } else {
-            const hide = setTimeout(() => {
-                setShowShopOptions(false);
-            }, 200);
-            return () => clearTimeout(hide);
-        }
-    }, [hoverShopLink, hoverShopOptions]);
-
-    useEffect(() => {
-        if (hoverPharmacyLink || hoverPharmacyOptions) {
-            setShowPharmacyOptions(true);
-        } else {
-            const hide = setTimeout(() => {
-                setShowPharmacyOptions(false);
-            }, 200);
-            return () => clearTimeout(hide);
-        }
-    }, [hoverPharmacyLink, hoverPharmacyOptions]);
-
-    useEffect(() => {
-        if (hoverGiveBackLink || hoverGiveBackOptions) {
-            setShowGiveBackOptions(true);
-        } else {
-            const hide = setTimeout(() => {
-                setShowGiveBackOptions(false);
-            }, 200);
-            return () => clearTimeout(hide);
-        }
-    }, [hoverGiveBackLink, hoverGiveBackOptions]);
     const [isCarouselIntervalDisabled, setIsCauroselIntervalDisabled] =
         useState(false);
     useEffect(() => {
@@ -268,7 +96,7 @@ export const Home = () => {
 
                     <Input className=" 2xl:h-full 2xl:w-1/3"></Input>
                     <div className=" 2xl:flex 2xl:items-center">
-                        <Popper>
+                        <Popper title="24/7">
                             <div className="bg-white 2xl:p-7">
                                 <div className="2xl:flex 2xl:justify-center 2xl:m-auto ">
                                     Get help from our experts 24/7
@@ -309,10 +137,10 @@ export const Home = () => {
                                 </Link>
                                 -
                                 <Link
-                                    onBlur={() => {
-                                        setHoverHelpOptions(false);
-                                        setHoverHelpLink(false);
-                                    }}
+                                    // onBlur={() => {
+                                    //     setHoverHelpOptions(false);
+                                    //     setHoverHelpLink(false);
+                                    // }}
                                     to="/"
                                     className=" 2xl:hover:underline"
                                 >
@@ -321,440 +149,181 @@ export const Home = () => {
                             </div>
                         </Popper>
 
-                        <div
-                            className="2xl:flex 2xl:border-r 2xl:border-opacity-30"
-                            onMouseEnter={() => setHoverAccountLink(true)}
-                            onMouseLeave={() => setHoverAccountLink(false)}
-                            onFocus={() => setHoverAccountLink(true)}
-                        >
-                            <Link
-                                className="2xl:pl-2 2xl:leading-none"
-                                // onClick={() => redirect to help page}
-                                to="/"
-                            >
-                                {token && (
-                                    <span className="2xl:block 2xl:text-sm ">
-                                        Hi {user.firstName}
-                                    </span>
-                                )}
-
-                                <span className="2xl:font-semisectionbold">
-                                    your account
-                                </span>
-                            </Link>
-                            <button
-                                className="2xl:mr-2"
-                                ref={setReferenceAccountLink}
-                                onClick={() =>
-                                    setShowAccountOptions(!showAccountOptions)
-                                }
-                            >
-                                <HiChevronDown
-                                    size={24}
-                                    className="2xl:text-yellow-300 "
-                                />
-                            </button>
-                        </div>
-                        {showAccountOptions &&
-                            createPortal(
-                                <div
-                                    ref={setPopperAccountLink}
-                                    style={accountLinkStyles.popper}
-                                    {...accountLinkAttributes.popper}
-                                    onMouseEnter={() =>
-                                        setHoverAccountOptions(true)
-                                    }
-                                    onMouseLeave={() => {
-                                        setHoverAccountOptions(false);
-                                    }}
-                                    onFocus={() => setHoverAccountLink(true)}
-                                    className="2xl:bg-white 2xl:rounded-b-sm 2xl:shadow-lg 2xl:w-min 2xl:ring-1 2xl:ring-black 2xl:ring-opacity-5"
+                        <Popper title="your account">
+                            <div className="2xl:overflow-y-auto 2xl:max-h-80">
+                                <div className="2xl:p-3 2xl:border-b ">
+                                    <button className="2xl:w-full 2xl:px-4 2xl:py-2 2xl:m-auto 2xl:font-bold 2xl:text-white 2xl:bg-yellow-500 2xl:rounded">
+                                        <Link to="" />
+                                        Sign In
+                                    </button>
+                                    <div className="2xl:flex 2xl:pt-3 2xl:text-xs">
+                                        <span className="2xl:min-w-max">
+                                            New Customer?
+                                        </span>{" "}
+                                        &nbsp;
+                                        <Link
+                                            to=""
+                                            className="2xl:text-blue-500 2xl:min-w-max 2xl:hover:underline"
+                                        >
+                                            Start Here
+                                        </Link>
+                                    </div>
+                                </div>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
                                 >
-                                    <div
-                                        ref={setArrowElement}
-                                        style={accountLinkStyles.arrow}
-                                        data-arrow
-                                    />
-                                    <div className="2xl:overflow-y-auto 2xl:max-h-80">
-                                        <div className="2xl:p-3 2xl:border-b ">
-                                            <button className="2xl:w-full 2xl:px-4 2xl:py-2 2xl:m-auto 2xl:font-bold 2xl:text-white 2xl:bg-yellow-500 2xl:rounded">
-                                                <Link to="" />
-                                                Sign In
-                                            </button>
-                                            <div className="2xl:flex 2xl:pt-3 2xl:text-xs">
-                                                <span className="2xl:min-w-max">
-                                                    New Customer?
-                                                </span>{" "}
-                                                &nbsp;
-                                                <Link
-                                                    to=""
-                                                    className="2xl:text-blue-500 2xl:min-w-max 2xl:hover:underline"
-                                                >
-                                                    Start Here
-                                                </Link>
+                                    Account
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    Orders
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    Manage Autoship
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    Favorites
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    Buy Again
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    Perscriptions
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    My Pet Health
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    Connect with a Vet
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                >
+                                    My Resources
+                                </Link>
+                                <Link
+                                    to=""
+                                    className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
+                                    // onBlur={() => {
+                                    //     setHoverAccountOptions(false);
+                                    //     setHoverAccountLink(false);
+                                    // }}
+                                >
+                                    Create a Pet Profile
+                                </Link>
+                            </div>
+                        </Popper>
+                        <Popper title="your cart">
+                            {true ? ( // Items in your cart? Show items
+                                <div className="2xl:overflow-y-auto 2xl:w-80 2xl:max-h-80">
+                                    <div className="2xl:p-4 2xl:bg-gray-50">
+                                        <div className="2xl:flex 2xl:mb-4">
+                                            <div className="2xl:font-bold 2xl:flex-2">
+                                                Cart Subtotal:
+                                                <span className="2xl:text-red-700">
+                                                    &nbsp; $80.80
+                                                </span>
                                             </div>
+                                            <Link
+                                                to="/"
+                                                className="2xl:flex 2xl:justify-end 2xl:flex-1 2xl:w-full 2xl:text-blue-500 2xl:hover:underline"
+                                            >
+                                                Edit Cart
+                                            </Link>
                                         </div>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            Account
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            Orders
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            Manage Autoship
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            Favorites
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            Buy Again
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            Perscriptions
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            My Pet Health
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            Connect with a Vet
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                        >
-                                            My Resources
-                                        </Link>
-                                        <Link
-                                            to=""
-                                            className="border-b 2xl:block 2xl:w-full 2xl:px-3 2xl:py-1 2xl:text-blue-500 2xl:hover:underline"
-                                            onBlur={() => {
-                                                setHoverAccountOptions(false);
-                                                setHoverAccountLink(false);
-                                            }}
-                                        >
-                                            Create a Pet Profile
-                                        </Link>
+                                        <button className="2xl:w-full 2xl:px-4 2xl:py-2 2xl:m-auto 2xl:font-bold 2xl:text-white 2xl:bg-yellow-500 2xl:rounded ">
+                                            <Link to="/">
+                                                Proceed to Checkout
+                                            </Link>
+                                        </button>
                                     </div>
-                                </div>,
-                                document.body
-                            )}
-                        <div
-                            className="2xl:flex 2xl:items-center 2xl:h-full 2xl:px-2"
-                            // onClick={() => redirect to help page}
-                            onMouseEnter={() => setHoverYourCartLink(true)}
-                            onMouseLeave={() => setHoverYourCartLink(false)}
-                            onFocus={() => setHoverYourCartLink(true)}
-                        >
-                            {" "}
-                            <HiShoppingCart size={34} />
-                            &nbsp;
-                            <Link to="/">
-                                <span className="2xl:font-bold">your cart</span>
-                            </Link>
-                            <button
-                                ref={setReferenceYourCartLink}
-                                onClick={() =>
-                                    setShowYourCartOptions(!showYourCartOptions)
-                                }
-                            >
-                                <HiChevronDown
-                                    size={24}
-                                    className="2xl:text-yellow-300 "
-                                />
-                            </button>
-                        </div>
-                        {showYourCartOptions &&
-                            createPortal(
-                                <>
-                                    <div
-                                        ref={setPopperYourCartLink}
-                                        onMouseEnter={() =>
-                                            setHoverYourCartOptions(true)
-                                        }
-                                        onMouseLeave={() => {
-                                            setHoverYourCartOptions(false);
-                                        }}
-                                        onFocus={() =>
-                                            setHoverYourCartLink(true)
-                                        }
-                                        className="2xl:bg-white 2xl:rounded-b-sm 2xl:shadow-lg ring-1 2xl:ring-black 2xl:ring-opacity-5"
-                                        style={yourCartLinkStyles.popper}
-                                        {...yourCartLinkAttributes.popper}
-                                    >
-                                        <div
-                                            ref={setArrowElement}
-                                            style={yourCartLinkStyles.arrow}
-                                            data-arrow
-                                        />
-                                        {true ? ( // Items in your cart? Show items
-                                            <div className="2xl:overflow-y-auto 2xl:w-80 2xl:max-h-80">
-                                                <div className="2xl:p-4 2xl:bg-gray-50">
-                                                    <div className="2xl:flex 2xl:mb-4">
-                                                        <div className="2xl:font-bold 2xl:flex-2">
-                                                            Cart Subtotal:
-                                                            <span className="2xl:text-red-700">
-                                                                &nbsp; $80.80
-                                                            </span>
-                                                        </div>
-                                                        <Link
-                                                            to="/"
-                                                            className="2xl:flex 2xl:justify-end 2xl:flex-1 2xl:w-full 2xl:text-blue-500 2xl:hover:underline"
-                                                        >
-                                                            Edit Cart
-                                                        </Link>
-                                                    </div>
-                                                    <button className="2xl:w-full 2xl:px-4 2xl:py-2 2xl:m-auto 2xl:font-bold 2xl:text-white 2xl:bg-yellow-500 2xl:rounded ">
-                                                        <Link to="/">
-                                                            Proceed to Checkout
-                                                        </Link>
-                                                    </button>
-                                                </div>
-                                                <div className="2xl:flex 2xl:justify-between 2xl:px-4 2xl:pt-4 2xl:font-medium">
-                                                    <span>Recently Added:</span>
-                                                    <span>{`Total Items (${"3"})`}</span>
-                                                </div>
-                                                section
-                                                {[2, 3, 4, 5].map((item) => (
-                                                    <div className="2xl:p-4 2xl:border-b ">
-                                                        <Link
-                                                            to="/"
-                                                            className="2xl:flex"
-                                                        >
-                                                            <img
-                                                                className="2xl:w-12 2xl:h-12 2xl:mt-1"
-                                                                src="https://d1e4pidl3fu268.cloudfront.net/4eed2f6d-4fe3-48a2-bc3f-709ff9e20d0a/TEST.jpg"
-                                                                alt="product"
-                                                            ></img>
-                                                            <div className="2xl:ml-4 2xl:text-sm">
-                                                                This is the
-                                                                desciption of
-                                                                the item and it
-                                                                is really cool
-                                                                because it
-                                                                smells like
-                                                                chicken
-                                                                <div className="2xl:block 2xl:pt-1">
-                                                                    <span className="2xl:font-bold 2xl:text-red-700 ">
-                                                                        $55.49
-                                                                    </span>
-                                                                    &nbsp;
-                                                                    (Qty:1)
-                                                                </div>
-                                                            </div>
-                                                        </Link>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ) : (
-                                            <div className="2xl:px-4 2xl:py-8 2xl:w-80">
-                                                <h1 className="2xl:pb-5 2xl:font-medium">
-                                                    Your Cart is Empty.
-                                                </h1>
-                                                <p>
-                                                    Something missing?&nbsp;
-                                                    <Link
-                                                        to=""
-                                                        className="2xl:text-blue-500 2xl:hover:underline"
-                                                    >
-                                                        Sign in &nbsp;
-                                                    </Link>
-                                                    to see items you may have
-                                                    added from another computer
-                                                    or device.
-                                                </p>
-                                            </div>
-                                        )}
+                                    <div className="2xl:flex 2xl:justify-between 2xl:px-4 2xl:pt-4 2xl:font-medium">
+                                        <span>Recently Added:</span>
+                                        <span>{`Total Items (${"3"})`}</span>
                                     </div>
-                                </>,
-                                document.body
+                                    {[2, 3, 4, 5].map((item) => (
+                                        <div className="2xl:p-4 2xl:border-b ">
+                                            <Link to="/" className="2xl:flex">
+                                                <img
+                                                    className="2xl:w-12 2xl:h-12 2xl:mt-1"
+                                                    src="https://d1e4pidl3fu268.cloudfront.net/4eed2f6d-4fe3-48a2-bc3f-709ff9e20d0a/TEST.jpg"
+                                                    alt="product"
+                                                ></img>
+                                                <div className="2xl:ml-4 2xl:text-sm">
+                                                    This is the desciption of
+                                                    the item and it is really
+                                                    cool because it smells like
+                                                    chicken
+                                                    <div className="2xl:block 2xl:pt-1">
+                                                        <span className="2xl:font-bold 2xl:text-red-700 ">
+                                                            $55.49
+                                                        </span>
+                                                        &nbsp; (Qty:1)
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="2xl:px-4 2xl:py-8 2xl:w-80">
+                                    <h1 className="2xl:pb-5 2xl:font-medium">
+                                        Your Cart is Empty.
+                                    </h1>
+                                    <p>
+                                        Something missing?&nbsp;
+                                        <Link
+                                            to=""
+                                            className="2xl:text-blue-500 2xl:hover:underline"
+                                        >
+                                            Sign in &nbsp;
+                                        </Link>
+                                        to see items you may have added from
+                                        another computer or device.
+                                    </p>
+                                </div>
                             )}
+                        </Popper>
                     </div>
                 </div>
-                {token && (
+
+                {true && (
                     <div id="bottomNav" className="2xl:mt-8">
                         <div className="2xl:flex 2xl:items-center 2xl:justify-between 2xl:font-bold">
-                            <div
-                                className="2xl:flex 2xl:items-center 2xl:px-2 "
-                                onMouseEnter={() => setHoverShopLink(true)}
-                                onMouseLeave={() => setHoverShopLink(false)}
-                                onFocus={() => setHoverShopLink(true)}
-                            >
-                                <Link to="/">
-                                    <span className="2xl:font-bold">shop</span>
-                                </Link>
-                                <button
-                                    ref={setReferenceShopLink}
-                                    onClick={() => {
-                                        setShowShopOptions(!showShopOptions);
-                                    }}
-                                >
-                                    <HiChevronDown
-                                        size={24}
-                                        className="2xl:text-yellow-300 "
-                                    />
-                                </button>
-                            </div>
-                            {showShopOptions &&
-                                createPortal(
-                                    <>
-                                        <div
-                                            onMouseEnter={() =>
-                                                setHoverShopOptions(true)
-                                            }
-                                            onMouseLeave={() =>
-                                                setHoverShopOptions(false)
-                                            }
-                                            onFocus={() =>
-                                                setHoverShopLink(true)
-                                            }
-                                            ref={setPopperShopLink}
-                                            className="rounded-b-sm 2xl:bg-white 2xl:shadow-lg 2xl:w-80 2xl:ring-1 2xl:ring-black 2xl:ring-opacity-5"
-                                            style={shopLinkStyles.popper}
-                                            {...shopLinkAttributes.popper}
-                                        >
-                                            <div
-                                                ref={setArrowElement}
-                                                style={shopLinkStyles.arrow}
-                                                data-arrow
-                                            />
-                                            <div>Hello!</div>
-                                        </div>
-                                    </>,
-                                    document.body
-                                )}
-                            <div
-                                className="2xl:flex 2xl:items-center 2xl:px-2 "
-                                onMouseEnter={() => setHoverPharmacyLink(true)}
-                                onMouseLeave={() => setHoverPharmacyLink(false)}
-                                onFocus={() => setHoverPharmacyLink(true)}
-                            >
-                                <Link to="/">
-                                    <span className="2xl:font-bold">
-                                        pharmacy
-                                    </span>
-                                </Link>
-                                <button
-                                    ref={setReferencePharmacyLink}
-                                    onClick={() => {
-                                        setShowPharmacyOptions(
-                                            !showPharmacyOptions
-                                        );
-                                    }}
-                                >
-                                    <HiChevronDown
-                                        size={24}
-                                        className="2xl:text-yellow-300 "
-                                    />
-                                </button>
-                            </div>
-                            {showPharmacyOptions &&
-                                createPortal(
-                                    <>
-                                        <div
-                                            onMouseEnter={() =>
-                                                setHoverPharmacyOptions(true)
-                                            }
-                                            onMouseLeave={() =>
-                                                setHoverPharmacyOptions(false)
-                                            }
-                                            onFocus={() =>
-                                                setHoverPharmacyLink(true)
-                                            }
-                                            ref={setPopperPharmacyLink}
-                                            className="bg-white 2xl:rounded-b-sm 2xl:shadow-lg 2xl:w-80 2xl:ring-1 2xl:ring-black 2xl:ring-opacity-5"
-                                            style={pharmacyLinkStyles.popper}
-                                            {...pharmacyLinkAttributes.popper}
-                                        >
-                                            <div
-                                                ref={setArrowElement}
-                                                style={pharmacyLinkStyles.arrow}
-                                                data-arrow
-                                            />
-                                            <div>Hello!</div>
-                                        </div>
-                                    </>,
-                                    document.body
-                                )}
+                            <Popper title="shop">
+                                <div>Hello!</div>
+                            </Popper>
+                            <Popper title="pharmacy">
+                                <div>pharmacy</div>
+                            </Popper>
                             <Link to="/">brands</Link>
                             <Link to="/">today's deals</Link>
                             <Link to="/">chewy picks</Link>
-                            <div
-                                className="2xl:flex 2xl:items-center 2xl:px-2 "
-                                onMouseEnter={() => setHoverGiveBackLink(true)}
-                                onMouseLeave={() => setHoverGiveBackLink(false)}
-                                onFocus={() => setHoverGiveBackLink(true)}
-                            >
-                                <Link to="/">
-                                    <span className="2xl:font-bold">
-                                        give back
-                                    </span>
-                                </Link>
-                                <button
-                                    ref={setReferenceGiveBackLink}
-                                    onClick={() => {
-                                        setShowGiveBackOptions(
-                                            !showGiveBackOptions
-                                        );
-                                    }}
-                                >
-                                    <HiChevronDown
-                                        size={24}
-                                        className="2xl:text-yellow-300 "
-                                    />
-                                </button>
-                            </div>
-                            {showGiveBackOptions &&
-                                createPortal(
-                                    <>
-                                        <div
-                                            onMouseEnter={() =>
-                                                setHoverGiveBackOptions(true)
-                                            }
-                                            onMouseLeave={() =>
-                                                setHoverGiveBackOptions(false)
-                                            }
-                                            onFocus={() =>
-                                                setHoverGiveBackLink(true)
-                                            }
-                                            ref={setPopperGiveBackLink}
-                                            className="2xl:bg-white 2xl:rounded-b-sm 2xl:shadow-lg 2xl:w-80 2xl:ring-1 2xl:ring-black 2xl:ring-opacity-5"
-                                            style={giveBackLinkStyles.popper}
-                                            {...giveBackLinkAttributes.popper}
-                                        >
-                                            <div
-                                                ref={setArrowElement}
-                                                style={giveBackLinkStyles.arrow}
-                                                data-arrow
-                                            />
-                                            <div>Hello!</div>
-                                        </div>
-                                    </>,
-                                    document.body
-                                )}
+                            <Popper title="give back">
+                                <div>Hello</div>
+                            </Popper>
                             <Link to="/">halloween shop</Link>
                             <Link to="/">FREE 1-3 DAY SHIPPING OVER $49</Link>
                         </div>
@@ -842,98 +411,6 @@ export const Home = () => {
             </div>
 
             {/* css transition groups */}
-            {/* <nav className="flex flex-wrap items-center justify-between p-6 bg-teal-500">
-                    <div className="flex items-center flex-shrink-0 mr-6"></div>
-                    <div className="block lg:hidden">
-                        <button className="flex items-center px-3 py-2 text-teal-200 border border-teal-400 rounded hover:text-white hover:border-white">
-                            <svg
-                                className="w-3 h-3 fill-current"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Menu</title>
-                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                            </svg>
-                        </button>
-                    </div> */}
-            {/* <div className="absolute top-5 right-5 ">
-                        <button
-                            onClick={() => {
-                                if (theme === "dark") {
-                                    localStorage.setItem("theme", "light");
-                                    setTheme("light");
-                                    document.documentElement.classList.remove(
-                                        "dark"
-                                    );
-                                } else {
-                                    localStorage.setItem("theme", "dark");
-                                    setTheme("dark");
-                                    document.documentElement.classList.add(
-                                        "dark"
-                                    );
-                                }
-                            }}
-                        >
-                            {theme === "dark" ? (
-                                <HiSun className="text-yellow-500" size="2em" />
-                            ) : (
-                                <HiMoon className="text-blue-900" size="2em" />
-                            )}
-                        </button>
-                    </div> */}
-            {/* {token && (
-                        <div className="flex-grow block w-full lg:flex lg:items-center lg:w-auto">
-                            <div className="text-sm lg:flex-grow">
-                                <Link
-                                    className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0"
-                                    to="/"
-                                >
-                                    Home
-                                </Link>
-                                <Link
-                                    className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-blue-700"
-                                    to="/contactUs"
-                                >
-                                    Contact Us
-                                </Link>
-                                <Link
-                                    className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-blue-700"
-                                    to="/logIn"
-                                    onClick={() => {
-                                        setToken(null);
-                                        localStorage.removeItem("token");
-                                    }}
-                                >
-                                    Logout
-                                </Link>
-                            </div>
-                        </div>
-                    )}
-                </nav> */}
-            {/* {!token && <Redirect to="/login" />} */}
-            {/* <div
-                style={{
-                    textAlign: "center",
-                    marginTop: "50px",
-                }}
-            >
-                {user?.firstName && (
-                    <h1 className="text-3xl">{`Welcome ${user.firstName}`}</h1>
-                )}
-                <h1 className="text-xl">{`have a chilln' ${new Date().toLocaleDateString(
-                    undefined,
-                    { weekday: "long" }
-                )}`}</h1>
-                <Button
-                    onClick={async () =>
-                        await fetch("/api/products").then((response) =>
-                            response.json()
-                        )
-                    }
-                >
-                    get all products
-                </Button>
-            </div> */}
         </>
     );
 };

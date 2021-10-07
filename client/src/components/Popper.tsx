@@ -64,7 +64,7 @@ export const Popper = (props: any) => {
                 onFocus={() => setHoverLink(true)}
             >
                 <Link to="/">
-                    <span className="2xl:font-bold">24/7 </span>
+                    <span className="2xl:font-bold">{props.title} </span>
                 </Link>
                 <button
                     ref={setReferenceLink}
