@@ -2,17 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-.picture-enter {
-    transform: translatex(100%);
+.carousel-right-enter {
+    transform: translatex(-100%);
 }
-.picture-enter-active {
+.carousel-right-enter-active {
     transform: translatex(0px);
     transition-duration: 1000ms;
 }
-.picture-exit {
+.carousel-right-exit {
     transform: translatex(0px);
 }
-.picture-exit-active {
+.carousel-right-exit-active {
+    transform: translatex(100%);
+    transition-duration: 1000ms;
+}
+
+.carousel-left-enter {
+    transform: translatex(100%);
+}
+.carousel-left-enter-active {
+    transform: translatex(0px);
+    transition-duration: 1000ms;
+}
+.carousel-left-exit {
+    transform: translatex(0px);
+}
+.carousel-left-exit-active {
     transform: translatex(-100%);
     transition-duration: 1000ms;
 }

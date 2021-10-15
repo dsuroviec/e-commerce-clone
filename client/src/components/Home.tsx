@@ -26,28 +26,30 @@ export const Home = () => {
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
     const [carouselIndex, setCarouselIndex] = useState(0);
-
+    const [enableExitClass, setEnableExitClass] = useState(true);
     const [isCarouselIntervalDisabled, setIsCauroselIntervalDisabled] =
         useState(false);
-    useEffect(() => {
-        if (isCarouselIntervalDisabled) return;
+    const [carouselDirection, setCarouselDirection] = useState("carousel-left");
+    // useEffect(() => {
+    //     if (isCarouselIntervalDisabled) return;
 
-        if (carouselIndex === 5) {
-            const carouselInterval = setInterval(() => {
-                setCarouselIndex(0);
-            }, 2000);
-            return () => clearInterval(carouselInterval);
-        } else {
-            const carouselInterval = setInterval(() => {
-                setCarouselIndex(carouselIndex + 1);
-            }, 2000);
+    //     if (carouselIndex === 5) {
+    //         const carouselInterval = setInterval(() => {
+    //             setCarouselIndex(0);
+    //         }, 2000);
+    //         return () => clearInterval(carouselInterval);
+    //     } else {
+    //         const carouselInterval = setInterval(() => {
+    //             setCarouselIndex(carouselIndex + 1);
+    //         }, 2000);
 
-            return () => clearInterval(carouselInterval);
-        }
-    }, [carouselIndex, isCarouselIntervalDisabled]);
+    //         return () => clearInterval(carouselInterval);
+    //     }
+    // }, [carouselIndex, isCarouselIntervalDisabled]);
 
     const [switchCarousel, setSwitchCarousel] = useState(false);
     console.log(switchCarousel, "switchCarousels");
+    console.log(carouselDirection, "direction");
     return (
         <>
             <section
@@ -352,9 +354,10 @@ export const Home = () => {
                     ></img>
                 </button>
             </div>
-            {/* <div className="relative">
+            <div className="relative h-44">
                 <button
                     onClick={() => {
+                        setCarouselDirection("carousel-left");
                         setIsCauroselIntervalDisabled(true);
                         if (carouselIndex > 0) {
                             setCarouselIndex(carouselIndex - 1);
@@ -362,41 +365,46 @@ export const Home = () => {
                             setCarouselIndex(5);
                         }
                     }}
-                    className="absolute text-white text-opacity-60 inset-y-1/2"
+                    className="absolute z-10 h-full text-white text-opacity-60"
                 >
                     <HiChevronLeft size={40} />
                 </button>
-
-                <picture className="">
-                    <img
-                        className="transition duration-150 ease-in-out"
-                        src={
-                            [
-                                "autoshipping.jpg",
-                                "buy-a-bag.jpg",
-                                "disney-collection.jpg",
-                                "e-gift-card.jpg",
-                                "gift-card.jpg",
-                                "halloween.jpg",
-                            ][carouselIndex]
-                        }
-                        alt="buy a bag"
-                    ></img>
-                </picture>
-
                 <button
                     onClick={() => {
                         setIsCauroselIntervalDisabled(true);
                         if (carouselIndex < 5) {
                             setCarouselIndex(carouselIndex + 1);
+                            setCarouselDirection("carousel-right");
                         } else {
                             setCarouselIndex(0);
                         }
                     }}
-                    className="absolute right-0 text-white text-opacity-60 top-1/2"
+                    className="absolute right-0 z-10 h-full text-white text-opacity-60 "
                 >
                     <HiChevronRight size={40} />
                 </button>
+                <TransitionGroup componenent={null}>
+                    <CSSTransition
+                        timeout={{ enter: 1000, exit: 1000 }}
+                        classNames={carouselDirection}
+                        key={carouselIndex}
+                    >
+                        <img
+                            className="absolute w-full h-full"
+                            src={
+                                [
+                                    "autoshipping.jpg",
+                                    "buy-a-bag.jpg",
+                                    "disney-collection.jpg",
+                                    "e-gift-card.jpg",
+                                    "gift-card.jpg",
+                                    "halloween.jpg",
+                                ][carouselIndex]
+                            }
+                            alt="hero"
+                        ></img>
+                    </CSSTransition>
+                </TransitionGroup>
             </div>
             <div className="flex justify-center p-1">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
@@ -414,59 +422,8 @@ export const Home = () => {
                         }}
                     ></button>
                 ))}
-            </div> */}
-
-            {/* -------------------------------testing--------------------------------------- */}
-            <div className="relative">
-                <button
-                    onClick={() => {
-                        setIsCauroselIntervalDisabled(true);
-                        if (carouselIndex > 0) {
-                            setCarouselIndex(carouselIndex - 1);
-                        } else {
-                            setCarouselIndex(5);
-                        }
-                    }}
-                    className="absolute z-10 text-white text-opacity-60 inset-y-1/2"
-                >
-                    <HiChevronLeft size={40} />
-                </button>
-                <button
-                    onClick={() => {
-                        setIsCauroselIntervalDisabled(true);
-                        if (carouselIndex < 5) {
-                            setCarouselIndex(carouselIndex + 1);
-                        } else {
-                            setCarouselIndex(0);
-                        }
-                    }}
-                    className="absolute right-0 z-10 text-white text-opacity-60 top-1/2"
-                >
-                    <HiChevronRight size={40} />
-                </button>
-                <TransitionGroup>
-                    <CSSTransition
-                        timeout={{ enter: 1000, exit: 1000 }}
-                        classNames="picture"
-                        key={carouselIndex}
-                    >
-                        <img
-                            className="absolute block "
-                            src={
-                                [
-                                    "autoshipping.jpg",
-                                    "buy-a-bag.jpg",
-                                    "disney-collection.jpg",
-                                    "e-gift-card.jpg",
-                                    "gift-card.jpg",
-                                    "halloween.jpg",
-                                ][carouselIndex]
-                            }
-                            alt="buy a bag"
-                        ></img>
-                    </CSSTransition>
-                </TransitionGroup>
             </div>
+
             {/* ONLY SHOW THIS SECTION IF USER IS LOGGED IN AND TOKEN
             <div id="afterToggle" className="flex">
                 <Link to="" className="flex-1">
