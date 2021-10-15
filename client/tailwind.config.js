@@ -31,11 +31,15 @@ module.exports = {
                 chewyYellow: {
                     DEFAULT: "#f8d81c",
                 },
-                chewygray: {
+                chewyGray: {
                     lightest: "#fff",
                     lighter: "#f9f9f9",
                     light: "#f5f5f5",
+
                     DEFAULT: "#999",
+
+                    dark: "#ccc",
+                    darker: "#555",
                 },
             },
         },

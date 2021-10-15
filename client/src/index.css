@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.picture-enter {
+    transform: translatex(100%);
+}
+.picture-enter-active {
+    transform: translatex(0px);
+    transition-duration: 1000ms;
+}
+.picture-exit {
+    transform: translatex(0px);
+}
+.picture-exit-active {
+    transform: translatex(-100%);
+    transition-duration: 1000ms;
+}
+
 html {
     font-family: Roboto, Arial, Helvetica, sans-serif;
 }

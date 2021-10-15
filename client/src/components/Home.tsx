@@ -6,6 +6,7 @@ import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import clsx from "clsx";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import {
     HiMail,
     HiChatAlt2,
@@ -17,6 +18,7 @@ import {
     HiUser,
     HiChevronLeft,
     HiChevronRight,
+    HiSwitchHorizontal,
 } from "react-icons/hi";
 
 export const Home = () => {
@@ -39,10 +41,13 @@ export const Home = () => {
             const carouselInterval = setInterval(() => {
                 setCarouselIndex(carouselIndex + 1);
             }, 2000);
+
             return () => clearInterval(carouselInterval);
         }
     }, [carouselIndex, isCarouselIntervalDisabled]);
 
+    const [switchCarousel, setSwitchCarousel] = useState(false);
+    console.log(switchCarousel, "switchCarousels");
     return (
         <>
             <section
@@ -81,8 +86,7 @@ export const Home = () => {
                     ></Input>
                 </div>
             </section>
-
-            <section className="bg-blue-500 2xl:pt-6 2xl:h-36 2xl:text-xl 2xl:text-white">
+            <section className="hidden bg-blue-500 2xl:pt-6 2xl:h-36 2xl:text-xl 2xl:text-white">
                 <div
                     id="topNav"
                     className="justify-between hidden sm:flex 2xl:h-11 2xl:flex 2xl:justify-between 2xl:items-center"
@@ -263,7 +267,7 @@ export const Home = () => {
                                         <span>Recently Added:</span>
                                         <span>{`Total Items (${"3"})`}</span>
                                     </div>
-                                    {[2, 3, 4, 5].map((item) => (
+                                    {[2, 3, 4, 5].map(() => (
                                         <div className="2xl:p-4 2xl:border-b ">
                                             <Link to="/" className="2xl:flex">
                                                 <img
@@ -330,7 +334,7 @@ export const Home = () => {
                     </div>
                 )}
             </section>
-            {/* ----------------this starts first section after navbar assuming no token--------- */}
+            {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
             <div className="p-1 border-b ">
                 <button className="flex items-center justify-center w-full">
                     <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
@@ -348,7 +352,7 @@ export const Home = () => {
                     ></img>
                 </button>
             </div>
-            <div className="relative">
+            {/* <div className="relative">
                 <button
                     onClick={() => {
                         setIsCauroselIntervalDisabled(true);
@@ -362,8 +366,10 @@ export const Home = () => {
                 >
                     <HiChevronLeft size={40} />
                 </button>
-                <picture>
+
+                <picture className="">
                     <img
+                        className="transition duration-150 ease-in-out"
                         src={
                             [
                                 "autoshipping.jpg",
@@ -377,6 +383,7 @@ export const Home = () => {
                         alt="buy a bag"
                     ></img>
                 </picture>
+
                 <button
                     onClick={() => {
                         setIsCauroselIntervalDisabled(true);
@@ -399,7 +406,6 @@ export const Home = () => {
                             "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
                             {
                                 "bg-chewyBlue": index === carouselIndex,
-                                "border-chewyOrange": index === carouselIndex,
                             }
                         )}
                         onClick={() => {
@@ -408,8 +414,80 @@ export const Home = () => {
                         }}
                     ></button>
                 ))}
-            </div>
+            </div> */}
 
+            {/* -------------------------------testing--------------------------------------- */}
+            <div className="relative">
+                <button
+                    onClick={() => {
+                        setIsCauroselIntervalDisabled(true);
+                        if (carouselIndex > 0) {
+                            setCarouselIndex(carouselIndex - 1);
+                        } else {
+                            setCarouselIndex(5);
+                        }
+                    }}
+                    className="absolute z-10 text-white text-opacity-60 inset-y-1/2"
+                >
+                    <HiChevronLeft size={40} />
+                </button>
+                <button
+                    onClick={() => {
+                        setIsCauroselIntervalDisabled(true);
+                        if (carouselIndex < 5) {
+                            setCarouselIndex(carouselIndex + 1);
+                        } else {
+                            setCarouselIndex(0);
+                        }
+                    }}
+                    className="absolute right-0 z-10 text-white text-opacity-60 top-1/2"
+                >
+                    <HiChevronRight size={40} />
+                </button>
+                <TransitionGroup>
+                    <CSSTransition
+                        timeout={{ enter: 1000, exit: 1000 }}
+                        classNames="picture"
+                        key={carouselIndex}
+                    >
+                        <img
+                            className="absolute block "
+                            src={
+                                [
+                                    "autoshipping.jpg",
+                                    "buy-a-bag.jpg",
+                                    "disney-collection.jpg",
+                                    "e-gift-card.jpg",
+                                    "gift-card.jpg",
+                                    "halloween.jpg",
+                                ][carouselIndex]
+                            }
+                            alt="buy a bag"
+                        ></img>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
+            {/* ONLY SHOW THIS SECTION IF USER IS LOGGED IN AND TOKEN
+            <div id="afterToggle" className="flex">
+                <Link to="" className="flex-1">
+                    <div className="flex items-center p-3 text-sm font-medium border text-chewyGray-dark">
+                        <HiSwitchHorizontal size={44} />
+                        &nbsp;
+                        <div className="block">
+                            <span className="block text-chewyGray-darker">
+                                Save 35% Today
+                            </span>
+                            <span className="block text-chewyBlue-dark">
+                                Set up Autoship
+                            </span>
+                        </div>
+                    </div>
+                </Link>
+                <Link to="" className="flex-1 border">
+                    <span></span>
+                    <span></span>
+                </Link>
+            </div> */}
             {/* css transition groups */}
         </>
     );
