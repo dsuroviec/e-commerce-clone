@@ -51,7 +51,7 @@ export const Home = () => {
     console.log(switchCarousel, "switchCarousels");
     console.log(carouselDirection, "direction");
     return (
-        <>
+        <div className="">
             <section
                 id="mobile-nav"
                 className="w-full p-1 font-medium text-white bg-chewyBlue sm:hidden"
@@ -336,7 +336,6 @@ export const Home = () => {
                     </div>
                 )}
             </section>
-            {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
             <div className="p-1 border-b ">
                 <button className="flex items-center justify-center w-full">
                     <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
@@ -423,6 +422,42 @@ export const Home = () => {
                     ></button>
                 ))}
             </div>
+            <section className="w-full p-2 overflow-hidden " id="home-content">
+                <h1>Shop by Category</h1>
+                <div className="flex min-w-max">
+                    {[
+                        "Dog",
+                        "Cat",
+                        "Small Pet",
+                        "Bird",
+                        "Fish",
+                        "Reptile",
+                        "Horse",
+                        "Farm Animal",
+                        "Pet Parents",
+                        "Pharmacy",
+                        "Today's Deals",
+                        "Brands",
+                    ]
+                        .slice(0, 3)
+                        .map((category) => (
+                            <div className="w-40 h-auto p-4 mx-1 text-center border rounded-md hover:border-opacity-1 ">
+                                <img
+                                    className="block"
+                                    src="dog-tile.jpg"
+                                    alt="dog"
+                                />
+                                <Link
+                                    to="/"
+                                    className="block pt-3 text-md text-chewyBlue-dark"
+                                >
+                                    {category}
+                                </Link>
+                            </div>
+                        ))}
+                </div>
+            </section>
+            {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
 
             {/* ONLY SHOW THIS SECTION IF USER IS LOGGED IN AND TOKEN
             <div id="afterToggle" className="flex">
@@ -446,6 +481,6 @@ export const Home = () => {
                 </Link>
             </div> */}
             {/* css transition groups */}
-        </>
+        </div>
     );
 };
