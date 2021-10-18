@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import {
     Route,
-    Link,
     BrowserRouter as Router,
     Switch,
     Redirect,
