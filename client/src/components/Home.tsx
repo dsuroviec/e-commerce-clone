@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import _ from "lodash";
 import clsx from "clsx";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Button } from "./Button";
 import {
     HiMail,
     HiChatAlt2,
@@ -422,8 +423,8 @@ export const Home = () => {
                     ></button>
                 ))}
             </div>
-            <section className="w-full p-2 overflow-hidden " id="home-content">
-                <h1>Shop by Category</h1>
+            <section className="w-full p-3 overflow-hidden " id="home-content">
+                <h1 className="text-xl font-semibold">Shop by Category</h1>
                 <div className="flex min-w-max">
                     {[
                         "Dog",
@@ -440,12 +441,30 @@ export const Home = () => {
                         "Brands",
                     ]
                         .slice(0, 3)
-                        .map((category) => (
-                            <div className="w-40 h-auto p-4 mx-1 text-center border rounded-md hover:border-opacity-1 ">
+                        .map((category, index) => (
+                            <div
+                                key={index}
+                                className="w-40 h-auto p-4 mx-1 text-center border rounded-md hover:border-opacity-1 "
+                            >
                                 <img
                                     className="block"
-                                    src="dog-tile.jpg"
-                                    alt="dog"
+                                    src={
+                                        [
+                                            "dog-tile.jpg",
+                                            "cat-tile.webp",
+                                            "small-pet-tile.webp",
+                                            "bird-tile.webp",
+                                            "fish-tile.webp",
+                                            "reptile-tile.webp",
+                                            "horse-tile.webp",
+                                            "farm-animal-tile.webp",
+                                            "pet-parents-tile.jpg",
+                                            "rx-tile.webp",
+                                            "todays-deals-tile.webp",
+                                            "shop-by-brand-tile.webp",
+                                        ][index]
+                                    }
+                                    alt={category}
                                 />
                                 <Link
                                     to="/"
@@ -456,6 +475,138 @@ export const Home = () => {
                             </div>
                         ))}
                 </div>
+                <h1 className="text-xl font-semibold">Customer Favorites</h1>
+                <div className="flex min-w-max">
+                    {[
+                        "Dog Food",
+                        "Dog Toys",
+                        "Dog Treats",
+                        "Cat Litter",
+                        "Cat Food",
+                        "Cat Trees, Condos & Scratchers",
+                        "Dog Beds",
+                        "Dog Flea & Ticks",
+                        "Cat Toys",
+                        "Dog Supplements",
+                        "Football Shop",
+                        "Chewy Pharmacy",
+                    ]
+                        .slice(0, 3)
+                        .map((category, index) => (
+                            <div
+                                key={index}
+                                className="w-40 h-auto p-4 mx-1 text-center border rounded-md hover:border-opacity-1 "
+                            >
+                                <img
+                                    className="block"
+                                    src={
+                                        [
+                                            "dog-food-tile.webp",
+                                            "dog-toys-tile.webp",
+                                            "dog-treats-tile.webp",
+                                            "cat-litter-tile.webp",
+                                            "cat-food-tile.webp",
+                                            "cat-trees-tile.webp",
+                                            "dog-beds-tile.webp",
+                                            "dog-flea-tick-tile.webp",
+                                            "cat-toys-tile.webp",
+                                            "dog-supplements-tile.webp",
+                                            "football-shop-tile.webp",
+                                            "chewy-pharmacy-tile.webp",
+                                        ][index]
+                                    }
+                                    alt={category}
+                                />
+                                <Link
+                                    to="/"
+                                    className="block pt-3 text-md text-chewyBlue-dark"
+                                >
+                                    {category}
+                                </Link>
+                            </div>
+                        ))}
+                </div>
+                <div className="p-1">
+                    <h1 className="text-xl font-semibold">
+                        New Puppy or Kitten?
+                    </h1>
+                    <Link to="/">
+                        <img src="new-puppy.jpg" alt="new puppy"></img>
+                        <span className="text-sm hover:underline text-chewyBlue-dark">
+                            Puppy Shop
+                        </span>
+                    </Link>
+                    <Link to="/">
+                        <img src="new-kitten.jpg" alt="new kitten"></img>
+                        <span className="text-sm hover:underline text-chewyBlue-dark">
+                            Kitten Shop
+                        </span>
+                    </Link>
+                </div>
+                <div>
+                    <h1 className="text-xl font-semibold">
+                        2,000+ Brands in Stock!
+                    </h1>
+                    <Link
+                        to="/"
+                        className="flex items-center text-chewyBlue-dark"
+                    >
+                        <span className="mt-0.5 text-sm hover:underline ">
+                            Shop All
+                        </span>
+                        <HiChevronRight size={24} />
+                    </Link>
+                    <div className="flex flex-wrap w-full ">
+                        {[
+                            "hills-logo.png",
+                            "royal-canin-logo.jpeg",
+                            "disney-collection-logo.jpeg",
+                            "purina-logo.jpg",
+                            "blue-logo.png",
+                            "kong-logo.jpg",
+                        ].map((logo) => (
+                            <picture className="flex justify-center w-1/3 text-center border">
+                                <img
+                                    className="p-2 w-28 h-28"
+                                    src={logo}
+                                    alt={logo}
+                                />
+                            </picture>
+                        ))}
+                    </div>
+                </div>
+                <div className="p-3 bg-chewyBlue-light">
+                    <h1 className="text-xl font-semibold">
+                        Join the Chewy Pack
+                    </h1>
+                    <p className="text-sm">
+                        Sign up to get emails about the latest deals, product
+                        drops, pet health tips and more!
+                    </p>
+                    <Input placeholder="Email"></Input>
+                    <Button className="bg-chewyBlue-darker">Sign Up</Button>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </section>
             {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
 
