@@ -19,6 +19,7 @@ import {
     HiUser,
     HiChevronLeft,
     HiChevronRight,
+    HiChevronUp,
     HiSwitchHorizontal,
 } from "react-icons/hi";
 
@@ -337,255 +338,564 @@ export const Home = () => {
                     </div>
                 )}
             </section>
-            <div className="p-1 border-b ">
-                <button className="flex items-center justify-center w-full">
-                    <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
-                        Save 35%
-                    </span>
-                    &nbsp;
-                    <span className="font-medium text-chewyBlue-evenDarker">
-                        on your first
-                    </span>
-                    &nbsp; &nbsp;
-                    <img
-                        className="w-20"
-                        src="autoship-logo.svg"
-                        alt="autoship"
-                    ></img>
-                </button>
-            </div>
-            <div className="relative h-44">
-                <button
-                    onClick={() => {
-                        setCarouselDirection("carousel-left");
-                        setIsCauroselIntervalDisabled(true);
-                        if (carouselIndex > 0) {
-                            setCarouselIndex(carouselIndex - 1);
-                        } else {
-                            setCarouselIndex(5);
-                        }
-                    }}
-                    className="absolute z-10 h-full text-white text-opacity-60"
-                >
-                    <HiChevronLeft size={40} />
-                </button>
-                <button
-                    onClick={() => {
-                        setIsCauroselIntervalDisabled(true);
-                        if (carouselIndex < 5) {
-                            setCarouselIndex(carouselIndex + 1);
-                            setCarouselDirection("carousel-right");
-                        } else {
-                            setCarouselIndex(0);
-                        }
-                    }}
-                    className="absolute right-0 z-10 h-full text-white text-opacity-60 "
-                >
-                    <HiChevronRight size={40} />
-                </button>
-                <TransitionGroup componenent={null}>
-                    <CSSTransition
-                        timeout={{ enter: 1000, exit: 1000 }}
-                        classNames={carouselDirection}
-                        key={carouselIndex}
-                    >
+            <section
+                className="w-full overflow-hidden bg-chewyGray-lighter "
+                id="home-content"
+            >
+                <div className="p-1 border-b ">
+                    <button className="flex items-center justify-center w-full">
+                        <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
+                            Save 35%
+                        </span>
+                        &nbsp;
+                        <span className="font-medium text-chewyBlue-evenDarker">
+                            on your first
+                        </span>
+                        &nbsp; &nbsp;
                         <img
-                            className="absolute w-full h-full"
-                            src={
-                                [
-                                    "autoshipping.jpg",
-                                    "buy-a-bag.jpg",
-                                    "disney-collection.jpg",
-                                    "e-gift-card.jpg",
-                                    "gift-card.jpg",
-                                    "halloween.jpg",
-                                ][carouselIndex]
-                            }
-                            alt="hero"
+                            className="w-20"
+                            src="autoship-logo.svg"
+                            alt="autoship"
                         ></img>
-                    </CSSTransition>
-                </TransitionGroup>
-            </div>
-            <div className="flex justify-center p-1">
-                {[0, 1, 2, 3, 4, 5].map((index) => (
+                    </button>
+                </div>
+                <div className="relative p-0 h-44">
                     <button
-                        key={index}
-                        className={clsx(
-                            "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
-                            {
-                                "bg-chewyBlue": index === carouselIndex,
+                        onClick={() => {
+                            setCarouselDirection("carousel-left");
+                            setIsCauroselIntervalDisabled(true);
+                            if (carouselIndex > 0) {
+                                setCarouselIndex(carouselIndex - 1);
+                            } else {
+                                setCarouselIndex(5);
                             }
-                        )}
+                        }}
+                        className="absolute z-10 h-full text-white text-opacity-60"
+                    >
+                        <HiChevronLeft size={40} />
+                    </button>
+                    <button
                         onClick={() => {
                             setIsCauroselIntervalDisabled(true);
-                            setCarouselIndex(index);
+                            if (carouselIndex < 5) {
+                                setCarouselIndex(carouselIndex + 1);
+                                setCarouselDirection("carousel-right");
+                            } else {
+                                setCarouselIndex(0);
+                            }
                         }}
-                    ></button>
-                ))}
-            </div>
-            <section className="w-full p-3 overflow-hidden " id="home-content">
-                <h1 className="text-xl font-semibold">Shop by Category</h1>
-                <div className="flex min-w-max">
-                    {[
-                        "Dog",
-                        "Cat",
-                        "Small Pet",
-                        "Bird",
-                        "Fish",
-                        "Reptile",
-                        "Horse",
-                        "Farm Animal",
-                        "Pet Parents",
-                        "Pharmacy",
-                        "Today's Deals",
-                        "Brands",
-                    ]
-                        .slice(0, 3)
-                        .map((category, index) => (
-                            <div
-                                key={index}
-                                className="w-40 h-auto p-4 mx-1 text-center border rounded-md hover:border-opacity-1 "
-                            >
-                                <img
-                                    className="block"
-                                    src={
-                                        [
-                                            "dog-tile.jpg",
-                                            "cat-tile.webp",
-                                            "small-pet-tile.webp",
-                                            "bird-tile.webp",
-                                            "fish-tile.webp",
-                                            "reptile-tile.webp",
-                                            "horse-tile.webp",
-                                            "farm-animal-tile.webp",
-                                            "pet-parents-tile.jpg",
-                                            "rx-tile.webp",
-                                            "todays-deals-tile.webp",
-                                            "shop-by-brand-tile.webp",
-                                        ][index]
-                                    }
-                                    alt={category}
-                                />
-                                <Link
-                                    to="/"
-                                    className="block pt-3 text-md text-chewyBlue-dark"
-                                >
-                                    {category}
-                                </Link>
-                            </div>
-                        ))}
-                </div>
-                <h1 className="text-xl font-semibold">Customer Favorites</h1>
-                <div className="flex min-w-max">
-                    {[
-                        "Dog Food",
-                        "Dog Toys",
-                        "Dog Treats",
-                        "Cat Litter",
-                        "Cat Food",
-                        "Cat Trees, Condos & Scratchers",
-                        "Dog Beds",
-                        "Dog Flea & Ticks",
-                        "Cat Toys",
-                        "Dog Supplements",
-                        "Football Shop",
-                        "Chewy Pharmacy",
-                    ]
-                        .slice(0, 3)
-                        .map((category, index) => (
-                            <div
-                                key={index}
-                                className="w-40 h-auto p-4 mx-1 text-center border rounded-md hover:border-opacity-1 "
-                            >
-                                <img
-                                    className="block"
-                                    src={
-                                        [
-                                            "dog-food-tile.webp",
-                                            "dog-toys-tile.webp",
-                                            "dog-treats-tile.webp",
-                                            "cat-litter-tile.webp",
-                                            "cat-food-tile.webp",
-                                            "cat-trees-tile.webp",
-                                            "dog-beds-tile.webp",
-                                            "dog-flea-tick-tile.webp",
-                                            "cat-toys-tile.webp",
-                                            "dog-supplements-tile.webp",
-                                            "football-shop-tile.webp",
-                                            "chewy-pharmacy-tile.webp",
-                                        ][index]
-                                    }
-                                    alt={category}
-                                />
-                                <Link
-                                    to="/"
-                                    className="block pt-3 text-md text-chewyBlue-dark"
-                                >
-                                    {category}
-                                </Link>
-                            </div>
-                        ))}
-                </div>
-                <div className="p-1">
-                    <h1 className="text-xl font-semibold">
-                        New Puppy or Kitten?
-                    </h1>
-                    <Link to="/">
-                        <img src="new-puppy.jpg" alt="new puppy"></img>
-                        <span className="text-sm hover:underline text-chewyBlue-dark">
-                            Puppy Shop
-                        </span>
-                    </Link>
-                    <Link to="/">
-                        <img src="new-kitten.jpg" alt="new kitten"></img>
-                        <span className="text-sm hover:underline text-chewyBlue-dark">
-                            Kitten Shop
-                        </span>
-                    </Link>
-                </div>
-                <div>
-                    <h1 className="text-xl font-semibold">
-                        2,000+ Brands in Stock!
-                    </h1>
-                    <Link
-                        to="/"
-                        className="flex items-center text-chewyBlue-dark"
+                        className="absolute right-0 z-10 h-full text-white text-opacity-60 "
                     >
-                        <span className="mt-0.5 text-sm hover:underline ">
-                            Shop All
-                        </span>
-                        <HiChevronRight size={24} />
-                    </Link>
-                    <div className="flex flex-wrap w-full ">
+                        <HiChevronRight size={40} />
+                    </button>
+                    <TransitionGroup componenent={null}>
+                        <CSSTransition
+                            timeout={{ enter: 1000, exit: 1000 }}
+                            classNames={carouselDirection}
+                            key={carouselIndex}
+                        >
+                            <img
+                                className="absolute w-full h-full"
+                                src={
+                                    [
+                                        "autoshipping.jpg",
+                                        "buy-a-bag.jpg",
+                                        "disney-collection.jpg",
+                                        "e-gift-card.jpg",
+                                        "gift-card.jpg",
+                                        "halloween.jpg",
+                                    ][carouselIndex]
+                                }
+                                alt="hero"
+                            ></img>
+                        </CSSTransition>
+                    </TransitionGroup>
+                </div>
+                <div className="flex justify-center p-1">
+                    {[0, 1, 2, 3, 4, 5].map((index) => (
+                        <button
+                            key={index}
+                            className={clsx(
+                                "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
+                                {
+                                    "bg-chewyBlue": index === carouselIndex,
+                                }
+                            )}
+                            onClick={() => {
+                                setIsCauroselIntervalDisabled(true);
+                                setCarouselIndex(index);
+                            }}
+                        ></button>
+                    ))}
+                </div>
+                <div className="p-3">
+                    <h1 className="text-xl font-semibold">Shop by Category</h1>
+                    <div className="flex min-w-max">
                         {[
-                            "hills-logo.png",
-                            "royal-canin-logo.jpeg",
-                            "disney-collection-logo.jpeg",
-                            "purina-logo.jpg",
-                            "blue-logo.png",
-                            "kong-logo.jpg",
-                        ].map((logo) => (
-                            <picture className="flex justify-center w-1/3 text-center border">
+                            "Dog",
+                            "Cat",
+                            "Small Pet",
+                            "Bird",
+                            "Fish",
+                            "Reptile",
+                            "Horse",
+                            "Farm Animal",
+                            "Pet Parents",
+                            "Pharmacy",
+                            "Today's Deals",
+                            "Brands",
+                        ]
+                            .slice(0, 3)
+                            .map((category, index) => (
+                                <div
+                                    key={index}
+                                    className="w-40 h-auto p-4 mr-1.5 text-center bg-white border rounded-md hover:border-opacity-1 "
+                                >
+                                    <img
+                                        className="block"
+                                        src={
+                                            [
+                                                "dog-tile.jpg",
+                                                "cat-tile.webp",
+                                                "small-pet-tile.webp",
+                                                "bird-tile.webp",
+                                                "fish-tile.webp",
+                                                "reptile-tile.webp",
+                                                "horse-tile.webp",
+                                                "farm-animal-tile.webp",
+                                                "pet-parents-tile.jpg",
+                                                "rx-tile.webp",
+                                                "todays-deals-tile.webp",
+                                                "shop-by-brand-tile.webp",
+                                            ][index]
+                                        }
+                                        alt={category}
+                                    />
+                                    <Link
+                                        to="/"
+                                        className="block pt-3 text-md text-chewyBlue-dark"
+                                    >
+                                        {category}
+                                    </Link>
+                                </div>
+                            ))}
+                    </div>
+                    <h1 className="text-xl font-semibold">
+                        Customer Favorites
+                    </h1>
+                    <div className="flex min-w-max">
+                        {[
+                            "Dog Food",
+                            "Dog Toys",
+                            "Dog Treats",
+                            "Cat Litter",
+                            "Cat Food",
+                            "Cat Trees, Condos & Scratchers",
+                            "Dog Beds",
+                            "Dog Flea & Ticks",
+                            "Cat Toys",
+                            "Dog Supplements",
+                            "Football Shop",
+                            "Chewy Pharmacy",
+                        ]
+                            .slice(0, 3)
+                            .map((category, index) => (
+                                <div
+                                    key={index}
+                                    className="w-40 h-auto p-4 bg-white mr-1.5 text-center border rounded-md hover:border-opacity-1 "
+                                >
+                                    <img
+                                        className="block"
+                                        src={
+                                            [
+                                                "dog-food-tile.webp",
+                                                "dog-toys-tile.webp",
+                                                "dog-treats-tile.webp",
+                                                "cat-litter-tile.webp",
+                                                "cat-food-tile.webp",
+                                                "cat-trees-tile.webp",
+                                                "dog-beds-tile.webp",
+                                                "dog-flea-tick-tile.webp",
+                                                "cat-toys-tile.webp",
+                                                "dog-supplements-tile.webp",
+                                                "football-shop-tile.webp",
+                                                "chewy-pharmacy-tile.webp",
+                                            ][index]
+                                        }
+                                        alt={category}
+                                    />
+                                    <Link
+                                        to="/"
+                                        className="block pt-3 text-md text-chewyBlue-dark"
+                                    >
+                                        {category}
+                                    </Link>
+                                </div>
+                            ))}
+                    </div>
+                    <div className="p-1">
+                        <h1 className="text-xl font-semibold">
+                            New Puppy or Kitten?
+                        </h1>
+                        <Link to="/">
+                            <img src="new-puppy.jpg" alt="new puppy"></img>
+                            <span className="text-sm hover:underline text-chewyBlue-dark">
+                                Puppy Shop
+                            </span>
+                        </Link>
+                        <Link to="/">
+                            <img src="new-kitten.jpg" alt="new kitten"></img>
+                            <span className="text-sm hover:underline text-chewyBlue-dark">
+                                Kitten Shop
+                            </span>
+                        </Link>
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-semibold">
+                            2,000+ Brands in Stock!
+                        </h1>
+                        <Link
+                            to="/"
+                            className="flex items-center text-chewyBlue-dark"
+                        >
+                            <span className="mt-0.5 text-sm hover:underline ">
+                                Shop All
+                            </span>
+                            <HiChevronRight size={24} />
+                        </Link>
+                        <div className="flex flex-wrap w-full ">
+                            {[
+                                "hills-logo.png",
+                                "royal-canin-logo.jpeg",
+                                "disney-collection-logo.jpeg",
+                                "purina-logo.jpg",
+                                "blue-logo.png",
+                                "kong-logo.jpg",
+                            ].map((logo) => (
+                                <picture className="flex justify-center w-1/3 text-center bg-white border">
+                                    <img
+                                        className="p-2 w-28 h-28"
+                                        src={logo}
+                                        alt={logo}
+                                    />
+                                </picture>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="p-3 bg-chewyBlue-light">
+                        <h1 className="text-xl font-semibold">
+                            Join the Chewy Pack
+                        </h1>
+                        <p className="text-sm">
+                            Sign up to get emails about the latest deals,
+                            product drops, pet health tips and more!
+                        </p>
+                        <Input placeholder="Email"></Input>
+                        <Button className="bg-chewyBlue-darker">Sign Up</Button>
+                    </div>
+                    <div>
+                        <h2 className="text-xl font-semibold">
+                            Spooky Chewy Exclusives 🦇
+                        </h2>
+                        <div className="flex">
+                            {[0, 1, 2, 3, 4].map((article) => (
+                                <Link to="">
+                                    <article className="p-3.5 mr-1.5 border rounded-md w-36 bg-white ">
+                                        <div>
+                                            <img
+                                                className="w-20 h-20 m-auto"
+                                                src="goody-bag.jpg"
+                                                alt="goody bag"
+                                            ></img>
+                                            <span className="text-sm font-medium">
+                                                Goody Box
+                                            </span>
+                                            <p className="text-xs">
+                                                Halloween Toys, Treats, and
+                                                Bandanas
+                                            </p>
+                                            <div className="p-1 my-2 text-xs text-white rounded bg-chewyGreen">
+                                                Save 40% at Checkout
+                                            </div>
+                                            <span className="font-semibold text-chewyRed ">
+                                                $24.99
+                                            </span>
+                                            <div className="flex items-center">
+                                                <>Stars</>&nbsp;
+                                                <span className="text-xs text-chewyGray">
+                                                    88
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="">
+                        <h1 className="text-xl font-semibold">Pet Health</h1>
+                        <img src="pet-wellness.jpg" alt="pet wellness"></img>
+                        &nbsp;
+                        <Link className="text-sm text-chewyBlue-darker" to="">
+                            Pet Wellness
+                        </Link>
+                        <img
+                            src="connect-with-vet.jpg"
+                            alt="Connect With a Vet"
+                        />
+                        &nbsp;
+                        <Link className="text-sm text-chewyBlue-darker" to="">
+                            Connect with a Vet
+                        </Link>
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-semibold">
+                            Autoship & Save on Favorites
+                        </h1>
+                        <Link
+                            to="/"
+                            className="flex items-center text-chewyBlue-darker"
+                        >
+                            <span className="mt-0.5 text-sm hover:underline ">
+                                Shop All
+                            </span>
+                            <HiChevronRight size={24} />
+                        </Link>
+                        <div className="flex">
+                            {[0, 1, 2, 3, 4].map((article) => (
+                                <Link to="">
+                                    <article className="p-3.5 mr-1.5 border rounded-md bg-white w-36 ">
+                                        <div>
+                                            <img
+                                                className="w-16 h-24 m-auto"
+                                                src="taste-wild-dog-food.jpg"
+                                                alt="Dog Food"
+                                            ></img>
+                                            <span className="text-sm font-medium">
+                                                Taste Of the Wild
+                                            </span>
+                                            <p className="text-xs">
+                                                High Prarie Grain-Free Dry Dog
+                                                Food
+                                            </p>
+                                            <div className="p-1 my-2 text-xs text-white rounded bg-chewyGreen">
+                                                Save 40% at Checkout
+                                            </div>
+                                            <span className="font-semibold text-chewyRed ">
+                                                $24.99
+                                            </span>
+                                            <div className="flex items-center">
+                                                <>Stars</>&nbsp;
+                                                <span className="text-xs text-chewyGray">
+                                                    88
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-semibold">Explore More</h1>
+                        <div className="flex">
+                            {[
+                                "Holiday Shop",
+                                "Our Current Favorites",
+                                2,
+                                3,
+                                4,
+                            ].map((article) => (
+                                <Link to="">
+                                    <article className="p-3.5 mr-1.5 border rounded-md bg-white w-36 h-full text-center">
+                                        <img
+                                            src="holiday-shop.webp"
+                                            className="mb-3"
+                                            alt="Holiday Shop"
+                                        ></img>
+                                        <Link
+                                            to=""
+                                            className="text-chewyBlue-dark"
+                                        >
+                                            {article}
+                                        </Link>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <img
+                        src="adopt-a-dog-month-small.webp"
+                        className="object-none h-32"
+                        alt="adopt a dog"
+                    />
+                </div>
+                <footer className="bg-white ">
+                    <a href="#" className="block w-full m-auto text-center ">
+                        <HiChevronUp
+                            size={32}
+                            className="m-auto font-light text-chewyBlue "
+                        />
+                        <span className="text-sm font-semibold text-chewyGray-darker">
+                            TOP OF PAGE
+                        </span>
+                    </a>
+                    <section
+                        className="flex items-center px-3 py-4"
+                        style={{
+                            backgroundImage: 'url("mobile-background.jpg")',
+                        }}
+                    >
+                        <img src="icon-apple.png" className="w-11" alt="" />
+
+                        <div className="mx-4">
+                            <p className="mb-2 text-lg font-bold text-white">
+                                Get the Chewy app
+                            </p>
+                            <img src="5-stars.png" className="w-2/3" alt="" />
+                        </div>
+                        <div className="grid w-40 gap-y-1 sfw-mobile-footer-apps__button">
+                            <a
+                                href="https://itunes.apple.com/us/app/chewy-where-pet-lovers-shop/id1149449468"
+                                target="_blank"
+                            >
                                 <img
-                                    className="p-2 w-28 h-28"
-                                    src={logo}
-                                    alt={logo}
+                                    src="app-store.png"
+                                    alt="Download on the App Store"
+                                    loading="lazy"
                                 />
-                            </picture>
+                            </a>
+                            <a
+                                href="https://play.google.com/store/apps/details?id=com.chewy.android&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+                                target="_blank"
+                            >
+                                <img
+                                    src="google-play.png"
+                                    alt="Get it on Google Play"
+                                    loading="lazy"
+                                />
+                            </a>
+                        </div>
+                    </section>
+                    <div className="text-center">
+                        <span className="block font-medium text-chewyGray-darker">
+                            We're here 24/7
+                        </span>
+                        <Link to="" className="font-bold text-chewyBlue-dark">
+                            1-800-672-4399
+                        </Link>
+                        &nbsp;
+                        <span className="font-medium text-chewyGray-darker">
+                            or
+                        </span>
+                        &nbsp;
+                        <Link to="" className="font-bold text-chewyBlue-dark">
+                            Message Us
+                        </Link>
+                    </div>
+                    <div className="flex items-center justify-center border-t-8 border-chewyGray-light ">
+                        {[
+                            { image: "pharmacy.jpg", w: "w-24" },
+                            { image: "legitscript.png", w: "w-16" },
+                            {
+                                image: "compounding-pharmacy.png",
+                                w: "w-16",
+                            },
+                        ].map((item) => (
+                            <img
+                                src={item.image}
+                                className={`${item.w} mr-4`}
+                            />
                         ))}
                     </div>
-                </div>
-                <div className="p-3 bg-chewyBlue-light">
-                    <h1 className="text-xl font-semibold">
-                        Join the Chewy Pack
-                    </h1>
-                    <p className="text-sm">
-                        Sign up to get emails about the latest deals, product
-                        drops, pet health tips and more!
-                    </p>
-                    <Input placeholder="Email"></Input>
-                    <Button className="bg-chewyBlue-darker">Sign Up</Button>
-                </div>
+                    <div className="text-sm text-center border-t-2 text-chewyGray-darker">
+                        <p>Copyright © 2021 Chewy, Inc.</p>
+
+                        <nav className="">
+                            <ul className="flex justify-center ">
+                                <li>
+                                    <a
+                                        className="underline "
+                                        href="/app/content/terms"
+                                    >
+                                        Terms
+                                    </a>
+                                </li>
+                                &nbsp;
+                                <li className=" dash">
+                                    <a
+                                        className="underline "
+                                        href="/app/content/privacy"
+                                    >
+                                        Privacy
+                                    </a>
+                                </li>
+                                &nbsp;
+                                <li className=" dash">
+                                    <a
+                                        className="underline "
+                                        href="/app/content/accessibility-information"
+                                    >
+                                        Accessibility
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul className="flex justify-center">
+                                <li>
+                                    <a
+                                        className="underline "
+                                        href="/app/content/ca-supply-chain-disclosure"
+                                    >
+                                        California Supply Chains Act
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul className="flex justify-center">
+                                <li>
+                                    <a
+                                        className="underline "
+                                        href="/app/content/about-us"
+                                    >
+                                        About
+                                    </a>
+                                </li>
+                                &nbsp;
+                                <li className="dash">
+                                    <a
+                                        className="underline "
+                                        href="//investor.chewy.com"
+                                    >
+                                        Investor Relations
+                                    </a>
+                                </li>
+                                &nbsp;
+                                <li className="dash">
+                                    <a className="underline " href="/jobs">
+                                        Jobs
+                                    </a>
+                                </li>
+                                &nbsp;
+                                <li className="dash">
+                                    <a
+                                        className="underline "
+                                        href="//be.chewy.com"
+                                    >
+                                        Blog
+                                    </a>
+                                </li>
+                                &nbsp;
+                                <li className="dash">
+                                    <a
+                                        className="underline "
+                                        href="/gift-guide"
+                                    >
+                                        Gift Guide
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </footer>
                 <br />
                 <br />
                 <br />
@@ -608,6 +918,7 @@ export const Home = () => {
                 <br />
                 <br />
             </section>
+
             {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
 
             {/* ONLY SHOW THIS SECTION IF USER IS LOGGED IN AND TOKEN

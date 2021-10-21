@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.dash::before {
+    content: " - ";
+}
+
 .carousel-right-enter {
     transform: translatex(-100%);
 }
