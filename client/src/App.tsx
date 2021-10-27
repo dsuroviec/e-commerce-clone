@@ -9,6 +9,7 @@ import { Home } from "./components/Home";
 import { LogIn } from "./components/LogIn";
 import { ContactUs } from "./components/ContactUs";
 import { SignUp } from "./components/SignUp";
+import { Products } from "./components/Products";
 import "./App.css";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
@@ -62,6 +63,9 @@ function App() {
                         </Route>
                         <Route path="/logIn">
                             <LogIn />
+                        </Route>
+                        <Route path="/products">
+                            <Products />
                         </Route>
                         <Route path="/signUp">
                             <SignUp />
