@@ -7,6 +7,10 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Button } from "./Button";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {
     HiMail,
     HiChatAlt2,
@@ -59,14 +63,45 @@ export const Home = () => {
         })();
     }, []);
 
+    // https://react-slick.neostack.com/docs/api/ all props and methods
+    const carouselProps = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        pauseOnDotsHover: true,
+        pauseOnHover: true,
+        arrows: true,
+        dotsClass: "slick-dots",
+        // appendDots: (dots: any) => <ul>{dots}</ul>,
+    };
+
     return (
         <>
             <Header />
+            <Slider ref={(slider) => slider} {...carouselProps}>
+                {[
+                    "autoshipping.jpg",
+                    "buy-a-bag.jpg",
+                    "disney-collection.jpg",
+                    "e-gift-card.jpg",
+                    "gift-card.jpg",
+                    "halloween.jpg",
+                ].map((item) => (
+                    <div>
+                        <img className="" src={item} alt="hero"></img>
+                    </div>
+                ))}
+            </Slider>
+
             <section
                 className="w-full overflow-hidden bg-chewyGray-lighter "
                 id="home-content"
             >
-                <div className="relative p-0 h-44">
+                {/* <div className="relative p-0 h-44">
                     <button
                         onClick={() => {
                             setCarouselDirection("carousel-left");
@@ -100,22 +135,7 @@ export const Home = () => {
                             timeout={{ enter: 1000, exit: 1000 }}
                             classNames={carouselDirection}
                             key={carouselIndex}
-                        >
-                            <img
-                                className="absolute w-full h-full"
-                                src={
-                                    [
-                                        "autoshipping.jpg",
-                                        "buy-a-bag.jpg",
-                                        "disney-collection.jpg",
-                                        "e-gift-card.jpg",
-                                        "gift-card.jpg",
-                                        "halloween.jpg",
-                                    ][carouselIndex]
-                                }
-                                alt="hero"
-                            ></img>
-                        </CSSTransition>
+                        ></CSSTransition>
                     </TransitionGroup>
                 </div>
                 <div className="flex justify-center p-1">
@@ -134,7 +154,7 @@ export const Home = () => {
                             }}
                         ></button>
                     ))}
-                </div>
+                </div> */}
                 <div className="p-3">
                     <h1 className="text-xl font-semibold">Shop by Category</h1>
                     <div className="flex min-w-max">
