@@ -3,7 +3,7 @@ import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import clsx from "clsx";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 import { Button } from "./Button";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -52,36 +52,26 @@ export const Home = () => {
         useState(false);
     const [carouselDirection, setCarouselDirection] = useState("carousel-left");
     const [switchCarousel, setSwitchCarousel] = useState(false);
-    const [products, setProducts] = useState();
+    const [categories, setCategories] = useState<Categories[] | null>(null);
 
-    // useEffect(() => {
-    //     if (isCarouselIntervalDisabled) return;
-
-    //     if (carouselIndex === 5) {
-    //         const carouselInterval = setInterval(() => {
-    //             setCarouselIndex(0);
-    //         }, 2000);
-    //         return () => clearInterval(carouselInterval);
-    //     } else {
-    //         const carouselInterval = setInterval(() => {
-    //             setCarouselIndex(carouselIndex + 1);
-    //         }, 2000);
-
-    //         return () => clearInterval(carouselInterval);
-    //     }
-    // }, [carouselIndex, isCarouselIntervalDisabled]);
-
-    // Returns All products
+    interface Categories {
+        name: string;
+        id: number;
+        title: string;
+        banner: string;
+        tile: string;
+    }
 
     useEffect(() => {
         (async () => {
-            const products = await fetch("/api/products").then((response) =>
+            const categories = await fetch("/api/categories").then((response) =>
                 response.json()
             );
-            setProducts(products);
+            setCategories(categories);
         })();
     }, []);
 
+    console.log(categories, "LOOK AT ME");
     // https://react-slick.neostack.com/docs/api/ all props and methods
     const carouselProps = {
         dots: true,
@@ -183,55 +173,35 @@ export const Home = () => {
                 </div> */}
                 <div className="p-3">
                     <h1 className="text-xl font-semibold">Shop by Category</h1>
-                    <div className="flex min-w-max">
-                        {[
-                            "Dog",
-                            "Cat",
-                            "Small Pet",
-                            "Bird",
-                            "Fish",
-                            "Reptile",
-                            "Horse",
-                            "Farm Animal",
-                            "Pet Parents",
-                            "Pharmacy",
-                            "Today's Deals",
-                            "Brands",
-                        ]
-                            .slice(0, 3)
-                            .map((category, index) => (
+
+                    {/* {(() => {
+                        const data = fetch("api/products/3").then((response) =>
+                            response.json()
+                        );
+                        Promise.resolve(data).then((stuff) => {
+                            return <div>{stuff[0].name}</div>;
+                        });
+                    })()} */}
+                    <div className="flex gap-2 min-w-max">
+                        {categories?.map((category, index) => (
+                            <Link
+                                to={`/products/${category?.id}`}
+                                className="block pt-3 text-md text-chewyBlue-dark"
+                            >
                                 <div
                                     key={index}
-                                    className="w-40 h-auto p-4 mr-1.5 text-center bg-white border rounded-md hover:border-opacity-1 "
+                                    className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 "
                                 >
                                     <img
                                         className="block"
-                                        src={`/images/${
-                                            [
-                                                "dog-tile.jpg",
-                                                "cat-tile.webp",
-                                                "small-pet-tile.webp",
-                                                "bird-tile.webp",
-                                                "fish-tile.webp",
-                                                "reptile-tile.webp",
-                                                "horse-tile.webp",
-                                                "farm-animal-tile.webp",
-                                                "pet-parents-tile.jpg",
-                                                "rx-tile.webp",
-                                                "todays-deals-tile.webp",
-                                                "shop-by-brand-tile.webp",
-                                            ][index]
-                                        }`}
-                                        alt={category}
+                                        src={`/images/${category.tile}`}
+                                        alt={category.tile}
                                     />
-                                    <Link
-                                        to="/"
-                                        className="block pt-3 text-md text-chewyBlue-dark"
-                                    >
-                                        {category}
-                                    </Link>
+
+                                    {category.name}
                                 </div>
-                            ))}
+                            </Link>
+                        ))}
                     </div>
                     <h1 className="text-xl font-semibold">
                         Customer Favorites

@@ -134,11 +134,10 @@ export const getCategory = async ({ categoryID }: CategoryProps) => {
     return res.rows[0];
 };
 
-export const getCategories = async ({ categoryID }: CategoryProps) => {
+export const getCategories = async () => {
     const res = await pool.query({
         name: "get-categories",
-        text: "SELECT * FROM categories where id=$1",
-        values: [categoryID],
+        text: "SELECT * FROM categories",
     });
-    return res.rows[0];
+    return res.rows;
 };
