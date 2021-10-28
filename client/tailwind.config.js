@@ -27,6 +27,9 @@ module.exports = {
                 chewyOrange: {
                     DEFAULT: "#ef6c00",
                 },
+                chewyRed: {
+                    DEFAULT: "#d0021b",
+                },
 
                 chewyYellow: {
                     DEFAULT: "#f8d81c",
@@ -34,10 +37,8 @@ module.exports = {
                 chewyGray: {
                     lightest: "#fff",
                     lighter: "#f9f9f9",
-                    light: "#f5f5f5",
-
+                    light: "#ddd",
                     DEFAULT: "#999",
-
                     dark: "#ccc",
                     darker: "#555",
                 },
