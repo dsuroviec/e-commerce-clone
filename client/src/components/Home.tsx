@@ -25,7 +25,26 @@ import {
     HiChevronUp,
     HiSwitchHorizontal,
 } from "react-icons/hi";
-
+function SampleNextArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style, display: "block", background: "red" }}
+            onClick={onClick}
+        />
+    );
+}
+function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style, display: "block", background: "green" }}
+            onClick={onClick}
+        />
+    );
+}
 export const Home = () => {
     const [carouselIndex, setCarouselIndex] = useState(0);
     const [enableExitClass, setEnableExitClass] = useState(true);
@@ -75,6 +94,8 @@ export const Home = () => {
         pauseOnDotsHover: true,
         pauseOnHover: true,
         arrows: true,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
         dotsClass: "slick-dots",
         // appendDots: (dots: any) => <ul>{dots}</ul>,
     };
@@ -82,21 +103,22 @@ export const Home = () => {
     return (
         <>
             <Header />
-            <Slider ref={(slider) => slider} {...carouselProps}>
-                {[
-                    "autoshipping.jpg",
-                    "buy-a-bag.jpg",
-                    "disney-collection.jpg",
-                    "e-gift-card.jpg",
-                    "gift-card.jpg",
-                    "halloween.jpg",
-                ].map((item) => (
-                    <div>
-                        <img className="" src={item} alt="hero"></img>
-                    </div>
-                ))}
-            </Slider>
-
+            <div className="">
+                <Slider {...carouselProps}>
+                    {[
+                        "autoshipping.jpg",
+                        "buy-a-bag.jpg",
+                        "disney-collection.jpg",
+                        "e-gift-card.jpg",
+                        "gift-card.jpg",
+                        "halloween.jpg",
+                    ].map((item, index) => (
+                        <div key={index}>
+                            <img className="" src={item} alt="hero"></img>
+                        </div>
+                    ))}
+                </Slider>
+            </div>
             <section
                 className="w-full overflow-hidden bg-chewyGray-lighter "
                 id="home-content"
@@ -298,8 +320,11 @@ export const Home = () => {
                                 "purina-logo.jpg",
                                 "blue-logo.png",
                                 "kong-logo.jpg",
-                            ].map((logo) => (
-                                <picture className="flex justify-center w-1/3 text-center bg-white border">
+                            ].map((logo, index) => (
+                                <picture
+                                    key={index}
+                                    className="flex justify-center w-1/3 text-center bg-white border"
+                                >
                                     <img
                                         className="p-2 w-28 h-28"
                                         src={logo}
@@ -325,8 +350,8 @@ export const Home = () => {
                             Spooky Chewy Exclusives 🦇
                         </h2>
                         <div className="flex">
-                            {[0, 1, 2, 3, 4].map((article) => (
-                                <Link to="">
+                            {[0, 1, 2, 3, 4].map((article, index) => (
+                                <Link key={index} to="">
                                     <article className="p-3.5 mr-1.5 border rounded-md w-36 bg-white ">
                                         <div>
                                             <img
@@ -389,8 +414,8 @@ export const Home = () => {
                             <HiChevronRight size={24} />
                         </Link>
                         <div className="flex">
-                            {[0, 1, 2, 3, 4].map((article) => (
-                                <Link to="">
+                            {[0, 1, 2, 3, 4].map((article, index) => (
+                                <Link key={index} to="">
                                     <article className="p-3.5 mr-1.5 border rounded-md bg-white w-36 ">
                                         <div>
                                             <img
@@ -432,8 +457,8 @@ export const Home = () => {
                                 2,
                                 3,
                                 4,
-                            ].map((article) => (
-                                <Link to="">
+                            ].map((article, index) => (
+                                <Link key={index} to="">
                                     <article className="p-3.5 mr-1.5 border rounded-md bg-white w-36 h-full text-center">
                                         <img
                                             src="holiday-shop.webp"

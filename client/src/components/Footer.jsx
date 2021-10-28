@@ -7,7 +7,7 @@ export const Footer = () => {
         <>
             <footer className="bg-white ">
                 <a
-                    href="/"
+                    href="#"
                     className="block w-full m-auto text-center border-t-2 "
                     rel="noreferrer"
                 >
@@ -82,8 +82,9 @@ export const Footer = () => {
                             image: "compounding-pharmacy.png",
                             w: "w-16",
                         },
-                    ].map((item) => (
+                    ].map((item, index) => (
                         <img
+                            key={index}
                             src={item.image}
                             alt=""
                             className={`${item.w} mr-4`}

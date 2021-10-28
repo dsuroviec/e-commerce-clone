@@ -27,7 +27,7 @@ export const Header = () => {
     const [theme, setTheme] = useState(localStorage.theme || "light");
 
     return (
-        <div className="">
+        <div className="block">
             <section
                 id="mobile-nav"
                 className="w-full p-1 font-medium text-white bg-chewyBlue sm:hidden"
@@ -245,8 +245,11 @@ export const Header = () => {
                                         <span>Recently Added:</span>
                                         <span>{`Total Items (${"3"})`}</span>
                                     </div>
-                                    {[2, 3, 4, 5].map(() => (
-                                        <div className="2xl:p-4 2xl:border-b ">
+                                    {[2, 3, 4, 5].map((item, index) => (
+                                        <div
+                                            key={index}
+                                            className="2xl:p-4 2xl:border-b "
+                                        >
                                             <Link to="/" className="2xl:flex">
                                                 <img
                                                     className="2xl:w-12 2xl:h-12 2xl:mt-1"

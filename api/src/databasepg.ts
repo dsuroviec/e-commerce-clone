@@ -111,3 +111,15 @@ export const getProducts = async () => {
     const res = await pool.query(`Select * from products`);
     return res.rows;
 };
+
+interface CategoryProps {
+    categoryName: string;
+}
+export const getCategory = async ({ categoryName }: CategoryProps) => {
+    const res = await pool.query({
+        name: "get-category-data",
+        text: "SELECT * FROM categories where name=$1",
+        values: [categoryName],
+    });
+    return res.rows[0];
+};

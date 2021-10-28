@@ -1,5 +1,5 @@
 import express from "express";
-import _ from "lodash";
+import _, { identity } from "lodash";
 const app = express();
 app.use(express.json());
 import {
@@ -8,6 +8,7 @@ import {
     getCurrentUser,
     authorizeRequest,
     getProducts,
+    getCategory,
 } from "./databasepg";
 
 app.post("/api/login", (req, res, next) => {
@@ -24,6 +25,11 @@ app.post("/api/login", (req, res, next) => {
 app.get("/api/products", (req, res, next) => {
     getProducts()
         .then((products) => res.send(products))
+        .catch((error) => next(error));
+});
+app.post("/api/categories", (req, res, next) => {
+    getCategory(req.body)
+        .then((category) => res.send(category))
         .catch((error) => next(error));
 });
 
