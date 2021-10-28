@@ -106,8 +106,39 @@ export const getCurrentUser = async (
 
     return user.rows[0];
 };
-
+interface CategoryProps {
+    categoryID: string;
+}
 export const getProducts = async () => {
     const res = await pool.query(`Select * from products`);
     return res.rows;
+};
+
+export const getProductsByCategory = async ({ categoryID }: CategoryProps) => {
+    const res = await pool.query({
+        name: "get-products-by-category",
+        text: "SELECT * FROM products where category=$1",
+        values: [categoryID],
+    });
+
+    return res.rows;
+};
+
+export const getCategory = async ({ categoryID }: CategoryProps) => {
+    const res = await pool.query({
+        name: "get-category-by-name",
+        text: "SELECT * FROM categories where id=$1",
+        values: [categoryID],
+    });
+
+    return res.rows[0];
+};
+
+export const getCategories = async ({ categoryID }: CategoryProps) => {
+    const res = await pool.query({
+        name: "get-categories",
+        text: "SELECT * FROM categories where id=$1",
+        values: [categoryID],
+    });
+    return res.rows[0];
 };
