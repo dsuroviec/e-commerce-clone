@@ -64,7 +64,7 @@ function App() {
                         <Route path="/logIn">
                             <LogIn />
                         </Route>
-                        <Route path="/products/:categoryName">
+                        <Route path="/products/:categoryID">
                             <Products />
                         </Route>
                         <Route path="/signUp">

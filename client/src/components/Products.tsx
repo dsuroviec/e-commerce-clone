@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { Button } from "./Button";
 
 export const Products = () => {
     interface Product {
@@ -10,6 +11,7 @@ export const Products = () => {
         price?: number;
         image?: string;
         brand?: string;
+        category?: string;
     }
     interface RouteParamData {
         name: string;
@@ -18,29 +20,27 @@ export const Products = () => {
         id: number;
     }
 
-    const { categoryName } = useParams<{ categoryName: string }>();
+    const { categoryID } = useParams<{ categoryID: string }>();
     const [products, setProducts] = useState<Product[] | null>(null);
     const [category, setCategory] = useState<RouteParamData | null>(null);
 
     useEffect(() => {
         (async () => {
-            const category = await fetch(
-                `/api/categories/${categoryName}`
-            ).then((response) => response.json());
+            const category = await fetch(`/api/categories/${categoryID}`).then(
+                (response) => response.json()
+            );
             setCategory(category);
         })();
     }, []);
 
     useEffect(() => {
         (async () => {
-            const products = await fetch("/api/products", {
-                method: "Post",
-            }).then((response) => response.json());
+            const products = await fetch(`/api/products/${categoryID}`).then(
+                (response) => response.json()
+            );
             setProducts(products);
         })();
     }, []);
-
-    console.log(products);
 
     return (
         <>
@@ -51,12 +51,15 @@ export const Products = () => {
             <h2>{category?.title}</h2>
             {products?.map((product: Product) => (
                 <div key={product.id} className="flex gap-5 p-6 border-t">
-                    <div className="w-5/12 ">
+                    <div className="inline-grid w-5/12 gap-y-6 ">
                         <img
-                            src={product.image}
+                            src={`/images/${product?.image}`}
                             className="w-20 m-auto mt-1"
                             alt=""
                         ></img>
+                        <Button className="block m-auto bg-chewyOrange">
+                            AddToCart
+                        </Button>
                     </div>
                     <div className="w-7/12">
                         <h2>
@@ -67,7 +70,7 @@ export const Products = () => {
                             {`$${product.price}`}
                         </span>
                         <div className="flex items-center">
-                            <img src="rating.svg"></img>&nbsp;
+                            <img src="/images/rating.svg"></img>&nbsp;
                             <span className=" text-chewyGray">
                                 {Math.ceil(Math.random() * 100)}
                             </span>

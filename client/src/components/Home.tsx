@@ -114,7 +114,11 @@ export const Home = () => {
                         "halloween.jpg",
                     ].map((item, index) => (
                         <div key={index}>
-                            <img className="" src={item} alt="hero"></img>
+                            <img
+                                className=""
+                                src={`/images/${item}`}
+                                alt="hero"
+                            ></img>
                         </div>
                     ))}
                 </Slider>
@@ -202,7 +206,7 @@ export const Home = () => {
                                 >
                                     <img
                                         className="block"
-                                        src={
+                                        src={`/images/${
                                             [
                                                 "dog-tile.jpg",
                                                 "cat-tile.webp",
@@ -217,7 +221,7 @@ export const Home = () => {
                                                 "todays-deals-tile.webp",
                                                 "shop-by-brand-tile.webp",
                                             ][index]
-                                        }
+                                        }`}
                                         alt={category}
                                     />
                                     <Link
@@ -255,7 +259,7 @@ export const Home = () => {
                                 >
                                     <img
                                         className="block"
-                                        src={
+                                        src={`/images/${
                                             [
                                                 "dog-food-tile.webp",
                                                 "dog-toys-tile.webp",
@@ -270,7 +274,7 @@ export const Home = () => {
                                                 "football-shop-tile.webp",
                                                 "chewy-pharmacy-tile.webp",
                                             ][index]
-                                        }
+                                        }`}
                                         alt={category}
                                     />
                                     <Link
@@ -287,13 +291,19 @@ export const Home = () => {
                             New Puppy or Kitten?
                         </h1>
                         <Link to="/">
-                            <img src="new-puppy.jpg" alt="new puppy"></img>
+                            <img
+                                src="/images/new-puppy.jpg"
+                                alt="new puppy"
+                            ></img>
                             <span className="text-sm hover:underline text-chewyBlue-dark">
                                 Puppy Shop
                             </span>
                         </Link>
                         <Link to="/">
-                            <img src="new-kitten.jpg" alt="new kitten"></img>
+                            <img
+                                src="/images/new-kitten.jpg"
+                                alt="new kitten"
+                            ></img>
                             <span className="text-sm hover:underline text-chewyBlue-dark">
                                 Kitten Shop
                             </span>
@@ -327,7 +337,7 @@ export const Home = () => {
                                 >
                                     <img
                                         className="p-2 w-28 h-28"
-                                        src={logo}
+                                        src={`/images/${logo}`}
                                         alt={logo}
                                     />
                                 </picture>
@@ -356,7 +366,7 @@ export const Home = () => {
                                         <div>
                                             <img
                                                 className="w-20 h-20 m-auto"
-                                                src="goody-bag.jpg"
+                                                src="/images/goody-bag.jpg"
                                                 alt="goody bag"
                                             ></img>
                                             <span className="text-sm font-medium">
@@ -386,13 +396,16 @@ export const Home = () => {
                     </div>
                     <div className="">
                         <h1 className="text-xl font-semibold">Pet Health</h1>
-                        <img src="pet-wellness.jpg" alt="pet wellness"></img>
+                        <img
+                            src="/images/pet-wellness.jpg"
+                            alt="pet wellness"
+                        ></img>
                         &nbsp;
                         <Link className="text-sm text-chewyBlue-darker" to="">
                             Pet Wellness
                         </Link>
                         <img
-                            src="connect-with-vet.jpg"
+                            src="/images/connect-with-vet.jpg"
                             alt="Connect With a Vet"
                         />
                         &nbsp;
@@ -420,7 +433,7 @@ export const Home = () => {
                                         <div>
                                             <img
                                                 className="w-16 h-24 m-auto"
-                                                src="taste-wild-dog-food.jpg"
+                                                src="/images/taste-wild-dog-food.jpg"
                                                 alt="Dog Food"
                                             ></img>
                                             <span className="text-sm font-medium">
@@ -461,7 +474,7 @@ export const Home = () => {
                                 <Link key={index} to="">
                                     <article className="p-3.5 mr-1.5 border rounded-md bg-white w-36 h-full text-center">
                                         <img
-                                            src="holiday-shop.webp"
+                                            src="/images/holiday-shop.webp"
                                             className="mb-3"
                                             alt="Holiday Shop"
                                         ></img>
@@ -477,7 +490,7 @@ export const Home = () => {
                         </div>
                     </div>
                     <img
-                        src="adopt-a-dog-month-small.webp"
+                        src="/images/adopt-a-dog-month-small.webp"
                         className="object-none h-32"
                         alt="adopt a dog"
                     />

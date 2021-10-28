@@ -22,16 +22,20 @@ export const Footer = () => {
                 <section
                     className="flex items-center px-3 py-4"
                     style={{
-                        backgroundImage: 'url("mobile-background.jpg")',
+                        backgroundImage: 'url("/images/mobile-background.jpg")',
                     }}
                 >
-                    <img src="icon-apple.png" className="w-11" alt="" />
+                    <img src="/images/icon-apple.png" className="w-11" alt="" />
 
                     <div className="mx-4">
                         <p className="mb-2 text-lg font-bold text-white">
                             Get the Chewy app
                         </p>
-                        <img src="5-stars.png" className="w-2/3" alt="" />
+                        <img
+                            src="/images/5-stars.png"
+                            className="w-2/3"
+                            alt=""
+                        />
                     </div>
                     <div className="grid w-40 gap-y-1 sfw-mobile-footer-apps__button">
                         <a
@@ -40,7 +44,7 @@ export const Footer = () => {
                             rel="noreferrer"
                         >
                             <img
-                                src="app-store.png"
+                                src="/images/app-store.png"
                                 alt="Download on the App Store"
                                 loading="lazy"
                             />
@@ -51,7 +55,7 @@ export const Footer = () => {
                             rel="noreferrer"
                         >
                             <img
-                                src="google-play.png"
+                                src="/images/google-play.png"
                                 alt="Get it on Google Play"
                                 loading="lazy"
                             />
@@ -85,7 +89,7 @@ export const Footer = () => {
                     ].map((item, index) => (
                         <img
                             key={index}
-                            src={item.image}
+                            src={`/images/${item.image}`}
                             alt=""
                             className={`${item.w} mr-4`}
                         />

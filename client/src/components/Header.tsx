@@ -325,7 +325,7 @@ export const Header = () => {
                         &nbsp; &nbsp;
                         <img
                             className="w-20"
-                            src="autoship-logo.svg"
+                            src="/images/autoship-logo.svg"
                             alt="autoship"
                         ></img>
                     </button>
