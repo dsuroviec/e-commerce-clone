@@ -9,6 +9,8 @@ import {
     authorizeRequest,
     getProducts,
     getCategory,
+    getCategories,
+    getProductsByCategory,
 } from "./databasepg";
 
 app.post("/api/login", (req, res, next) => {
@@ -27,14 +29,18 @@ app.get("/api/products", (req, res, next) => {
         .then((products) => res.send(products))
         .catch((error) => next(error));
 });
+app.get("/api/products/:categoryID", (req, res, next) => {
+    getProductsByCategory(req.params)
+        .then((products) => res.send(products))
+        .catch((error) => next(error));
+});
 app.get("/api/categories", (req, res, next) => {
-    getCategory(req.body)
+    getCategories(req.body)
         .then((category) => res.send(category))
         .catch((error) => next(error));
 });
 
-app.get("/api/categories/:categoryName", (req, res, next) => {
-    console.log(req.params, "reqparams");
+app.get("/api/categories/:categoryID", (req, res, next) => {
     getCategory(req.params)
         .then((category) => res.send(category))
         .catch((error) => next(error));
