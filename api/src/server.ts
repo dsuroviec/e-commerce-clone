@@ -27,8 +27,15 @@ app.get("/api/products", (req, res, next) => {
         .then((products) => res.send(products))
         .catch((error) => next(error));
 });
-app.post("/api/categories", (req, res, next) => {
+app.get("/api/categories", (req, res, next) => {
     getCategory(req.body)
+        .then((category) => res.send(category))
+        .catch((error) => next(error));
+});
+
+app.get("/api/categories/:categoryName", (req, res, next) => {
+    console.log(req.params, "reqparams");
+    getCategory(req.params)
         .then((category) => res.send(category))
         .catch((error) => next(error));
 });

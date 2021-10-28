@@ -20,27 +20,22 @@ export const Products = () => {
 
     const { categoryName } = useParams<{ categoryName: string }>();
     const [products, setProducts] = useState<Product[] | null>(null);
-    const [routeParamData, setRouteParamData] = useState<RouteParamData | null>(
-        null
-    );
+    const [category, setCategory] = useState<RouteParamData | null>(null);
+
     useEffect(() => {
         (async () => {
-            const routeParamData = await fetch("/api/categories", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ categoryName }),
-            }).then((response) => response.json());
-            setRouteParamData(routeParamData);
+            const category = await fetch(
+                `/api/categories/${categoryName}`
+            ).then((response) => response.json());
+            setCategory(category);
         })();
     }, []);
-    console.log("routeParamData", routeParamData);
+
     useEffect(() => {
         (async () => {
-            const products = await fetch("/api/products").then((response) =>
-                response.json()
-            );
+            const products = await fetch("/api/products", {
+                method: "Post",
+            }).then((response) => response.json());
             setProducts(products);
         })();
     }, []);
@@ -51,9 +46,9 @@ export const Products = () => {
         <>
             <Header />
             <div>
-                <img src="" alt=""></img>
+                <img src={`/images/${category?.banner}`} alt=""></img>
             </div>
-            <h2>{routeParamData?.title}</h2>
+            <h2>{category?.title}</h2>
             {products?.map((product: Product) => (
                 <div key={product.id} className="flex gap-5 p-6 border-t">
                     <div className="w-5/12 ">
