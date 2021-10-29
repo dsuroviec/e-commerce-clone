@@ -56,7 +56,14 @@ export const Cart = () => {
 
                     <div className="p-4 border-t-2 bg-chewyGray-lighter">
                         <span className="flex items-center justify-center text-chewyGray-darkest text-chewyGray-dark">
-                            <strong></strong>
+                            <strong>
+                                {50 -
+                                    cart.reduce(
+                                        (total, product) =>
+                                            total + product.price,
+                                        0
+                                    )}
+                            </strong>
                             &nbsp; until Free shipping &nbsp;
                             <HiTruck size="24" />
                         </span>
@@ -66,7 +73,7 @@ export const Cart = () => {
                         <div className="flex items-center justify-between">
                             <span>Subtotal ({cart?.length} items):</span>
                             <span className="flex text-lg font-bold text-chewyRed">
-                                {cart?.reduce(
+                                {cart.reduce(
                                     (total, product) => total + product.price,
                                     0
                                 )}

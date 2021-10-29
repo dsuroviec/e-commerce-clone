@@ -25,13 +25,14 @@ export const Products = () => {
     const [products, setProducts] = useState<Product[] | null>(null);
     const [category, setCategory] = useState<Category | null>(null);
     const [showAddedToCartModal, setShowAddedToCartModal] = useState(false);
-    const [cart, setCart] = useState<Product[]>([]);
-    console.log(cart, "here is cart");
-
+    const [cart, setCart] = useState<Product[] | null>(null);
+    console.log(cart, "cart");
     // Get cart items from local storage upon initial render of cart page
     useEffect(() => {
         const item: any = localStorage.getItem("cart");
-        setCart(JSON.parse(item));
+        if (item) {
+            setCart(JSON.parse(item));
+        }
     }, []);
 
     // Updates local storage with cart changes from product page
@@ -78,10 +79,13 @@ export const Products = () => {
                             className="block m-auto bg-chewyOrange"
                             onClick={() => {
                                 setShowAddedToCartModal(true);
-                                setCart([...cart, product]);
+
+                                cart
+                                    ? setCart([...cart, product])
+                                    : setCart([product]);
                             }}
                         >
-                            AddToCart
+                            Add To Cart
                         </Button>
                         {showAddedToCartModal && <AddedToCartModal />}
                     </div>

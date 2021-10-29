@@ -19,7 +19,6 @@ export const AddedToCartModal = () => {
             const products = await fetch(`/api/products/${categoryID}`).then(
                 (response) => response.json()
             );
-            console.log(products, "Hey rsdf");
             setProducts(products);
         })();
     }, []);

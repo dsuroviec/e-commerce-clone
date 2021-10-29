@@ -48,7 +48,7 @@ export const Header = () => {
                             <HiUser size={27} />
                         </Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to="/">
+                        <Link to="/cart">
                             <HiShoppingCart size={27} />
                         </Link>
                     </div>
