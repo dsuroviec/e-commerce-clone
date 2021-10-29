@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Popper } from "./Popper";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
@@ -22,9 +22,32 @@ import {
 } from "react-icons/hi";
 
 export const Header = () => {
+    interface Product {
+        id: number;
+        name: string;
+        price: number;
+        image: string;
+        brand: string;
+        category: string;
+    }
+
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
+    const [cart, setCart] = useState<Product[] | null>(null);
+
+    // Get cart items from local storage upon initial render of cart page
+    useEffect(() => {
+        const item: any = localStorage.getItem("cart");
+        if (item) {
+            setCart(JSON.parse(item));
+        }
+    }, []);
+    console.log("cart in header", cart);
+    // Updates local storage with cart changes from product page
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
     return (
         <div className="block">
@@ -48,8 +71,11 @@ export const Header = () => {
                             <HiUser size={27} />
                         </Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to="/cart">
+                        <Link className="relative" to="/cart">
                             <HiShoppingCart size={27} />
+                            <div className="absolute w-5 h-5 text-center text-black rounded-full -top-2 left-3 bg-chewyYellow">
+                                {cart ? cart?.length : 0}
+                            </div>
                         </Link>
                     </div>
                 </div>

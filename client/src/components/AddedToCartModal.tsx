@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 
 export const AddedToCartModal = () => {
     interface Product {
-        id?: number;
-        name?: string;
-        price?: number;
-        image?: string;
-        brand?: string;
-        category?: string;
+        id?: number | null;
+        name?: string | null;
+        price?: number | null;
+        image?: string | null;
+        brand?: string | null;
+        category?: string | null;
     }
 
     const { categoryID } = useParams<{ categoryID: string }>();

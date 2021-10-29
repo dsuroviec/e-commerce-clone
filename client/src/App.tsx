@@ -14,17 +14,27 @@ import { Cart } from "./components/Cart";
 import "./App.css";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
+import CartContext from "./contexts/CartContext";
 
 function App() {
-    const [token, setToken] = useState<null | string>(
-        localStorage.token || null
-    );
-
     interface User {
         firstName: string | null;
         lastName: string | null;
         email: string | null;
     }
+    interface Product {
+        id: number;
+        name: string;
+        price: number;
+        image: string;
+        brand: string;
+        category: string;
+    }
+    const [token, setToken] = useState<null | string>(
+        localStorage.token || null
+    );
+    const [cart, setCart] = useState<Product[] | null>(null);
+
     const [user, setUser] = useState<User>({
         firstName: null,
         lastName: null,
@@ -54,31 +64,33 @@ function App() {
     return (
         <TokenContext.Provider value={{ token, setToken }}>
             <UserContext.Provider value={{ user, setUser }}>
-                <Router>
-                    <Switch>
-                        <Route exact path="/">
-                            <Home />
-                        </Route>
-                        <Route path="/contactUs">
-                            <ContactUs />
-                        </Route>
-                        <Route path="/logIn">
-                            <LogIn />
-                        </Route>
-                        <Route path="/products/:categoryID">
-                            <Products />
-                        </Route>
-                        <Route path="/cart">
-                            <Cart />
-                        </Route>
-                        <Route path="/signUp">
-                            <SignUp />
-                        </Route>
-                        <Route>
-                            <Redirect to="/" />
-                        </Route>
-                    </Switch>
-                </Router>
+                <CartContext.Provider value={{ cart, setCart }}>
+                    <Router>
+                        <Switch>
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+                            <Route path="/contactUs">
+                                <ContactUs />
+                            </Route>
+                            <Route path="/logIn">
+                                <LogIn />
+                            </Route>
+                            <Route path="/products/:categoryID">
+                                <Products />
+                            </Route>
+                            <Route path="/cart">
+                                <Cart />
+                            </Route>
+                            <Route path="/signUp">
+                                <SignUp />
+                            </Route>
+                            <Route>
+                                <Redirect to="/" />
+                            </Route>
+                        </Switch>
+                    </Router>
+                </CartContext.Provider>
             </UserContext.Provider>
         </TokenContext.Provider>
     );
