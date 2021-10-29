@@ -34,6 +34,7 @@ app.get("/api/products/:categoryID", (req, res, next) => {
         .then((products) => res.send(products))
         .catch((error) => next(error));
 });
+
 app.get("/api/categories", (req, res, next) => {
     getCategories()
         .then((categories) => res.send(categories))

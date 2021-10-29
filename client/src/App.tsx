@@ -10,6 +10,7 @@ import { LogIn } from "./components/LogIn";
 import { ContactUs } from "./components/ContactUs";
 import { SignUp } from "./components/SignUp";
 import { Products } from "./components/Products";
+import { Cart } from "./components/Cart";
 import "./App.css";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
@@ -66,6 +67,9 @@ function App() {
                         </Route>
                         <Route path="/products/:categoryID">
                             <Products />
+                        </Route>
+                        <Route path="/cart">
+                            <Cart />
                         </Route>
                         <Route path="/signUp">
                             <SignUp />

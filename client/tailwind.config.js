@@ -6,6 +6,10 @@ module.exports = {
     },
     darkMode: "class", // or 'media' or 'class'
     theme: {
+        borderWidth: {
+            DEFAULT: "2px",
+            1: "1px",
+        },
         extend: {
             colors: {
                 transparent: "transparent",
@@ -39,7 +43,7 @@ module.exports = {
                     lighter: "#f9f9f9",
                     light: "#ddd",
                     DEFAULT: "#999",
-                    dark: "#ccc",
+                    dark: "#333",
                     darker: "#555",
                 },
             },

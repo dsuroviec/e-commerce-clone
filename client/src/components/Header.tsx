@@ -312,25 +312,25 @@ export const Header = () => {
                             <Link to="/">FREE 1-3 DAY SHIPPING OVER $49</Link>
                         </div>
                     </div>
-                )}{" "}
-                <div className="p-1 border-b ">
-                    <button className="flex items-center justify-center w-full">
-                        <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
-                            Save 35%
-                        </span>
-                        &nbsp;
-                        <span className="font-medium text-chewyBlue-evenDarker">
-                            on your first
-                        </span>
-                        &nbsp; &nbsp;
-                        <img
-                            className="w-20"
-                            src="/images/autoship-logo.svg"
-                            alt="autoship"
-                        ></img>
-                    </button>
-                </div>
+                )}
             </section>
+            <div className="p-1 border-b ">
+                <button className="flex items-center justify-center w-full">
+                    <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
+                        Save 35%
+                    </span>
+                    &nbsp;
+                    <span className="font-medium text-chewyBlue-evenDarker">
+                        on your first
+                    </span>
+                    &nbsp; &nbsp;
+                    <img
+                        className="w-20"
+                        src="/images/autoship-logo.svg"
+                        alt="autoship"
+                    ></img>
+                </button>
+            </div>
 
             {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
 

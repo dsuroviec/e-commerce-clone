@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Button } from "./Button";
+import { AddedToCartModal } from "./AddedToCartModal";
 
 export const Products = () => {
     interface Product {
@@ -13,7 +14,7 @@ export const Products = () => {
         brand?: string;
         category?: string;
     }
-    interface RouteParamData {
+    interface Category {
         name: string;
         title: string;
         banner: string;
@@ -22,8 +23,23 @@ export const Products = () => {
 
     const { categoryID } = useParams<{ categoryID: string }>();
     const [products, setProducts] = useState<Product[] | null>(null);
-    const [category, setCategory] = useState<RouteParamData | null>(null);
+    const [category, setCategory] = useState<Category | null>(null);
+    const [showAddedToCartModal, setShowAddedToCartModal] = useState(false);
+    const [cart, setCart] = useState<Product[]>([]);
+    console.log(cart, "here is cart");
 
+    // Get cart items from local storage upon initial render of cart page
+    useEffect(() => {
+        const item: any = localStorage.getItem("cart");
+        setCart(JSON.parse(item));
+    }, []);
+
+    // Updates local storage with cart changes from product page
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
+
+    // Gets categories for category section and cards
     useEffect(() => {
         (async () => {
             const category = await fetch(`/api/categories/${categoryID}`).then(
@@ -33,6 +49,7 @@ export const Products = () => {
         })();
     }, []);
 
+    // Gets products that match the path
     useEffect(() => {
         (async () => {
             const products = await fetch(`/api/products/${categoryID}`).then(
@@ -57,9 +74,16 @@ export const Products = () => {
                             className="w-20 m-auto mt-1"
                             alt=""
                         ></img>
-                        <Button className="block m-auto bg-chewyOrange">
+                        <Button
+                            className="block m-auto bg-chewyOrange"
+                            onClick={() => {
+                                setShowAddedToCartModal(true);
+                                setCart([...cart, product]);
+                            }}
+                        >
                             AddToCart
                         </Button>
+                        {showAddedToCartModal && <AddedToCartModal />}
                     </div>
                     <div className="w-7/12">
                         <h2>

@@ -118,58 +118,12 @@ export const Home = () => {
                 id="home-content"
             >
                 {/* <div className="relative p-0 h-44">
-                    <button
-                        onClick={() => {
-                            setCarouselDirection("carousel-left");
-                            setIsCauroselIntervalDisabled(true);
-                            if (carouselIndex > 0) {
-                                setCarouselIndex(carouselIndex - 1);
-                            } else {
-                                setCarouselIndex(5);
-                            }
-                        }}
-                        className="absolute z-10 h-full text-white text-opacity-60"
-                    >
-                        <HiChevronLeft size={40} />
-                    </button>
-                    <button
-                        onClick={() => {
-                            setIsCauroselIntervalDisabled(true);
-                            if (carouselIndex < 5) {
-                                setCarouselIndex(carouselIndex + 1);
-                                setCarouselDirection("carousel-right");
-                            } else {
-                                setCarouselIndex(0);
-                            }
-                        }}
-                        className="absolute right-0 z-10 h-full text-white text-opacity-60 "
-                    >
-                        <HiChevronRight size={40} />
-                    </button>
-                    <TransitionGroup componenent={null}>
-                        <CSSTransition
-                            timeout={{ enter: 1000, exit: 1000 }}
-                            classNames={carouselDirection}
-                            key={carouselIndex}
-                        ></CSSTransition>
-                    </TransitionGroup>
-                </div>
-                <div className="flex justify-center p-1">
-                    {[0, 1, 2, 3, 4, 5].map((index) => (
-                        <button
-                            key={index}
                             className={clsx(
                                 "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
                                 {
                                     "bg-chewyBlue": index === carouselIndex,
                                 }
                             )}
-                            onClick={() => {
-                                setIsCauroselIntervalDisabled(true);
-                                setCarouselIndex(index);
-                            }}
-                        ></button>
-                    ))}
                 </div> */}
                 <div className="p-3">
                     <h1 className="text-xl font-semibold">Shop by Category</h1>
