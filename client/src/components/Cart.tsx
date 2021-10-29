@@ -7,7 +7,6 @@ import { Button } from "./Button";
 import { useHistory } from "react-router-dom";
 
 export const Cart = () => {
-    // Updates local storage with cart changes from product page
     interface Product {
         id: number;
         name: string;
@@ -17,6 +16,9 @@ export const Cart = () => {
         category: string;
     }
     const [cart, setCart] = useState<Product[] | null>(null);
+
+    // react-router history
+    let history = useHistory();
 
     // Get cart items from local storage upon initial render of cart page
     useEffect(() => {
@@ -29,11 +31,6 @@ export const Cart = () => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    let history = useHistory();
-    const handleBackToShopping = () => {
-        history.goBack();
-    };
-
     return (
         <>
             <Header />
@@ -44,7 +41,10 @@ export const Cart = () => {
                     </h1>
                     <img className="m-auto" src="/images/empty-cart.png"></img>
 
-                    <Button onClick={() => handleBackToShopping()}>
+                    <Button
+                        className="block m-auto my-6 bg-chewyOrange"
+                        onClick={() => history.goBack()}
+                    >
                         Continue Shopping
                     </Button>
                 </>
@@ -57,26 +57,26 @@ export const Cart = () => {
                     <div className="p-4 border-t-2 bg-chewyGray-lighter">
                         <span className="flex items-center justify-center text-chewyGray-darkest text-chewyGray-dark">
                             <strong>
-                                {50 -
+                                {`$${
+                                    50.0 -
                                     cart.reduce(
                                         (total, product) =>
                                             total + product.price,
                                         0
-                                    )}
+                                    )
+                                }`}
                             </strong>
                             &nbsp; until Free shipping &nbsp;
                             <HiTruck size="24" />
                         </span>
-                        <div className="m-auto text-center">
-                            Some Type of Progress Bar
-                        </div>
+
                         <div className="flex items-center justify-between">
                             <span>Subtotal ({cart?.length} items):</span>
                             <span className="flex text-lg font-bold text-chewyRed">
-                                {cart.reduce(
+                                {`$${cart.reduce(
                                     (total, product) => total + product.price,
                                     0
-                                )}
+                                )}`}
                             </span>
                         </div>
                         <Button className="block w-full mt-4 bg-chewyOrange">
@@ -137,14 +137,18 @@ export const Cart = () => {
                                         </select>
                                     </div>
                                     <Button
-                                        onClick={() =>
-                                            setCart(
-                                                [...cart].filter(
-                                                    (item) =>
-                                                        item.id !== product.id
-                                                )
-                                            )
-                                        }
+                                        onClick={() => {
+                                            const updatedCart = [
+                                                ...cart,
+                                            ].filter(
+                                                (item) => item.id !== product.id
+                                            );
+                                            if (updatedCart.length) {
+                                                setCart([...updatedCart]);
+                                            } else {
+                                                setCart(null);
+                                            }
+                                        }}
                                     >
                                         Remove Items
                                     </Button>

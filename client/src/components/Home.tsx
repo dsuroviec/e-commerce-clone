@@ -139,13 +139,11 @@ export const Home = () => {
                     <div className="flex gap-2 min-w-max">
                         {categories?.map((category, index) => (
                             <Link
+                                key={index}
                                 to={`/products/${category?.id}`}
                                 className="block pt-3 text-md text-chewyBlue-dark"
                             >
-                                <div
-                                    key={index}
-                                    className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 "
-                                >
+                                <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
                                     <img
                                         className="block"
                                         src={`/images/${category.tile}`}

@@ -63,12 +63,19 @@ export const Products = () => {
     return (
         <>
             <Header />
-            <div>
-                <img src={`/images/${category?.banner}`} alt=""></img>
+            <div className="p-4 bg-chewyGray-lighter">
+                <div>
+                    <img src={`/images/${category?.banner}`} alt=""></img>
+                </div>
+                <h2 className="py-6 text-2xl text-chewyGray-dark">
+                    {category?.title}
+                </h2>
             </div>
-            <h2>{category?.title}</h2>
             {products?.map((product: Product) => (
-                <div key={product.id} className="flex gap-5 p-6 border-t">
+                <div
+                    key={product.id}
+                    className="flex gap-5 p-4 bg-white border-t"
+                >
                     <div className="inline-grid w-5/12 gap-y-6 ">
                         <img
                             src={`/images/${product?.image}`}
@@ -99,9 +106,7 @@ export const Products = () => {
                         </span>
                         <div className="flex items-center">
                             <img src="/images/rating.svg"></img>&nbsp;
-                            <span className=" text-chewyGray">
-                                {Math.ceil(Math.random() * 100)}
-                            </span>
+                            <span className=" text-chewyGray">48</span>
                         </div>
                         <span className="text-xs">
                             FREE 1-3 day shipping over $49
