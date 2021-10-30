@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Button } from "./Button";
 import { AddedToCartModal } from "./AddedToCartModal";
+import CartContext from "../contexts/CartContext";
 
 export const Products = () => {
     interface Product {
@@ -20,13 +21,14 @@ export const Products = () => {
         banner: string;
         id: number;
     }
-
+    const { cart, setCart } = useContext(CartContext)!;
     const { categoryID } = useParams<{ categoryID: string }>();
-    const [products, setProducts] = useState<Product[] | null>(null);
+    const [products, setProducts] = useState<any>(null);
     const [category, setCategory] = useState<Category | null>(null);
     const [showAddedToCartModal, setShowAddedToCartModal] = useState(false);
-    const [cart, setCart] = useState<Product[] | null>(null);
-    console.log(cart, "cart");
+
+    console.log(cart, "cart in products");
+
     // Get cart items from local storage upon initial render of cart page
     useEffect(() => {
         const item: any = localStorage.getItem("cart");
@@ -71,7 +73,7 @@ export const Products = () => {
                     {category?.title}
                 </h2>
             </div>
-            {products?.map((product: Product) => (
+            {products?.map((product: any) => (
                 <div
                     key={product.id}
                     className="flex gap-5 p-4 bg-white border-t"

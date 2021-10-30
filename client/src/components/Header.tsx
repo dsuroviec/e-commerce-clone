@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { Popper } from "./Popper";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
+import CartContext from "../contexts/CartContext";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
+
 import _ from "lodash";
 import { Button } from "./Button";
 import {
@@ -34,7 +36,7 @@ export const Header = () => {
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
-    const [cart, setCart] = useState<Product[] | null>(null);
+    const { cart, setCart } = useContext(CartContext)!;
 
     // Get cart items from local storage upon initial render of cart page
     useEffect(() => {

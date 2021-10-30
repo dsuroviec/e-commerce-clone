@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { HiTruck } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import { useHistory } from "react-router-dom";
-
+import CartContext from "../contexts/CartContext";
 export const Cart = () => {
-    interface Product {
-        id: number;
-        name: string;
-        price: number;
-        image: string;
-        brand: string;
-        category: string;
-    }
-    const [cart, setCart] = useState<Product[] | null>(null);
-
+    const { cart, setCart } = useContext(CartContext)!;
     // react-router history
     let history = useHistory();
 
