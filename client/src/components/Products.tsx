@@ -29,19 +29,6 @@ export const Products = () => {
 
     console.log(cart, "cart in products");
 
-    // Get cart items from local storage upon initial render of cart page
-    useEffect(() => {
-        const item: any = localStorage.getItem("cart");
-        if (item) {
-            setCart(JSON.parse(item));
-        }
-    }, []);
-
-    // Updates local storage with cart changes from product page
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
-
     // Gets categories for category section and cards
     useEffect(() => {
         (async () => {

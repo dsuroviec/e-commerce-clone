@@ -46,12 +46,6 @@ function SamplePrevArrow(props: any) {
     );
 }
 export const Home = () => {
-    const [carouselIndex, setCarouselIndex] = useState(0);
-    const [enableExitClass, setEnableExitClass] = useState(true);
-    const [isCarouselIntervalDisabled, setIsCauroselIntervalDisabled] =
-        useState(false);
-    const [carouselDirection, setCarouselDirection] = useState("carousel-left");
-    const [switchCarousel, setSwitchCarousel] = useState(false);
     const [categories, setCategories] = useState<Categories[] | null>(null);
 
     interface Categories {

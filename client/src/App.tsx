@@ -41,6 +41,17 @@ function App() {
         email: null,
     });
 
+    // Get cart items from local storage upon initial render of cart page
+    useEffect(() => {
+        const item: any = localStorage.getItem("cart");
+        setCart(JSON.parse(item));
+    }, []);
+
+    // // Updates local storage with cart changes
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
+
     useEffect(() => {
         if (token) {
             const user = async () => {

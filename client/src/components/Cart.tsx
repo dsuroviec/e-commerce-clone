@@ -8,22 +8,9 @@ import { useHistory } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
 export const Cart = () => {
     const { cart, setCart } = useContext(CartContext)!;
-    // react-router history
+    // react-router history for keep shopping button
     let history = useHistory();
 
-    // Get cart items from local storage upon initial render of cart page
-    useEffect(() => {
-        const item: any = localStorage.getItem("cart");
-        if (item) {
-            setCart(JSON.parse(item));
-        }
-    }, []);
-
-    // Updates local storage with cart changes from product page
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
-    console.log("cart in cart", cart);
     return (
         <>
             <Header />
@@ -50,14 +37,15 @@ export const Cart = () => {
                     <div className="p-4 border-t-2 bg-chewyGray-lighter">
                         <span className="flex items-center justify-center text-chewyGray-darkest text-chewyGray-dark">
                             <strong>
-                                {`$${
+                                {`$${Math.max(
                                     50.0 -
-                                    cart.reduce(
-                                        (total, product) =>
-                                            total + product.price,
-                                        0
-                                    )
-                                }`}
+                                        cart.reduce(
+                                            (total, product) =>
+                                                total + product.price,
+                                            0
+                                        ),
+                                    0
+                                )}`}
                             </strong>
                             &nbsp; until Free shipping &nbsp;
                             <HiTruck size="24" />
@@ -66,10 +54,13 @@ export const Cart = () => {
                         <div className="flex items-center justify-between">
                             <span>Subtotal ({cart?.length} items):</span>
                             <span className="flex text-lg font-bold text-chewyRed">
-                                {`$${cart.reduce(
-                                    (total, product) => total + product.price,
-                                    0
-                                )}`}
+                                {`$${cart
+                                    .reduce(
+                                        (total, product) =>
+                                            total + product.price,
+                                        0
+                                    )
+                                    .toFixed(2)}`}
                             </span>
                         </div>
                         <Button className="block w-full mt-4 bg-chewyOrange">

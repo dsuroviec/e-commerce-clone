@@ -36,20 +36,7 @@ export const Header = () => {
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
-    const { cart, setCart } = useContext(CartContext)!;
-
-    // Get cart items from local storage upon initial render of cart page
-    useEffect(() => {
-        const item: any = localStorage.getItem("cart");
-        if (item) {
-            setCart(JSON.parse(item));
-        }
-    }, []);
-    console.log("cart in header", cart);
-    // Updates local storage with cart changes from product page
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
+    const { cart } = useContext(CartContext)!;
 
     return (
         <div className="block">
