@@ -1,4 +1,5 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
+import _ from "lodash";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { HiTruck } from "react-icons/hi";
@@ -6,10 +7,19 @@ import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import { useHistory } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
+
 export const Cart = () => {
     const { cart, setCart } = useContext(CartContext)!;
+
     // react-router history for keep shopping button
     let history = useHistory();
+    const ref: any = useRef();
+
+    console.log(cart, cart?.length, "cart");
+
+    useEffect(() => {
+        // console.log(ref["current"]?.value, "ref");
+    }, []);
 
     return (
         <>
@@ -45,7 +55,7 @@ export const Cart = () => {
                                             0
                                         ),
                                     0
-                                )}`}
+                                ).toFixed(2)}`}
                             </strong>
                             &nbsp; until Free shipping &nbsp;
                             <HiTruck size="24" />
@@ -67,79 +77,108 @@ export const Cart = () => {
                             Proceed to Checkout
                         </Button>
                     </div>
-                    {cart?.map((product, index) => (
-                        <div className="p-4 border-b rounded-lg" key={index}>
-                            <div className="flex gap-5">
-                                <div className="grid gap-2">
-                                    <img
-                                        className="block w-20 m-auto mt-1"
-                                        src={`/images/${product.image}`}
-                                        alt=""
-                                    ></img>
-                                    <span className="test-sm text text-chewyGreen">
-                                        In&nbsp;Stock
-                                    </span>
-                                </div>
-                                <div className="grid ">
-                                    <div>
-                                        <strong>{product.brand}</strong>&nbsp;
-                                        {product.name}
+                    {_.sortBy(_.uniqBy(cart, "id"), "id")?.map(
+                        (product, index) => (
+                            <div
+                                className="p-4 border-b rounded-lg"
+                                key={product.id}
+                            >
+                                <div className="flex gap-5">
+                                    <div className="grid gap-2">
+                                        <img
+                                            className="block w-20 m-auto mt-1"
+                                            src={`/images/${product.image}`}
+                                            alt=""
+                                        ></img>
+                                        <span className="test-sm text text-chewyGreen">
+                                            In&nbsp;Stock
+                                        </span>
                                     </div>
-                                    <span className="text-lg font-bold text-chewyRed">
-                                        ${product.price}
-                                    </span>
+                                    <div className="grid ">
+                                        <div>
+                                            <strong>{product.brand}</strong>
+                                            &nbsp;
+                                            {product.name}
+                                        </div>
+                                        <span className="text-lg font-bold text-chewyRed">
+                                            ${product.price}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="mt-3 border-t-1 ">
-                                <div className="flex my-4 text-sm">
-                                    <img
-                                        className="w-20"
-                                        src="/images/autoship-logo.svg"
-                                        alt=""
-                                    ></img>
-                                    &nbsp; - Save 5% on future Autoship orders
-                                </div>
-                                <div className="flex items-center justify-between pt-2">
-                                    <div>
-                                        <label htmlFor="quantity">
-                                            Quantity:
-                                        </label>
-                                        &nbsp;
-                                        <select
-                                            onChange={(event) =>
-                                                console.log(
-                                                    "here is target",
-                                                    event.target.value
-                                                )
-                                            }
-                                            name="quantity"
-                                            className="w-8"
+                                <div className="mt-3 border-t-1 ">
+                                    <div className="flex my-4 text-sm">
+                                        <img
+                                            className="w-20"
+                                            src="/images/autoship-logo.svg"
+                                            alt=""
+                                        ></img>
+                                        &nbsp; - Save 5% on future Autoship
+                                        orders
+                                    </div>
+                                    <div className="flex items-center justify-between pt-2">
+                                        <div>
+                                            <label htmlFor="quantity">
+                                                Quantity:
+                                            </label>
+                                            &nbsp;
+                                            <select
+                                                ref={ref}
+                                                defaultValue={
+                                                    cart.filter(
+                                                        (item) =>
+                                                            item.id ===
+                                                            product.id
+                                                    ).length
+                                                }
+                                                onChange={({
+                                                    target: { value },
+                                                }: any) => {
+                                                    // Remove all products that match id of modified product
+                                                    const filteredCart =
+                                                        cart?.filter(
+                                                            (item) =>
+                                                                item.id !==
+                                                                product.id
+                                                        );
+
+                                                    // Add the quantity of modified product back to the array
+                                                    _.times(value, () =>
+                                                        filteredCart.push(
+                                                            product
+                                                        )
+                                                    );
+                                                    setCart(filteredCart);
+                                                }}
+                                                name="quantity"
+                                                className="w-8"
+                                            >
+                                                <option value={1}>1</option>
+                                                <option value={2}>2</option>
+                                                <option value={3}>3</option>
+                                            </select>
+                                        </div>
+                                        <Button
+                                            onClick={() => {
+                                                const updatedCart = [
+                                                    ...cart,
+                                                ].filter(
+                                                    (item) =>
+                                                        item.id !== product.id
+                                                );
+                                                if (updatedCart.length) {
+                                                    setCart([...updatedCart]);
+                                                } else {
+                                                    setCart(null);
+                                                }
+                                            }}
                                         >
-                                            <option value={1}>1</option>
-                                            <option value={2}>2</option>
-                                            <option value={3}>3</option>
-                                        </select>
+                                            Remove Items
+                                        </Button>
                                     </div>
-                                    <Button
-                                        onClick={() => {
-                                            const updatedCart = [
-                                                ...cart,
-                                            ].filter(
-                                                (item) => item.id !== product.id
-                                            );
-                                            if (updatedCart.length) {
-                                                setCart([...updatedCart]);
-                                            } else {
-                                                setCart(null);
-                                            }
-                                        }}
-                                    >
-                                        Remove Items
-                                    </Button>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    )}
                 </>
             )}
             <Footer />

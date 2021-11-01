@@ -5,16 +5,8 @@ import { Footer } from "./Footer";
 import { Button } from "./Button";
 import { AddedToCartModal } from "./AddedToCartModal";
 import CartContext from "../contexts/CartContext";
-
+import _ from "lodash";
 export const Products = () => {
-    interface Product {
-        id?: number;
-        name?: string;
-        price?: number;
-        image?: string;
-        brand?: string;
-        category?: string;
-    }
     interface Category {
         name: string;
         title: string;
@@ -74,11 +66,20 @@ export const Products = () => {
                         <Button
                             className="block m-auto bg-chewyOrange"
                             onClick={() => {
-                                setShowAddedToCartModal(true);
-
-                                cart
-                                    ? setCart([...cart, product])
-                                    : setCart([product]);
+                                const quantityOfSelectedProductAlreadyInCart =
+                                    _.countBy(cart, "id")[product.id];
+                                if (
+                                    quantityOfSelectedProductAlreadyInCart > 2
+                                ) {
+                                    return alert(
+                                        `There's a order limit of ${quantityOfSelectedProductAlreadyInCart} for this item`
+                                    );
+                                } else {
+                                    setShowAddedToCartModal(true);
+                                    cart
+                                        ? setCart([...cart, product])
+                                        : setCart([product]);
+                                }
                             }}
                         >
                             Add To Cart
