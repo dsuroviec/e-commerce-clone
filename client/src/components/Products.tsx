@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Button } from "./Button";
-import { AddedToCartModal } from "./AddedToCartModal";
 import CartContext from "../contexts/CartContext";
 import _ from "lodash";
 import { Transition, Dialog } from "@headlessui/react";
@@ -204,7 +203,6 @@ export const Products = () => {
                                                     {productAddedToCart?.name}
                                                 </div>
                                             </div>
-
                                             <div className="grid gap-6 p-4 mt-4 bg-chewyGray-lighter">
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-lg text-chewyGray-dark">

@@ -4,7 +4,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { HiTruck } from "react-icons/hi";
 import { Button } from "./Button";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
 
 export const Cart = () => {
@@ -65,9 +65,11 @@ export const Cart = () => {
                                     .toFixed(2)}`}
                             </span>
                         </div>
-                        <Button className="block w-full mt-4 bg-chewyOrange">
-                            Proceed to Checkout
-                        </Button>
+                        <Link to="/login">
+                            <Button className="block w-full mt-4 bg-chewyOrange">
+                                Proceed to Checkout
+                            </Button>
+                        </Link>
                     </div>
                     {_.sortBy(_.uniqBy(cart, "id"), "id")?.map(
                         (product, index) => (
