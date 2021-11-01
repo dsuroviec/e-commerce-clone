@@ -3,7 +3,7 @@ import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import clsx from "clsx";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 import { Button } from "./Button";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -46,39 +46,22 @@ function SamplePrevArrow(props: any) {
     );
 }
 export const Home = () => {
-    const [carouselIndex, setCarouselIndex] = useState(0);
-    const [enableExitClass, setEnableExitClass] = useState(true);
-    const [isCarouselIntervalDisabled, setIsCauroselIntervalDisabled] =
-        useState(false);
-    const [carouselDirection, setCarouselDirection] = useState("carousel-left");
-    const [switchCarousel, setSwitchCarousel] = useState(false);
-    const [products, setProducts] = useState();
+    const [categories, setCategories] = useState<Categories[] | null>(null);
 
-    // useEffect(() => {
-    //     if (isCarouselIntervalDisabled) return;
-
-    //     if (carouselIndex === 5) {
-    //         const carouselInterval = setInterval(() => {
-    //             setCarouselIndex(0);
-    //         }, 2000);
-    //         return () => clearInterval(carouselInterval);
-    //     } else {
-    //         const carouselInterval = setInterval(() => {
-    //             setCarouselIndex(carouselIndex + 1);
-    //         }, 2000);
-
-    //         return () => clearInterval(carouselInterval);
-    //     }
-    // }, [carouselIndex, isCarouselIntervalDisabled]);
-
-    // Returns All products
+    interface Categories {
+        name: string;
+        id: number;
+        title: string;
+        banner: string;
+        tile: string;
+    }
 
     useEffect(() => {
         (async () => {
-            const products = await fetch("/api/products").then((response) =>
+            const categories = await fetch("/api/categories").then((response) =>
                 response.json()
             );
-            setProducts(products);
+            setCategories(categories);
         })();
     }, []);
 
@@ -128,110 +111,42 @@ export const Home = () => {
                 id="home-content"
             >
                 {/* <div className="relative p-0 h-44">
-                    <button
-                        onClick={() => {
-                            setCarouselDirection("carousel-left");
-                            setIsCauroselIntervalDisabled(true);
-                            if (carouselIndex > 0) {
-                                setCarouselIndex(carouselIndex - 1);
-                            } else {
-                                setCarouselIndex(5);
-                            }
-                        }}
-                        className="absolute z-10 h-full text-white text-opacity-60"
-                    >
-                        <HiChevronLeft size={40} />
-                    </button>
-                    <button
-                        onClick={() => {
-                            setIsCauroselIntervalDisabled(true);
-                            if (carouselIndex < 5) {
-                                setCarouselIndex(carouselIndex + 1);
-                                setCarouselDirection("carousel-right");
-                            } else {
-                                setCarouselIndex(0);
-                            }
-                        }}
-                        className="absolute right-0 z-10 h-full text-white text-opacity-60 "
-                    >
-                        <HiChevronRight size={40} />
-                    </button>
-                    <TransitionGroup componenent={null}>
-                        <CSSTransition
-                            timeout={{ enter: 1000, exit: 1000 }}
-                            classNames={carouselDirection}
-                            key={carouselIndex}
-                        ></CSSTransition>
-                    </TransitionGroup>
-                </div>
-                <div className="flex justify-center p-1">
-                    {[0, 1, 2, 3, 4, 5].map((index) => (
-                        <button
-                            key={index}
                             className={clsx(
                                 "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
                                 {
                                     "bg-chewyBlue": index === carouselIndex,
                                 }
                             )}
-                            onClick={() => {
-                                setIsCauroselIntervalDisabled(true);
-                                setCarouselIndex(index);
-                            }}
-                        ></button>
-                    ))}
                 </div> */}
                 <div className="p-3">
                     <h1 className="text-xl font-semibold">Shop by Category</h1>
-                    <div className="flex min-w-max">
-                        {[
-                            "Dog",
-                            "Cat",
-                            "Small Pet",
-                            "Bird",
-                            "Fish",
-                            "Reptile",
-                            "Horse",
-                            "Farm Animal",
-                            "Pet Parents",
-                            "Pharmacy",
-                            "Today's Deals",
-                            "Brands",
-                        ]
-                            .slice(0, 3)
-                            .map((category, index) => (
-                                <div
-                                    key={index}
-                                    className="w-40 h-auto p-4 mr-1.5 text-center bg-white border rounded-md hover:border-opacity-1 "
-                                >
+
+                    {/* {(() => {
+                        const data = fetch("api/products/3").then((response) =>
+                            response.json()
+                        );
+                        Promise.resolve(data).then((stuff) => {
+                            return <div>{stuff[0].name}</div>;
+                        });
+                    })()} */}
+                    <div className="flex gap-2 min-w-max">
+                        {categories?.map((category, index) => (
+                            <Link
+                                key={index}
+                                to={`/products/${category?.id}`}
+                                className="block pt-3 text-md text-chewyBlue-dark"
+                            >
+                                <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
                                     <img
                                         className="block"
-                                        src={`/images/${
-                                            [
-                                                "dog-tile.jpg",
-                                                "cat-tile.webp",
-                                                "small-pet-tile.webp",
-                                                "bird-tile.webp",
-                                                "fish-tile.webp",
-                                                "reptile-tile.webp",
-                                                "horse-tile.webp",
-                                                "farm-animal-tile.webp",
-                                                "pet-parents-tile.jpg",
-                                                "rx-tile.webp",
-                                                "todays-deals-tile.webp",
-                                                "shop-by-brand-tile.webp",
-                                            ][index]
-                                        }`}
-                                        alt={category}
+                                        src={`/images/${category.tile}`}
+                                        alt={category.tile}
                                     />
-                                    <Link
-                                        to="/"
-                                        className="block pt-3 text-md text-chewyBlue-dark"
-                                    >
-                                        {category}
-                                    </Link>
+
+                                    {category.name}
                                 </div>
-                            ))}
+                            </Link>
+                        ))}
                     </div>
                     <h1 className="text-xl font-semibold">
                         Customer Favorites

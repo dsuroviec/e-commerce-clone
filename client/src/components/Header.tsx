@@ -1,9 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Popper } from "./Popper";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
+import CartContext from "../contexts/CartContext";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
+
 import _ from "lodash";
 import { Button } from "./Button";
 import {
@@ -22,9 +24,19 @@ import {
 } from "react-icons/hi";
 
 export const Header = () => {
+    interface Product {
+        id: number;
+        name: string;
+        price: number;
+        image: string;
+        brand: string;
+        category: string;
+    }
+
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");
+    const { cart } = useContext(CartContext)!;
 
     return (
         <div className="block">
@@ -48,8 +60,11 @@ export const Header = () => {
                             <HiUser size={27} />
                         </Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to="/">
+                        <Link className="relative" to="/cart">
                             <HiShoppingCart size={27} />
+                            <div className="absolute w-5 h-5 text-center text-black rounded-full -top-2 left-3 bg-chewyYellow">
+                                {cart ? cart?.length : 0}
+                            </div>
                         </Link>
                     </div>
                 </div>
@@ -312,25 +327,25 @@ export const Header = () => {
                             <Link to="/">FREE 1-3 DAY SHIPPING OVER $49</Link>
                         </div>
                     </div>
-                )}{" "}
-                <div className="p-1 border-b ">
-                    <button className="flex items-center justify-center w-full">
-                        <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
-                            Save 35%
-                        </span>
-                        &nbsp;
-                        <span className="font-medium text-chewyBlue-evenDarker">
-                            on your first
-                        </span>
-                        &nbsp; &nbsp;
-                        <img
-                            className="w-20"
-                            src="/images/autoship-logo.svg"
-                            alt="autoship"
-                        ></img>
-                    </button>
-                </div>
+                )}
             </section>
+            <div className="p-1 border-b ">
+                <button className="flex items-center justify-center w-full">
+                    <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
+                        Save 35%
+                    </span>
+                    &nbsp;
+                    <span className="font-medium text-chewyBlue-evenDarker">
+                        on your first
+                    </span>
+                    &nbsp; &nbsp;
+                    <img
+                        className="w-20"
+                        src="/images/autoship-logo.svg"
+                        alt="autoship"
+                    ></img>
+                </button>
+            </div>
 
             {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
 

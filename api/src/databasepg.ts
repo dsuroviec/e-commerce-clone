@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { Request } from "express";
+import { IncomingMessage } from "http";
 dotenv.config();
 const pool = new Pool({
     host: "localhost",
@@ -121,7 +122,10 @@ export const getProductsByCategory = async ({ categoryID }: CategoryProps) => {
         values: [categoryID],
     });
 
-    return res.rows;
+    return res.rows.map((category) => ({
+        ...category,
+        price: parseFloat(category.price),
+    }));
 };
 
 export const getCategory = async ({ categoryID }: CategoryProps) => {
@@ -134,11 +138,10 @@ export const getCategory = async ({ categoryID }: CategoryProps) => {
     return res.rows[0];
 };
 
-export const getCategories = async ({ categoryID }: CategoryProps) => {
+export const getCategories = async () => {
     const res = await pool.query({
         name: "get-categories",
-        text: "SELECT * FROM categories where id=$1",
-        values: [categoryID],
+        text: "SELECT * FROM categories",
     });
-    return res.rows[0];
+    return res.rows;
 };
