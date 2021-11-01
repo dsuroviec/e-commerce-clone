@@ -1,13 +1,13 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext, Fragment } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Button } from "./Button";
 import { AddedToCartModal } from "./AddedToCartModal";
 import CartContext from "../contexts/CartContext";
 import _ from "lodash";
-import { Transition } from "@headlessui/react";
-import { HiCheck } from "react-icons/hi";
+import { Transition, Dialog } from "@headlessui/react";
+import { HiCheck, HiOutlineX } from "react-icons/hi";
 export const Products = () => {
     interface Category {
         name: string;
@@ -52,7 +52,7 @@ export const Products = () => {
     }, [categoryID]);
 
     return (
-        <>
+        <div className="relative">
             <Header />
             <div className="p-4 bg-chewyGray-lighter">
                 <div>
@@ -117,92 +117,149 @@ export const Products = () => {
                     </div>
                 </>
             ))}
-            <Transition
-                show={productAddedToCart ? true : false}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
+
+            {/* show={productAddedToCart ? true : false}
+                enter="transition ease-in-out duration-1000 transform"
+                enterFrom="translate-x-full "
                 enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom="translate-x-0 "
-                leaveTo="translate-x-full"
+                leave="transition ease-in-out duration-1000 transform"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full" */}
+
+            <Transition.Root
+                show={productAddedToCart ? true : false}
+                as={Fragment}
             >
-                <div
+                <Dialog
+                    as="div"
                     className="fixed inset-0 overflow-hidden"
-                    aria-labelledby="slide-over-title"
-                    role="dialog"
-                    aria-modal="true"
+                    onClose={() => setProductAddedToCart(null)}
                 >
                     <div className="absolute inset-0 overflow-hidden">
-                        <div
-                            className="absolute inset-0 transition-opacity bg-gray-500 bg-opacity-75"
-                            aria-hidden="true"
-                        ></div>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-in-out duration-500"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in-out duration-500"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
+                            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
+                        </Transition.Child>
                         <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
-                            <div className="relative w-screen max-w-md">
-                                <div className="absolute top-0 left-0 flex pt-4 pr-2 -ml-8 sm:-ml-10 sm:pr-4">
-                                    <button
-                                        onClick={() =>
-                                            setProductAddedToCart(null)
-                                        }
-                                        type="button"
-                                        className="text-gray-300 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                            <Transition.Child
+                                as={Fragment}
+                                enter="transform transition ease-in-out duration-500 sm:duration-700"
+                                enterFrom="translate-x-full"
+                                enterTo="translate-x-0"
+                                leave="transform transition ease-in-out duration-500 sm:duration-700"
+                                leaveFrom="translate-x-0"
+                                leaveTo="translate-x-full"
+                            >
+                                <div className="relative w-screen max-w-md">
+                                    <Transition.Child
+                                        as={Fragment}
+                                        enter="ease-in-out duration-500"
+                                        enterFrom="opacity-0"
+                                        enterTo="opacity-100"
+                                        leave="ease-in-out duration-500"
+                                        leaveFrom="opacity-100"
+                                        leaveTo="opacity-0"
                                     >
-                                        <span className="sr-only">
-                                            Close panel
-                                        </span>
-                                        {/* <!-- Heroicon name: outline/x --> */}
-                                        <svg
-                                            className="w-6 h-6"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M6 18L18 6M6 6l12 12"
-                                            />
-                                        </svg>
-                                    </button>
-                                </div>
+                                        <div className="absolute top-0 left-0 flex pt-4 pr-2 -ml-8 sm:-ml-10 sm:pr-4">
+                                            <button
+                                                onClick={() =>
+                                                    setProductAddedToCart(null)
+                                                }
+                                                className="text-gray-300 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                                            >
+                                                <span className="sr-only">
+                                                    Close panel
+                                                </span>
 
-                                <div className="flex flex-col h-full py-6 overflow-y-scroll bg-white shadow-xl">
-                                    <div className="flex items-center justify-center px-4 text-chewyGreen sm:px-6">
-                                        <HiCheck size={26} />
-                                        &nbsp;
-                                        <h2
-                                            className="text-lg font-medium "
-                                            id="slide-over-title"
-                                        >
-                                            Added to Cart
-                                        </h2>
-                                    </div>
-                                    <div className="relative flex-1 px-4 mt-6 sm:px-6">
-                                        <div className="flex items-center gap-6 p-4 bg-white border-b-1 ">
-                                            <img
-                                                className="w-20"
-                                                src={`/images/${productAddedToCart?.image}`}
-                                                alt=""
-                                            ></img>
-                                            <div className=" text-chewyGray-dark">
-                                                <strong>
-                                                    {productAddedToCart?.brand}
-                                                </strong>
-                                                &nbsp;
-                                                {productAddedToCart?.name}
+                                                <HiOutlineX size={28} />
+                                            </button>
+                                        </div>
+                                    </Transition.Child>
+                                    <div className="flex flex-col h-full py-6 overflow-y-scroll bg-white shadow-xl">
+                                        <div className="flex items-center justify-center px-4 text-chewyGreen sm:px-6">
+                                            <HiCheck size={26} />
+                                            &nbsp;
+                                            <h2
+                                                className="text-lg font-medium "
+                                                id="slide-over-title"
+                                            >
+                                                Added to Cart
+                                            </h2>
+                                        </div>
+
+                                        <div className="relative flex-1 px-4 mt-6 sm:px-6">
+                                            {/* Replace with your content */}
+                                            <div className="flex items-center gap-6 p-4 bg-white border-b-1 ">
+                                                <img
+                                                    className="w-20"
+                                                    src={`/images/${productAddedToCart?.image}`}
+                                                    alt=""
+                                                ></img>
+                                                <div className=" text-chewyGray-dark">
+                                                    <strong>
+                                                        {
+                                                            productAddedToCart?.brand
+                                                        }
+                                                    </strong>
+                                                    &nbsp;
+                                                    {productAddedToCart?.name}
+                                                </div>
                                             </div>
+
+                                            <div className="grid gap-6 bg-chewyGray-lighter">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-lg text-chewyGray-dark">
+                                                        <strong>
+                                                            Subtotal
+                                                        </strong>{" "}
+                                                        ({cart?.length} items):
+                                                    </span>
+                                                </div>
+                                                <span className="flex text-lg font-bold text-chewyRed">
+                                                    {`$${
+                                                        cart &&
+                                                        cart
+                                                            .reduce(
+                                                                (
+                                                                    total,
+                                                                    product
+                                                                ) =>
+                                                                    total +
+                                                                    product.price,
+                                                                0
+                                                            )
+                                                            .toFixed(2)
+                                                    }`}
+                                                </span>
+                                                <div className="flex justify-evenly">
+                                                    <Link to="/cart">
+                                                        <Button className="p-4 bg-white text-chewyGray-dark">
+                                                            Cart
+                                                        </Button>
+                                                    </Link>
+                                                    <Button className="p-4 bg-chewyOrange">
+                                                        Proceed to Checkout
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                            {/* /End replace */}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Transition.Child>
                         </div>
                     </div>
-                </div>
-            </Transition>
+                </Dialog>
+            </Transition.Root>
+
             <Footer />
-        </>
+        </div>
     );
 };

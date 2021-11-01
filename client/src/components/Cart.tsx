@@ -147,6 +147,7 @@ export const Cart = () => {
                                             </select>
                                         </div>
                                         <Button
+                                            className="bg-chewyBlue-darker "
                                             onClick={() => {
                                                 const updatedCart = [
                                                     ...cart,
