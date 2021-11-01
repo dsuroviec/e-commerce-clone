@@ -118,14 +118,6 @@ export const Products = () => {
                 </>
             ))}
 
-            {/* show={productAddedToCart ? true : false}
-                enter="transition ease-in-out duration-1000 transform"
-                enterFrom="translate-x-full "
-                enterTo="translate-x-0"
-                leave="transition ease-in-out duration-1000 transform"
-                leaveFrom="translate-x-0"
-                leaveTo="translate-x-full" */}
-
             <Transition.Root
                 show={productAddedToCart ? true : false}
                 as={Fragment}
@@ -182,7 +174,7 @@ export const Products = () => {
                                             </button>
                                         </div>
                                     </Transition.Child>
-                                    <div className="flex flex-col h-full py-6 overflow-y-scroll bg-white shadow-xl">
+                                    <div className="flex flex-col h-auto py-6 overflow-y-scroll bg-white shadow-xl">
                                         <div className="flex items-center justify-center px-4 text-chewyGreen sm:px-6">
                                             <HiCheck size={26} />
                                             &nbsp;
@@ -194,7 +186,7 @@ export const Products = () => {
                                             </h2>
                                         </div>
 
-                                        <div className="relative flex-1 px-4 mt-6 sm:px-6">
+                                        <div className="relative flex-1 mt-6 sm:px-6">
                                             {/* Replace with your content */}
                                             <div className="flex items-center gap-6 p-4 bg-white border-b-1 ">
                                                 <img
@@ -213,40 +205,43 @@ export const Products = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="grid gap-6 bg-chewyGray-lighter">
+                                            <div className="grid gap-6 p-4 mt-4 bg-chewyGray-lighter">
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-lg text-chewyGray-dark">
                                                         <strong>
                                                             Subtotal
-                                                        </strong>{" "}
-                                                        ({cart?.length} items):
+                                                        </strong>
+                                                        &nbsp; ({cart?.length}{" "}
+                                                        items):
                                                     </span>
+                                                    <span className="flex text-lg font-bold text-chewyRed">
+                                                        {`$${
+                                                            cart &&
+                                                            cart
+                                                                .reduce(
+                                                                    (
+                                                                        total,
+                                                                        product
+                                                                    ) =>
+                                                                        total +
+                                                                        product.price,
+                                                                    0
+                                                                )
+                                                                .toFixed(2)
+                                                        }`}
+                                                    </span>{" "}
                                                 </div>
-                                                <span className="flex text-lg font-bold text-chewyRed">
-                                                    {`$${
-                                                        cart &&
-                                                        cart
-                                                            .reduce(
-                                                                (
-                                                                    total,
-                                                                    product
-                                                                ) =>
-                                                                    total +
-                                                                    product.price,
-                                                                0
-                                                            )
-                                                            .toFixed(2)
-                                                    }`}
-                                                </span>
                                                 <div className="flex justify-evenly">
                                                     <Link to="/cart">
                                                         <Button className="p-4 bg-white text-chewyGray-dark">
                                                             Cart
                                                         </Button>
                                                     </Link>
-                                                    <Button className="p-4 bg-chewyOrange">
-                                                        Proceed to Checkout
-                                                    </Button>
+                                                    <Link to="/login">
+                                                        <Button className="p-4 bg-chewyOrange">
+                                                            Proceed to Checkout
+                                                        </Button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                             {/* /End replace */}

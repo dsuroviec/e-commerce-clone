@@ -4,6 +4,7 @@ import TokenContext from "../contexts/TokenContext";
 import { useFormik } from "formik";
 import { Button } from "./Button";
 import { Input } from "./Input";
+import { Header } from "./Header";
 export const LogIn = () => {
     // const [email, setemail] = useState<string | null>();
     // const [password, setPassword] = useState<string | number>();
@@ -62,6 +63,7 @@ export const LogIn = () => {
     return (
         <>
             {token && <Redirect to="/" />}
+            <Header />
             <div
                 style={{
                     display: "flex",
@@ -69,11 +71,12 @@ export const LogIn = () => {
                     alignItems: "center",
                 }}
             >
-                <h1 className="text-2xl mb-4">Log In</h1>
-                <form className="w-72" onSubmit={formik.handleSubmit}>
+                <h1 className="mt-4 mb-2 text-2xl">Log In</h1>
+                <form className="w-full p-4" onSubmit={formik.handleSubmit}>
                     <label>
                         <p>email</p>
                         <Input
+                            className="w-full"
                             id="email"
                             name="email"
                             type="text"
@@ -81,7 +84,7 @@ export const LogIn = () => {
                             value={formik.values.email}
                         />
                         {formik.errors.email ? (
-                            <div className="text-red-600 text-xs ">
+                            <div className="text-xs text-red-600 ">
                                 {formik.errors.email}
                             </div>
                         ) : null}
@@ -89,6 +92,7 @@ export const LogIn = () => {
                     <label>
                         <p>Password</p>
                         <Input
+                            className="w-full"
                             id="password"
                             name="password"
                             type="text"
@@ -96,14 +100,22 @@ export const LogIn = () => {
                             value={formik.values.password}
                         />
                         {formik.errors.password ? (
-                            <div className="text-red-600 text-xs max-w-fit-content">
+                            <div className="text-xs text-red-600 max-w-fit-content">
                                 {formik.errors.password}
                             </div>
                         ) : null}
                     </label>
-                    <div className="flex justify-evenly mt-4">
-                        <Button type="submit">Log In</Button>
-                        <Button>
+                    <div className="grid gap-8 mt-4 ">
+                        <Button className="w-full bg-chewyOrange" type="submit">
+                            Log In
+                        </Button>
+                        <div className="relative items-center ">
+                            <hr />
+                            <div className="absolute w-12 font-bold text-center transform -translate-x-1/2 bg-white left-1/2 text-chewyGray-dark -top-3 ">
+                                OR
+                            </div>
+                        </div>
+                        <Button className="w-full bg-chewyBlue">
                             <Link to="/signUp">Sign Up</Link>
                         </Button>
                     </div>
