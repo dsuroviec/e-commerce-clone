@@ -1,9 +1,8 @@
-import { useEffect, useState, useContext, useRef } from "react";
+import { useContext } from "react";
 import _ from "lodash";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { HiTruck } from "react-icons/hi";
-import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import { useHistory } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
@@ -13,13 +12,6 @@ export const Cart = () => {
 
     // react-router history for keep shopping button
     let history = useHistory();
-    const ref: any = useRef();
-
-    console.log(cart, cart?.length, "cart");
-
-    useEffect(() => {
-        // console.log(ref["current"]?.value, "ref");
-    }, []);
 
     return (
         <>
@@ -122,19 +114,16 @@ export const Cart = () => {
                                             </label>
                                             &nbsp;
                                             <select
-                                                ref={ref}
                                                 defaultValue={
-                                                    cart.filter(
-                                                        (item) =>
-                                                            item.id ===
-                                                            product.id
-                                                    ).length
+                                                    _.countBy(cart, "id")[
+                                                        product.id
+                                                    ]
                                                 }
                                                 onChange={({
                                                     target: { value },
                                                 }: any) => {
                                                     // Remove all products that match id of modified product
-                                                    const filteredCart =
+                                                    const newCart =
                                                         cart?.filter(
                                                             (item) =>
                                                                 item.id !==
@@ -143,11 +132,9 @@ export const Cart = () => {
 
                                                     // Add the quantity of modified product back to the array
                                                     _.times(value, () =>
-                                                        filteredCart.push(
-                                                            product
-                                                        )
+                                                        newCart.push(product)
                                                     );
-                                                    setCart(filteredCart);
+                                                    setCart(newCart);
                                                 }}
                                                 name="quantity"
                                                 className="w-8"
@@ -155,6 +142,8 @@ export const Cart = () => {
                                                 <option value={1}>1</option>
                                                 <option value={2}>2</option>
                                                 <option value={3}>3</option>
+                                                <option value={4}>4</option>
+                                                <option value={5}>6</option>
                                             </select>
                                         </div>
                                         <Button

@@ -65,7 +65,6 @@ export const Home = () => {
         })();
     }, []);
 
-    console.log(categories, "LOOK AT ME");
     // https://react-slick.neostack.com/docs/api/ all props and methods
     const carouselProps = {
         dots: true,

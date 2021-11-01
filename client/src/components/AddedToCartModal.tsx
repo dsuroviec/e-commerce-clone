@@ -24,8 +24,20 @@ export const AddedToCartModal = () => {
     }, []);
 
     return (
-        <div className="w-1/2 h-full">
-            HELLLOOO THIS IS THE CART CONFIRMATION MODAL
+        <div className="flex flex-col h-full py-6 overflow-y-scroll bg-white shadow-xl">
+            <div className="px-4 sm:px-6">
+                <h2
+                    className="text-lg font-medium text-gray-900"
+                    id="slide-over-title"
+                >
+                    Panel title
+                </h2>
+            </div>
+            <div className="relative flex-1 px-4 mt-6 sm:px-6">
+                {/* <!-- Replace with your content --> */}
+                <div>Hello</div>
+                {/* <!-- /End replace --> */}
+            </div>
         </div>
     );
 };
