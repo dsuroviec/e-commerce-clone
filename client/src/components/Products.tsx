@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Button } from "./Button";
 import CartContext from "../contexts/CartContext";
+import TokenContext from "../contexts/TokenContext";
 import _ from "lodash";
 import { Transition, Dialog } from "@headlessui/react";
 import { HiCheck, HiOutlineX } from "react-icons/hi";
@@ -24,6 +25,7 @@ export const Products = () => {
         category: string;
     }
     const { cart, setCart } = useContext(CartContext)!;
+    const { token } = useContext(TokenContext)!;
     const { categoryID } = useParams<{ categoryID: string }>();
     const [products, setProducts] = useState<any>(null);
     const [category, setCategory] = useState<Category | null>(null);
@@ -235,7 +237,13 @@ export const Products = () => {
                                                             Cart
                                                         </Button>
                                                     </Link>
-                                                    <Link to="/login">
+                                                    <Link
+                                                        to={
+                                                            token
+                                                                ? "/checkout"
+                                                                : "/login"
+                                                        }
+                                                    >
                                                         <Button className="p-4 bg-chewyOrange">
                                                             Proceed to Checkout
                                                         </Button>

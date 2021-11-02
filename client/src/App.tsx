@@ -20,6 +20,7 @@ import CartContext from "./contexts/CartContext";
 // To Do, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.
 // Finish connecting up the authorization for requests for security
 // Build checkout page, credit card order screen etc
+// Fix the buttons and stuff on the carousel
 // Get it deployed somewhere
 // build in responsiveness
 // put testing in one day
