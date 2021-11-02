@@ -22,7 +22,11 @@ export const Cart = () => {
                     <h1 className="text-2xl text-center">
                         Your cart is empty.
                     </h1>
-                    <img className="m-auto" src="/images/empty-cart.png"></img>
+                    <img
+                        className="m-auto"
+                        src="/images/empty-cart.png"
+                        alt=""
+                    ></img>
 
                     <Button
                         className="block m-auto my-6 bg-chewyOrange"
