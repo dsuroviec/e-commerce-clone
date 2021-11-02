@@ -6,10 +6,11 @@ import { HiTruck } from "react-icons/hi";
 import { Button } from "./Button";
 import { useHistory, Link } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
+import TokenContext from "../contexts/TokenContext";
 
 export const Cart = () => {
     const { cart, setCart } = useContext(CartContext)!;
-
+    const { token } = useContext(TokenContext)!;
     // react-router history for keep shopping button
     let history = useHistory();
 
@@ -25,7 +26,10 @@ export const Cart = () => {
 
                     <Button
                         className="block m-auto my-6 bg-chewyOrange"
-                        onClick={() => history.goBack()}
+                        onClick={() =>
+                            // history.goBack()
+                            console.log(history, "history")
+                        }
                     >
                         Continue Shopping
                     </Button>
@@ -65,7 +69,8 @@ export const Cart = () => {
                                     .toFixed(2)}`}
                             </span>
                         </div>
-                        <Link to="/login">
+
+                        <Link to={token ? "/checkout" : "/logIn"}>
                             <Button className="block w-full mt-4 bg-chewyOrange">
                                 Proceed to Checkout
                             </Button>

@@ -6,22 +6,16 @@ import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { Header } from "./Header";
+
 export const SignUp = () => {
     const { token, setToken } = useContext(TokenContext)!;
-    // const [firstName, setFirstName] = useState<string>("");
-    // const [lastName, setLastName] = useState<string>("");
-    // const [email, setemail] = useState<string>("");
-    // const [password, setPassword] = useState<string>("");
-
     interface Fields {
         firstName?: string;
         lastName?: string;
         email?: string;
         password?: string;
     }
-    // console.log(
-    //     !/[0-9][a-z][A-Z][*.!@$%^&(){}[]:;<>,.?~_+-=|\]/.test("Darr3*n8n")
-    // );
+
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -46,14 +40,20 @@ export const SignUp = () => {
                 errors.email = "Please make email more than 5 characters ";
             }
 
+            // Not sure why this isn't working, tested with tim in console. seems to be a formik problem
+            //  else if (!/[^@]+@[^@]+/g.test(password)) {
+            //     errors.email = "Invalid email format";
+            // }
+
             if (!password) {
                 errors.password = "Required";
             } else if (password.length < 5) {
                 errors.password = "Please make password more than 5 characters";
-            } else if (false) {
-                errors.password =
-                    "Password requires at least 1 lower case letter, one upper case letter, one number, and one special character";
             }
+            // else if (false) {
+            //     errors.password =
+            //         "Password requires at least 1 lower case letter, one upper case letter, one number, and one special character";
+            // }
 
             return errors;
         },
@@ -72,6 +72,7 @@ export const SignUp = () => {
                 }),
             }).then((response) => {
                 if (!response.ok) {
+                    alert("User with that email already exists");
                     throw new Error();
                 }
                 return response.text();
