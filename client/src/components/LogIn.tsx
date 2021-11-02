@@ -64,48 +64,43 @@ export const LogIn = () => {
         <>
             {token && <Redirect to="/" />}
             <Header />
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
-                <h1 className="mt-4 mb-2 text-2xl">Log In</h1>
-                <form className="w-full p-4" onSubmit={formik.handleSubmit}>
-                    <label>
-                        <p>email</p>
-                        <Input
-                            className="w-full"
-                            id="email"
-                            name="email"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                        />
-                        {formik.errors.email ? (
-                            <div className="text-xs text-red-600 ">
-                                {formik.errors.email}
-                            </div>
-                        ) : null}
-                    </label>
-                    <label>
-                        <p>Password</p>
-                        <Input
-                            className="w-full"
-                            id="password"
-                            name="password"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.password}
-                        />
-                        {formik.errors.password ? (
-                            <div className="text-xs text-red-600 max-w-fit-content">
-                                {formik.errors.password}
-                            </div>
-                        ) : null}
-                    </label>
-                    <div className="grid gap-8 mt-4 ">
+            <div className="p-4">
+                <h1 className="mt-4 mb-2 text-2xl font-light">Log In</h1>
+                <form
+                    className="grid w-full gap-4"
+                    onSubmit={formik.handleSubmit}
+                >
+                    <Input
+                        placeholder="Email Address"
+                        className="w-full"
+                        id="email"
+                        name="email"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    {formik.errors.email ? (
+                        <div className="text-xs text-red-600 ">
+                            {formik.errors.email}
+                        </div>
+                    ) : null}
+
+                    <Input
+                        placeholder="Password"
+                        className="w-full"
+                        id="password"
+                        name="password"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                    {formik.errors.password ? (
+                        <div className="text-xs text-red-600 max-w-fit-content">
+                            {formik.errors.password}
+                        </div>
+                    ) : null}
+
+                    <div className="grid gap-8 ">
                         <Button className="w-full bg-chewyOrange" type="submit">
                             Log In
                         </Button>

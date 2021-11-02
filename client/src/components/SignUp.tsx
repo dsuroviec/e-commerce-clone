@@ -5,22 +5,17 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
+import { Header } from "./Header";
+
 export const SignUp = () => {
     const { token, setToken } = useContext(TokenContext)!;
-    // const [firstName, setFirstName] = useState<string>("");
-    // const [lastName, setLastName] = useState<string>("");
-    // const [email, setemail] = useState<string>("");
-    // const [password, setPassword] = useState<string>("");
-
     interface Fields {
         firstName?: string;
         lastName?: string;
         email?: string;
         password?: string;
     }
-    // console.log(
-    //     !/[0-9][a-z][A-Z][*.!@$%^&(){}[]:;<>,.?~_+-=|\]/.test("Darr3*n8n")
-    // );
+
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -45,14 +40,20 @@ export const SignUp = () => {
                 errors.email = "Please make email more than 5 characters ";
             }
 
+            // Not sure why this isn't working, tested with tim in console. seems to be a formik problem
+            //  else if (!/[^@]+@[^@]+/g.test(password)) {
+            //     errors.email = "Invalid email format";
+            // }
+
             if (!password) {
                 errors.password = "Required";
             } else if (password.length < 5) {
                 errors.password = "Please make password more than 5 characters";
-            } else if (false) {
-                errors.password =
-                    "Password requires at least 1 lower case letter, one upper case letter, one number, and one special character";
             }
+            // else if (false) {
+            //     errors.password =
+            //         "Password requires at least 1 lower case letter, one upper case letter, one number, and one special character";
+            // }
 
             return errors;
         },
@@ -71,6 +72,7 @@ export const SignUp = () => {
                 }),
             }).then((response) => {
                 if (!response.ok) {
+                    alert("User with that email already exists");
                     throw new Error();
                 }
                 return response.text();
@@ -85,81 +87,91 @@ export const SignUp = () => {
     return (
         <>
             {token && <Redirect to="/" />}
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
-                <h1 className="text-2xl mb-4">Sign Up</h1>
-                <form className="w-72" onSubmit={formik.handleSubmit}>
-                    <label>
-                        <p>First Name</p>
-                        <Input
-                            id="firstName"
-                            name="firstName"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.firstName}
-                        />
-                        {formik.errors.firstName ? (
-                            <div className="text-red-600 text-xs">
-                                {formik.errors.firstName}
-                            </div>
-                        ) : null}
-                    </label>
-                    <label>
-                        <p>Last Name</p>
-                        <Input
-                            id="lastName"
-                            name="lastName"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.lastName}
-                        />
-                        {formik.errors.lastName ? (
-                            <div className="text-red-600 text-xs">
-                                {formik.errors.lastName}
-                            </div>
-                        ) : null}
-                    </label>
-                    <label>
-                        <p>email</p>
-                        <Input
-                            id="email"
-                            name="email"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                        />
-                        {formik.errors.email ? (
-                            <div className="text-red-600 text-xs ">
-                                {formik.errors.email}
-                            </div>
-                        ) : null}
-                    </label>
-                    <label>
-                        <p>Password</p>
-                        <Input
-                            id="password"
-                            name="password"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.password}
-                        />
-                        {formik.errors.password ? (
-                            <div className="text-red-600 text-xs max-w-fit-content">
-                                {formik.errors.password}
-                            </div>
-                        ) : null}
-                    </label>
+            <Header />
+            <div className="p-4">
+                <h1 className="mt-4 mb-2 text-2xl font-light">
+                    Create an Account
+                </h1>
+                <form className="grid gap-4" onSubmit={formik.handleSubmit}>
+                    <Input
+                        placeholder="First Name"
+                        className="w-full"
+                        id="firstName"
+                        name="firstName"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.firstName}
+                    />
+                    {formik.errors.firstName ? (
+                        <div className="text-xs text-red-600">
+                            {formik.errors.firstName}
+                        </div>
+                    ) : null}
 
-                    <div className="flex justify-evenly mt-4">
-                        <Button type="submit" children="Sign Up" />
-                        <Button>
-                            <Link to="/logIn">Log In</Link>
+                    <Input
+                        placeholder="Last Name"
+                        className="w-full"
+                        id="lastName"
+                        name="lastName"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.lastName}
+                    />
+                    {formik.errors.lastName ? (
+                        <div className="text-xs text-red-600">
+                            {formik.errors.lastName}
+                        </div>
+                    ) : null}
+
+                    <Input
+                        placeholder="Email Address"
+                        className="w-full"
+                        id="email"
+                        name="email"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    {formik.errors.email ? (
+                        <div className="text-xs text-red-600 ">
+                            {formik.errors.email}
+                        </div>
+                    ) : null}
+
+                    <Input
+                        placeholder="Password"
+                        className="w-full"
+                        id="password"
+                        name="password"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                    {formik.errors.password ? (
+                        <div className="text-xs text-red-600 max-w-fit-content">
+                            {formik.errors.password}
+                        </div>
+                    ) : null}
+
+                    <div className="grid gap-8">
+                        <Button className="w-full bg-chewyOrange">
+                            Create Account
                         </Button>
+
+                        <div className="relative items-center ">
+                            <hr />
+                            <div className="absolute inline w-auto w-8/12 font-light text-center transform -translate-x-1/2 bg-white left-1/2 text-chewyGray-dark -top-3 ">
+                                Already have an account?
+                            </div>
+                        </div>
+                        <Link to="/logIn">
+                            <Button
+                                className="w-full bg-chewyBlue"
+                                type="submit"
+                            >
+                                Log In
+                            </Button>
+                        </Link>
                     </div>
                 </form>
             </div>
