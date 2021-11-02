@@ -4,12 +4,13 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { HiTruck } from "react-icons/hi";
 import { Button } from "./Button";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import CartContext from "../contexts/CartContext";
+import TokenContext from "../contexts/TokenContext";
 
 export const Cart = () => {
     const { cart, setCart } = useContext(CartContext)!;
-
+    const { token } = useContext(TokenContext)!;
     // react-router history for keep shopping button
     let history = useHistory();
 
@@ -21,11 +22,18 @@ export const Cart = () => {
                     <h1 className="text-2xl text-center">
                         Your cart is empty.
                     </h1>
-                    <img className="m-auto" src="/images/empty-cart.png"></img>
+                    <img
+                        className="m-auto"
+                        src="/images/empty-cart.png"
+                        alt=""
+                    ></img>
 
                     <Button
                         className="block m-auto my-6 bg-chewyOrange"
-                        onClick={() => history.goBack()}
+                        onClick={() =>
+                            // history.goBack()
+                            console.log(history, "history")
+                        }
                     >
                         Continue Shopping
                     </Button>
@@ -65,9 +73,12 @@ export const Cart = () => {
                                     .toFixed(2)}`}
                             </span>
                         </div>
-                        <Button className="block w-full mt-4 bg-chewyOrange">
-                            Proceed to Checkout
-                        </Button>
+
+                        <Link to={token ? "/checkout" : "/logIn"}>
+                            <Button className="block w-full mt-4 bg-chewyOrange">
+                                Proceed to Checkout
+                            </Button>
+                        </Link>
                     </div>
                     {_.sortBy(_.uniqBy(cart, "id"), "id")?.map(
                         (product, index) => (

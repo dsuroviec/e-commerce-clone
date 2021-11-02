@@ -56,7 +56,7 @@ export const Header = () => {
                     </svg>
                     <div className="flex">
                         &nbsp;&nbsp;
-                        <Link to="/">
+                        <Link to="/logIn">
                             <HiUser size={27} />
                         </Link>
                         &nbsp;&nbsp;&nbsp;&nbsp;
