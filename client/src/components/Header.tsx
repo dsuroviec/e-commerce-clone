@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Popper } from "./Popper";
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
@@ -7,7 +7,7 @@ import { Input } from "./Input";
 import { Link } from "react-router-dom";
 
 import _ from "lodash";
-import { Button } from "./Button";
+
 import {
     HiMail,
     HiChatAlt2,
@@ -24,15 +24,6 @@ import {
 } from "react-icons/hi";
 
 export const Header = () => {
-    interface Product {
-        id: number;
-        name: string;
-        price: number;
-        image: string;
-        brand: string;
-        category: string;
-    }
-
     const { token, setToken } = useContext(TokenContext)!;
     const { user } = useContext(UserContext)!;
     const [theme, setTheme] = useState(localStorage.theme || "light");

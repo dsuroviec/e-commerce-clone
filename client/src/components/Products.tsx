@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, Fragment } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Button } from "./Button";
@@ -8,26 +8,12 @@ import TokenContext from "../contexts/TokenContext";
 import _ from "lodash";
 import { Transition, Dialog } from "@headlessui/react";
 import { HiCheck, HiOutlineX } from "react-icons/hi";
-export const Products = () => {
-    interface Category {
-        name: string;
-        title: string;
-        banner: string;
-        id: number;
-    }
+import { Product, Category } from "../types";
 
-    interface Product {
-        id: number;
-        name: string;
-        price: number;
-        image: string;
-        brand: string;
-        category: string;
-    }
+export const Products = (props: { products: Product[] | null }) => {
     const { cart, setCart } = useContext(CartContext)!;
     const { token } = useContext(TokenContext)!;
     const { categoryID } = useParams<{ categoryID: string }>();
-    const [products, setProducts] = useState<any>(null);
     const [category, setCategory] = useState<Category | null>(null);
     const [productAddedToCart, setProductAddedToCart] =
         useState<Product | null>(null);
@@ -42,16 +28,6 @@ export const Products = () => {
         })();
     }, [categoryID]);
 
-    // Gets products that match the path
-    useEffect(() => {
-        (async () => {
-            const products = await fetch(`/api/products/${categoryID}`).then(
-                (response) => response.json()
-            );
-            setProducts(products);
-        })();
-    }, [categoryID]);
-
     return (
         <div className="relative">
             <Header />
@@ -63,7 +39,7 @@ export const Products = () => {
                     {category?.title}
                 </h2>
             </div>
-            {products?.map((product: any) => (
+            {props.products?.map((product: any) => (
                 <>
                     <div
                         key={product.id}

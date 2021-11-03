@@ -1,10 +1,5 @@
 import { createContext } from "react";
-
-interface User {
-    firstName: string | null;
-    lastName: string | null;
-    email: string | null;
-}
+import { User } from "../types";
 
 export default createContext<{
     user: User;

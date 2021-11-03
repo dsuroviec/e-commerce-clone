@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { Button } from "./Button";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-
+import { Category, Brand } from "../types";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,6 +25,7 @@ import {
     HiChevronUp,
     HiSwitchHorizontal,
 } from "react-icons/hi";
+import { BrandProducts } from "./BrandProducts";
 function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
@@ -46,15 +47,17 @@ function SamplePrevArrow(props: any) {
     );
 }
 export const Home = () => {
-    const [categories, setCategories] = useState<Categories[] | null>(null);
+    const [categories, setCategories] = useState<Category[] | null>(null);
+    const [brands, setBrands] = useState<Brand[] | null>(null);
 
-    interface Categories {
-        name: string;
-        id: number;
-        title: string;
-        banner: string;
-        tile: string;
-    }
+    useEffect(() => {
+        (async () => {
+            const brands = await fetch("/api/brands").then((response) =>
+                response.json()
+            );
+            setBrands(brands);
+        })();
+    }, []);
 
     useEffect(() => {
         (async () => {
@@ -133,7 +136,7 @@ export const Home = () => {
                         {categories?.map((category, index) => (
                             <Link
                                 key={index}
-                                to={`/products/${category?.id}`}
+                                to={`/category/${category?.id}`}
                                 className="block pt-3 text-md text-chewyBlue-dark"
                             >
                                 <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
@@ -237,25 +240,18 @@ export const Home = () => {
                             </span>
                             <HiChevronRight size={24} />
                         </Link>
+
                         <div className="flex flex-wrap w-full ">
-                            {[
-                                "hills-logo.png",
-                                "royal-canin-logo.jpeg",
-                                "disney-collection-logo.jpeg",
-                                "purina-logo.jpg",
-                                "blue-logo.png",
-                                "kong-logo.jpg",
-                            ].map((logo, index) => (
-                                <picture
-                                    key={index}
-                                    className="flex justify-center w-1/3 text-center bg-white border"
-                                >
-                                    <img
-                                        className="p-2 w-28 h-28"
-                                        src={`/images/${logo}`}
-                                        alt={logo}
-                                    />
-                                </picture>
+                            {brands?.map((brand) => (
+                                <Link key={brand.id} to={`/brand/${brand.id}`}>
+                                    <picture className="flex justify-center w-1/3 text-center bg-white border">
+                                        <img
+                                            className="p-2 w-28 h-28"
+                                            src={`/images/${brand.logo}`}
+                                            alt={brand.name}
+                                        />
+                                    </picture>
+                                </Link>
                             ))}
                         </div>
                     </div>

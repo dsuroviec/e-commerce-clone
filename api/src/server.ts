@@ -11,6 +11,8 @@ import {
     getCategory,
     getCategories,
     getProductsByCategory,
+    getProductsByBrand,
+    getBrands,
 } from "./databasepg";
 
 app.post("/api/login", (req, res, next) => {
@@ -35,9 +37,21 @@ app.get("/api/products/:categoryID", (req, res, next) => {
         .catch((error) => next(error));
 });
 
+app.get("/api/products/:brandID", (req, res, next) => {
+    getProductsByBrand(req.params)
+        .then((products) => res.send(products))
+        .catch((error) => next(error));
+});
+
 app.get("/api/categories", (req, res, next) => {
     getCategories()
         .then((categories) => res.send(categories))
+        .catch((error) => next(error));
+});
+
+app.get("/api/brands", (req, res, next) => {
+    getBrands()
+        .then((brands) => res.send(brands))
         .catch((error) => next(error));
 });
 

@@ -11,6 +11,7 @@ import TokenContext from "../contexts/TokenContext";
 export const Cart = () => {
     const { cart, setCart } = useContext(CartContext)!;
     const { token } = useContext(TokenContext)!;
+
     // react-router history for keep shopping button
     let history = useHistory();
 

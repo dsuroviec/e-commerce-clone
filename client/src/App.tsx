@@ -12,33 +12,22 @@ import { SignUp } from "./components/SignUp";
 import { Products } from "./components/Products";
 import { Cart } from "./components/Cart";
 import { Checkout } from "./components/Checkout";
-import "./App.css";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
 import CartContext from "./contexts/CartContext";
+import { CategoryProducts } from "./components/CategoryProducts";
+import { Product, User } from "./types";
+import { BrandProducts } from "./components/BrandProducts";
+import "./App.css";
 
-// To Do, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.
+// TO DO, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.
 // Finish connecting up the authorization for requests for security
-// Build checkout page, credit card order screen etc
 // Fix the buttons and stuff on the carousel
 // Get it deployed somewhere
 // build in responsiveness
 // put testing in one day
 
 function App() {
-    interface User {
-        firstName: string | null;
-        lastName: string | null;
-        email: string | null;
-    }
-    interface Product {
-        id: number;
-        name: string;
-        price: number;
-        image: string;
-        brand: string;
-        category: string;
-    }
     const [token, setToken] = useState<null | string>(
         localStorage.token || null
     );
@@ -96,8 +85,11 @@ function App() {
                             <Route path="/logIn">
                                 <LogIn />
                             </Route>
-                            <Route path="/products/:categoryID">
-                                <Products />
+                            <Route path="/category/:categoryID">
+                                <CategoryProducts />
+                            </Route>
+                            <Route path="/brand/:brandID">
+                                <BrandProducts />
                             </Route>
                             <Route path="/cart">
                                 <Cart />

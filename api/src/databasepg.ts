@@ -110,6 +110,9 @@ export const getCurrentUser = async (
 interface CategoryProps {
     categoryID: string;
 }
+interface BrandProps {
+    brandID: string;
+}
 export const getProducts = async () => {
     const res = await pool.query(`Select * from products`);
     return res.rows;
@@ -127,6 +130,15 @@ export const getProductsByCategory = async ({ categoryID }: CategoryProps) => {
         price: parseFloat(category.price),
     }));
 };
+export const getProductsByBrand = async ({ brandID }: BrandProps) => {
+    const res = await pool.query({
+        name: "get-products-by-brand",
+        text: "SELECT * FROM products where brand=$1",
+        values: [brandID],
+    });
+
+    return res.rows;
+};
 
 export const getCategory = async ({ categoryID }: CategoryProps) => {
     const res = await pool.query({
@@ -142,6 +154,14 @@ export const getCategories = async () => {
     const res = await pool.query({
         name: "get-categories",
         text: "SELECT * FROM categories",
+    });
+    return res.rows;
+};
+
+export const getBrands = async () => {
+    const res = await pool.query({
+        name: "get-brands",
+        text: "SELECT * FROM brands",
     });
     return res.rows;
 };

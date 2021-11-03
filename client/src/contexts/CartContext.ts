@@ -1,13 +1,5 @@
 import { createContext } from "react";
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    brand: string;
-    category: string;
-}
+import { Product } from "../types";
 
 export default createContext<{
     cart: Product[] | null;
