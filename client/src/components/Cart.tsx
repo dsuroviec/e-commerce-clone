@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import _ from "lodash";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+
 import { HiTruck } from "react-icons/hi";
 import { Button } from "./Button";
 import { useHistory, Link } from "react-router-dom";
@@ -17,7 +16,6 @@ export const Cart = () => {
 
     return (
         <>
-            <Header />
             {!cart ? (
                 <>
                     <h1 className="text-2xl text-center">
@@ -183,7 +181,6 @@ export const Cart = () => {
                     )}
                 </>
             )}
-            <Footer />
         </>
     );
 };

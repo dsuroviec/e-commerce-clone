@@ -31,13 +31,13 @@ app.get("/api/products", (req, res, next) => {
         .then((products) => res.send(products))
         .catch((error) => next(error));
 });
-app.get("/api/products/:categoryID", (req, res, next) => {
+app.get("/api/categoryproducts/:categoryID", (req, res, next) => {
     getProductsByCategory(req.params)
         .then((products) => res.send(products))
         .catch((error) => next(error));
 });
 
-app.get("/api/products/:brandID", (req, res, next) => {
+app.get("/api/brandproducts/:brandID", (req, res, next) => {
     getProductsByBrand(req.params)
         .then((products) => res.send(products))
         .catch((error) => next(error));

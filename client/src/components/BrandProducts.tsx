@@ -10,7 +10,7 @@ export const BrandProducts = () => {
     // Gets products that match the the category param on the path
     useEffect(() => {
         (async () => {
-            const products = await fetch(`/api/products/${brandID}`).then(
+            const products = await fetch(`/api/brandproducts/${brandID}`).then(
                 (response) => response.json()
             );
             setProducts(products);

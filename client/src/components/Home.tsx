@@ -5,8 +5,7 @@ import _ from "lodash";
 import clsx from "clsx";
 
 import { Button } from "./Button";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+
 import { Category, Brand } from "../types";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -88,7 +87,6 @@ export const Home = () => {
 
     return (
         <>
-            <Header />
             <div className="">
                 <Slider {...carouselProps}>
                     {[
@@ -242,9 +240,9 @@ export const Home = () => {
                         </Link>
 
                         <div className="flex flex-wrap w-full ">
-                            {brands?.map((brand) => (
+                            {brands?.slice(0 - 9)?.map((brand) => (
                                 <Link key={brand.id} to={`/brand/${brand.id}`}>
-                                    <picture className="flex justify-center w-1/3 text-center bg-white border">
+                                    <picture className="flex justify-center text-center bg-white border-1">
                                         <img
                                             className="p-2 w-28 h-28"
                                             src={`/images/${brand.logo}`}
@@ -407,7 +405,6 @@ export const Home = () => {
                     />
                 </div>
             </section>
-            <Footer />
         </>
     );
 };

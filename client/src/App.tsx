@@ -18,6 +18,8 @@ import CartContext from "./contexts/CartContext";
 import { CategoryProducts } from "./components/CategoryProducts";
 import { Product, User } from "./types";
 import { BrandProducts } from "./components/BrandProducts";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import "./App.css";
 
 // TO DO, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.
@@ -75,6 +77,7 @@ function App() {
             <UserContext.Provider value={{ user, setUser }}>
                 <CartContext.Provider value={{ cart, setCart }}>
                     <Router>
+                        <Header />
                         <Switch>
                             <Route exact path="/">
                                 <Home />
@@ -104,6 +107,7 @@ function App() {
                                 <Redirect to="/" />
                             </Route>
                         </Switch>
+                        <Footer />
                     </Router>
                 </CartContext.Provider>
             </UserContext.Provider>

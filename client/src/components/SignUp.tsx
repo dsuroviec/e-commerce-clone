@@ -5,7 +5,6 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import { Header } from "./Header";
 
 export const SignUp = () => {
     const { token, setToken } = useContext(TokenContext)!;
@@ -87,7 +86,6 @@ export const SignUp = () => {
     return (
         <>
             {token && <Redirect to="/" />}
-            <Header />
             <div className="p-4">
                 <h1 className="mt-4 mb-2 text-2xl font-light">
                     Create an Account

@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { Header } from "./Header";
 import { HiChevronRight } from "react-icons/hi";
 import { Button } from "./Button";
 import { Redirect } from "react-router-dom";
@@ -26,8 +25,6 @@ export const Checkout = () => {
     return (
         <>
             {!token && <Redirect to="/login" />}
-
-            <Header />
 
             <div className="grid gap-8 p-3">
                 <div className="grid gap-3 p-4 border rounded text-chewyGray-darker">
