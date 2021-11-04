@@ -1,32 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Popper } from "./Popper";
-import TokenContext from "../contexts/TokenContext";
-import UserContext from "../contexts/UserContext";
+// import TokenContext from "../contexts/TokenContext";
+// import UserContext from "../contexts/UserContext";
 import CartContext from "../contexts/CartContext";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
-
-import _ from "lodash";
-
 import {
     HiMail,
     HiChatAlt2,
     HiShoppingCart,
-    HiSun,
-    HiMoon,
+    // HiSun,
+    // HiMoon,
     HiMenu,
     HiSearch,
     HiUser,
-    HiChevronLeft,
-    HiChevronRight,
-    HiChevronUp,
-    HiSwitchHorizontal,
 } from "react-icons/hi";
 
 export const Header = () => {
-    const { token, setToken } = useContext(TokenContext)!;
-    const { user } = useContext(UserContext)!;
-    const [theme, setTheme] = useState(localStorage.theme || "light");
+    // const { token, setToken } = useContext(TokenContext)!;
+    // const { user } = useContext(UserContext)!;
+    // const [theme, setTheme] = useState(localStorage.theme || "light");
     const { cart } = useContext(CartContext)!;
 
     return (

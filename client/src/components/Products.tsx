@@ -1,6 +1,5 @@
 import { useState, useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
-
 import { Button } from "./Button";
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";

@@ -9,7 +9,6 @@ import { Home } from "./components/Home";
 import { LogIn } from "./components/LogIn";
 import { ContactUs } from "./components/ContactUs";
 import { SignUp } from "./components/SignUp";
-import { Products } from "./components/Products";
 import { Cart } from "./components/Cart";
 import { Checkout } from "./components/Checkout";
 import TokenContext from "./contexts/TokenContext";

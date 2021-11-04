@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import _ from "lodash";
-
 import { HiTruck } from "react-icons/hi";
 import { Button } from "./Button";
 import { useHistory, Link } from "react-router-dom";

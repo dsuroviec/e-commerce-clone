@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import _ from "lodash";
 import { HiChevronUp } from "react-icons/hi";
 
 export const Footer = () => {
@@ -7,7 +6,7 @@ export const Footer = () => {
         <>
             <footer className="bg-white ">
                 <a
-                    href="#"
+                    href="#top"
                     className="block w-full m-auto text-center border-t-2 "
                     rel="noreferrer"
                 >

@@ -1,50 +1,37 @@
 import { useEffect, useState } from "react";
 import { Input } from "./Input";
 import { Link } from "react-router-dom";
-import _ from "lodash";
-import clsx from "clsx";
-
 import { Button } from "./Button";
-
 import { Category, Brand } from "../types";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {
-    HiMail,
-    HiChatAlt2,
-    HiShoppingCart,
-    HiSun,
-    HiMoon,
-    HiMenu,
-    HiSearch,
-    HiUser,
-    HiChevronLeft,
+    // HiSun,
+    // HiMoon,
     HiChevronRight,
-    HiChevronUp,
-    HiSwitchHorizontal,
 } from "react-icons/hi";
-import { BrandProducts } from "./BrandProducts";
-function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block", background: "red" }}
-            onClick={onClick}
-        />
-    );
-}
-function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block", background: "green" }}
-            onClick={onClick}
-        />
-    );
-}
+
+// function SampleNextArrow(props: any) {
+//     const { className, style, onClick } = props;
+//     return (
+//         <div
+//             className={className}
+//             style={{ ...style, display: "block", background: "red" }}
+//             onClick={onClick}
+//         />
+//     );
+// }
+// function SamplePrevArrow(props: any) {
+//     const { className, style, onClick } = props;
+//     return (
+//         <div
+//             className={className}
+//             style={{ ...style, display: "block", background: "green" }}
+//             onClick={onClick}
+//         />
+//     );
+// }
 export const Home = () => {
     const [categories, setCategories] = useState<Category[] | null>(null);
     const [brands, setBrands] = useState<Brand[] | null>(null);
@@ -79,8 +66,8 @@ export const Home = () => {
         pauseOnDotsHover: true,
         pauseOnHover: true,
         arrows: true,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
+        // nextArrow: <SampleNextArrow />,
+        // prevArrow: <SamplePrevArrow />,
         dotsClass: "slick-dots",
         // appendDots: (dots: any) => <ul>{dots}</ul>,
     };
