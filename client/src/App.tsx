@@ -18,6 +18,8 @@ import { Checkout } from "./components/Checkout";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
 import CartContext from "./contexts/CartContext";
+import GlobalErrorContext from "./contexts/GlobalErrorContext";
+import { GlobalErrorDialog } from "./components/GlobalErrorDialog";
 import { Product, User } from "./types";
 import "./App.css";
 
@@ -40,6 +42,8 @@ function App() {
         email: null,
     });
 
+    const [isErrorOpen, setIsErrorOpen] = useState<boolean>(false);
+    console.log(isErrorOpen, "error open");
     // Get cart items from local storage upon initial render of cart page
     useEffect(() => {
         const item: any = localStorage.getItem("cart");
@@ -75,39 +79,47 @@ function App() {
         <TokenContext.Provider value={{ token, setToken }}>
             <UserContext.Provider value={{ user, setUser }}>
                 <CartContext.Provider value={{ cart, setCart }}>
-                    <Router>
-                        <Header />
-                        <Switch>
-                            <Route exact path="/">
-                                <Home />
-                            </Route>
-                            <Route path="/contactUs">
-                                <ContactUs />
-                            </Route>
-                            <Route path="/logIn">
-                                <LogIn />
-                            </Route>
-                            <Route path="/category/:categoryID">
-                                <CategoryProducts />
-                            </Route>
-                            <Route path="/brand/:brandID">
-                                <BrandProducts />
-                            </Route>
-                            <Route path="/cart">
-                                <Cart />
-                            </Route>
-                            <Route path="/checkout">
-                                <Checkout />
-                            </Route>
-                            <Route path="/signUp">
-                                <SignUp />
-                            </Route>
-                            <Route>
-                                <Redirect to="/" />
-                            </Route>
-                        </Switch>
-                        <Footer />
-                    </Router>
+                    <GlobalErrorContext.Provider
+                        value={{
+                            isErrorOpen,
+                            setIsErrorOpen,
+                        }}
+                    >
+                        <Router>
+                            <Header />
+                            <GlobalErrorDialog />
+                            <Switch>
+                                <Route exact path="/">
+                                    <Home />
+                                </Route>
+                                <Route path="/contactUs">
+                                    <ContactUs />
+                                </Route>
+                                <Route path="/logIn">
+                                    <LogIn />
+                                </Route>
+                                <Route path="/category/:categoryID">
+                                    <CategoryProducts />
+                                </Route>
+                                <Route path="/brand/:brandID">
+                                    <BrandProducts />
+                                </Route>
+                                <Route path="/cart">
+                                    <Cart />
+                                </Route>
+                                <Route path="/checkout">
+                                    <Checkout />
+                                </Route>
+                                <Route path="/signUp">
+                                    <SignUp />
+                                </Route>
+                                <Route>
+                                    <Redirect to="/" />
+                                </Route>
+                            </Switch>
+                            <Footer />
+                        </Router>
+                    </GlobalErrorContext.Provider>
                 </CartContext.Provider>
             </UserContext.Provider>
         </TokenContext.Provider>

@@ -8,6 +8,7 @@ export const BrandProducts = () => {
     const [products, setProducts] = useState<Product[] | null>(null);
     const [brand, setBrand] = useState<Brand | null>(null);
 
+    // Gets the brand name of the selected products
     useEffect(() => {
         (async () => {
             const brand = await fetch(`/api/brand/${brandID}`).then(
