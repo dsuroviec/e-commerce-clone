@@ -1,60 +1,48 @@
 import { useEffect, useState } from "react";
-import { Input } from "./Input";
 import { Link } from "react-router-dom";
-import _ from "lodash";
-import clsx from "clsx";
-
+import { Input } from "./Input";
 import { Button } from "./Button";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {
-    HiMail,
-    HiChatAlt2,
-    HiShoppingCart,
-    HiSun,
-    HiMoon,
-    HiMenu,
-    HiSearch,
-    HiUser,
-    HiChevronLeft,
+    // HiSun,
+    // HiMoon,
     HiChevronRight,
-    HiChevronUp,
-    HiSwitchHorizontal,
 } from "react-icons/hi";
-function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block", background: "red" }}
-            onClick={onClick}
-        />
-    );
-}
-function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block", background: "green" }}
-            onClick={onClick}
-        />
-    );
-}
+import { Category, Brand } from "../types";
+// function SampleNextArrow(props: any) {
+//     const { className, style, onClick } = props;
+//     return (
+//         <div
+//             className={className}
+//             style={{ ...style, display: "block", background: "red" }}
+//             onClick={onClick}
+//         />
+//     );
+// }
+// function SamplePrevArrow(props: any) {
+//     const { className, style, onClick } = props;
+//     return (
+//         <div
+//             className={className}
+//             style={{ ...style, display: "block", background: "green" }}
+//             onClick={onClick}
+//         />
+//     );
+// }
 export const Home = () => {
-    const [categories, setCategories] = useState<Categories[] | null>(null);
+    const [categories, setCategories] = useState<Category[] | null>(null);
+    const [brands, setBrands] = useState<Brand[] | null>(null);
 
-    interface Categories {
-        name: string;
-        id: number;
-        title: string;
-        banner: string;
-        tile: string;
-    }
+    useEffect(() => {
+        (async () => {
+            const brands = await fetch("/api/brands").then((response) =>
+                response.json()
+            );
+            setBrands(brands);
+        })();
+    }, []);
 
     useEffect(() => {
         (async () => {
@@ -77,15 +65,14 @@ export const Home = () => {
         pauseOnDotsHover: true,
         pauseOnHover: true,
         arrows: true,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
+        // nextArrow: <SampleNextArrow />,
+        // prevArrow: <SamplePrevArrow />,
         dotsClass: "slick-dots",
         // appendDots: (dots: any) => <ul>{dots}</ul>,
     };
 
     return (
         <>
-            <Header />
             <div className="">
                 <Slider {...carouselProps}>
                     {[
@@ -133,7 +120,7 @@ export const Home = () => {
                         {categories?.map((category, index) => (
                             <Link
                                 key={index}
-                                to={`/products/${category?.id}`}
+                                to={`/category/${category?.id}`}
                                 className="block pt-3 text-md text-chewyBlue-dark"
                             >
                                 <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
@@ -237,25 +224,18 @@ export const Home = () => {
                             </span>
                             <HiChevronRight size={24} />
                         </Link>
+
                         <div className="flex flex-wrap w-full ">
-                            {[
-                                "hills-logo.png",
-                                "royal-canin-logo.jpeg",
-                                "disney-collection-logo.jpeg",
-                                "purina-logo.jpg",
-                                "blue-logo.png",
-                                "kong-logo.jpg",
-                            ].map((logo, index) => (
-                                <picture
-                                    key={index}
-                                    className="flex justify-center w-1/3 text-center bg-white border"
-                                >
-                                    <img
-                                        className="p-2 w-28 h-28"
-                                        src={`/images/${logo}`}
-                                        alt={logo}
-                                    />
-                                </picture>
+                            {brands?.slice(0 - 9)?.map((brand) => (
+                                <Link key={brand.id} to={`/brand/${brand.id}`}>
+                                    <picture className="flex justify-center text-center bg-white border-1">
+                                        <img
+                                            className="p-2 w-28 h-28"
+                                            src={`/images/${brand.logo}`}
+                                            alt={brand.name}
+                                        />
+                                    </picture>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -411,7 +391,6 @@ export const Home = () => {
                     />
                 </div>
             </section>
-            <Footer />
         </>
     );
 };

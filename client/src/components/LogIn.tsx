@@ -4,7 +4,7 @@ import TokenContext from "../contexts/TokenContext";
 import { useFormik } from "formik";
 import { Button } from "./Button";
 import { Input } from "./Input";
-import { Header } from "./Header";
+
 export const LogIn = () => {
     // const [email, setemail] = useState<string | null>();
     // const [password, setPassword] = useState<string | number>();
@@ -63,7 +63,6 @@ export const LogIn = () => {
     return (
         <>
             {token && <Redirect to="/" />}
-            <Header />
             <div className="p-4">
                 <h1 className="mt-4 mb-2 text-2xl font-light">Log In</h1>
                 <form

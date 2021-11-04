@@ -1,12 +1,11 @@
 import { useContext, useState } from "react";
-import { Header } from "./Header";
+import { Redirect } from "react-router-dom";
 import { HiChevronRight } from "react-icons/hi";
 import { Button } from "./Button";
-import { Redirect } from "react-router-dom";
+import { Input } from "./Input";
 import { RadioGroup } from "@headlessui/react";
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
-import { Input } from "./Input";
 
 const plans = [
     {
@@ -26,8 +25,6 @@ export const Checkout = () => {
     return (
         <>
             {!token && <Redirect to="/login" />}
-
-            <Header />
 
             <div className="grid gap-8 p-3">
                 <div className="grid gap-3 p-4 border rounded text-chewyGray-darker">

@@ -10,6 +10,9 @@ module.exports = {
             DEFAULT: "2px",
             1: "1px",
         },
+        fontFamily: {
+            Fruktur: ["Fruktur"],
+        },
         extend: {
             colors: {
                 transparent: "transparent",

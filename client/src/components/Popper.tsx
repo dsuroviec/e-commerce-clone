@@ -1,25 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
-import TokenContext from "../contexts/TokenContext";
-import UserContext from "../contexts/UserContext";
-import { Button } from "./Button";
-import { Input } from "./Input";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import _ from "lodash";
-import clsx from "clsx";
-import {
-    HiChevronDown,
-    HiMail,
-    HiChatAlt2,
-    HiShoppingCart,
-    HiSun,
-    HiMoon,
-    HiMenu,
-    HiSearch,
-    HiUser,
-    HiChevronLeft,
-    HiChevronRight,
-} from "react-icons/hi";
+import { HiChevronDown } from "react-icons/hi";
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
 

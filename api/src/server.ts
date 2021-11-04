@@ -1,5 +1,4 @@
 import express from "express";
-import _, { identity } from "lodash";
 const app = express();
 app.use(express.json());
 import {
@@ -11,6 +10,9 @@ import {
     getCategory,
     getCategories,
     getProductsByCategory,
+    getProductsByBrand,
+    getBrands,
+    getBrand,
 } from "./databasepg";
 
 app.post("/api/login", (req, res, next) => {
@@ -29,9 +31,21 @@ app.get("/api/products", (req, res, next) => {
         .then((products) => res.send(products))
         .catch((error) => next(error));
 });
-app.get("/api/products/:categoryID", (req, res, next) => {
+app.get("/api/categoryproducts/:categoryID", (req, res, next) => {
     getProductsByCategory(req.params)
         .then((products) => res.send(products))
+        .catch((error) => next(error));
+});
+
+app.get("/api/brandproducts/:brandID", (req, res, next) => {
+    getProductsByBrand(req.params)
+        .then((products) => res.send(products))
+        .catch((error) => next(error));
+});
+
+app.get("/api/categories/:categoryID", (req, res, next) => {
+    getCategory(req.params)
+        .then((category) => res.send(category))
         .catch((error) => next(error));
 });
 
@@ -41,9 +55,15 @@ app.get("/api/categories", (req, res, next) => {
         .catch((error) => next(error));
 });
 
-app.get("/api/categories/:categoryID", (req, res, next) => {
-    getCategory(req.params)
-        .then((category) => res.send(category))
+app.get("/api/brand/:brandID", (req, res, next) => {
+    getBrand(req.params)
+        .then((brand) => res.send(brand))
+        .catch((error) => next(error));
+});
+
+app.get("/api/brands", (req, res, next) => {
+    getBrands()
+        .then((brands) => res.send(brands))
         .catch((error) => next(error));
 });
 
