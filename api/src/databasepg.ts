@@ -1,10 +1,16 @@
 import { Pool } from "pg";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { Request } from "express";
-import { IncomingMessage } from "http";
+
+interface CreateUserProps {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
+
 dotenv.config();
 const pool = new Pool({
     host: "localhost",
@@ -14,14 +20,13 @@ const pool = new Pool({
     database: "postgres",
 });
 
-interface AuthenticateUserProps {
-    email: string;
-    password: string;
-}
 export const authenticateUser = async ({
     email,
     password,
-}: AuthenticateUserProps) => {
+}: {
+    email: string;
+    password: string;
+}) => {
     const user = await pool.query({
         name: "authenticate-email",
         text: "SELECT id, email, firstname, lastname FROM users WHERE email=$1 ",
@@ -51,12 +56,6 @@ export const authenticateUser = async ({
         }
     }
 };
-interface CreateUserProps {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
 
 export const createUser = async ({
     firstName,
@@ -80,6 +79,7 @@ export const createUser = async ({
 
     return accessTokenSecret;
 };
+
 export const authorizeRequest = async (req: Request, res: any) => {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -96,9 +96,7 @@ export const authorizeRequest = async (req: Request, res: any) => {
     }
 };
 
-export const getCurrentUser = async (
-    id: string | jwt.JwtPayload | undefined
-) => {
+export const getCurrentUser = async (id: string | JwtPayload | undefined) => {
     const user = await pool.query({
         name: "get-current-user",
         text: "SELECT email, firstname, lastname FROM users WHERE id=$1 ",
@@ -107,15 +105,12 @@ export const getCurrentUser = async (
 
     return user.rows[0];
 };
-interface CategoryProps {
-    categoryID: string;
-}
-export const getProducts = async () => {
-    const res = await pool.query(`Select * from products`);
-    return res.rows;
-};
 
-export const getProductsByCategory = async ({ categoryID }: CategoryProps) => {
+export const getProductsByCategory = async ({
+    categoryID,
+}: {
+    categoryID: string;
+}) => {
     const res = await pool.query({
         name: "get-products-by-category",
         text: "SELECT * FROM products where category=$1",
@@ -128,7 +123,22 @@ export const getProductsByCategory = async ({ categoryID }: CategoryProps) => {
     }));
 };
 
-export const getCategory = async ({ categoryID }: CategoryProps) => {
+export const getProductsByBrand = async ({ brandID }: { brandID: string }) => {
+    const res = await pool.query({
+        name: "get-products-by-brand",
+        text: "SELECT * FROM products where brand=$1",
+        values: [brandID],
+    });
+
+    return res.rows;
+};
+
+export const getProducts = async () => {
+    const res = await pool.query(`Select * from products`);
+    return res.rows;
+};
+
+export const getCategory = async ({ categoryID }: { categoryID: string }) => {
     const res = await pool.query({
         name: "get-category-by-name",
         text: "SELECT * FROM categories where id=$1",
@@ -142,6 +152,24 @@ export const getCategories = async () => {
     const res = await pool.query({
         name: "get-categories",
         text: "SELECT * FROM categories",
+    });
+    return res.rows;
+};
+
+export const getBrand = async ({ brandID }: { brandID: string }) => {
+    const res = await pool.query({
+        name: "get-brand",
+        text: "SELECT * FROM brands where id=$1",
+        values: [brandID],
+    });
+    console.log(res.rows[0], "sfutrsdt");
+    return res.rows[0];
+};
+
+export const getBrands = async () => {
+    const res = await pool.query({
+        name: "get-brands",
+        text: "SELECT * FROM brands",
     });
     return res.rows;
 };

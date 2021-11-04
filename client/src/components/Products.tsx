@@ -1,74 +1,27 @@
-import { useEffect, useState, useContext, Fragment } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+import { useState, useContext, Fragment } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
-import _ from "lodash";
 import { Transition, Dialog } from "@headlessui/react";
+import _ from "lodash";
 import { HiCheck, HiOutlineX } from "react-icons/hi";
-export const Products = () => {
-    interface Category {
-        name: string;
-        title: string;
-        banner: string;
-        id: number;
-    }
+import { Product, Category } from "../types";
 
-    interface Product {
-        id: number;
-        name: string;
-        price: number;
-        image: string;
-        brand: string;
-        category: string;
-    }
+export const Products = (props: {
+    products: Product[] | null;
+    category?: Category | null;
+}) => {
     const { cart, setCart } = useContext(CartContext)!;
     const { token } = useContext(TokenContext)!;
-    const { categoryID } = useParams<{ categoryID: string }>();
-    const [products, setProducts] = useState<any>(null);
-    const [category, setCategory] = useState<Category | null>(null);
     const [productAddedToCart, setProductAddedToCart] =
         useState<Product | null>(null);
 
-    // Get categories that match path
-    useEffect(() => {
-        (async () => {
-            const category = await fetch(`/api/categories/${categoryID}`).then(
-                (response) => response.json()
-            );
-            setCategory(category);
-        })();
-    }, [categoryID]);
-
-    // Gets products that match the path
-    useEffect(() => {
-        (async () => {
-            const products = await fetch(`/api/products/${categoryID}`).then(
-                (response) => response.json()
-            );
-            setProducts(products);
-        })();
-    }, [categoryID]);
-
     return (
-        <div className="relative">
-            <Header />
-            <div className="p-4 bg-chewyGray-lighter">
-                <div>
-                    <img src={`/images/${category?.banner}`} alt=""></img>
-                </div>
-                <h2 className="py-6 text-2xl text-chewyGray-dark">
-                    {category?.title}
-                </h2>
-            </div>
-            {products?.map((product: any) => (
-                <>
-                    <div
-                        key={product.id}
-                        className="flex gap-5 p-4 bg-white border-t"
-                    >
+        <>
+            {props.products?.map((product: any) => (
+                <div key={product.id}>
+                    <div className="flex gap-5 p-4 bg-white border-t">
                         <div className="inline-grid w-5/12 gap-y-6 ">
                             <img
                                 src={`/images/${product?.image}`}
@@ -116,7 +69,7 @@ export const Products = () => {
                             </span>
                         </div>
                     </div>
-                </>
+                </div>
             ))}
 
             <Transition.Root
@@ -259,8 +212,6 @@ export const Products = () => {
                     </div>
                 </Dialog>
             </Transition.Root>
-
-            <Footer />
-        </div>
+        </>
     );
 };

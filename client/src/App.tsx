@@ -9,36 +9,26 @@ import { Home } from "./components/Home";
 import { LogIn } from "./components/LogIn";
 import { ContactUs } from "./components/ContactUs";
 import { SignUp } from "./components/SignUp";
-import { Products } from "./components/Products";
 import { Cart } from "./components/Cart";
+import { CategoryProducts } from "./components/CategoryProducts";
+import { BrandProducts } from "./components/BrandProducts";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { Checkout } from "./components/Checkout";
-import "./App.css";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
 import CartContext from "./contexts/CartContext";
+import { Product, User } from "./types";
+import "./App.css";
 
-// To Do, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.
+// TO DO, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.
 // Finish connecting up the authorization for requests for security
-// Build checkout page, credit card order screen etc
 // Fix the buttons and stuff on the carousel
 // Get it deployed somewhere
 // build in responsiveness
 // put testing in one day
 
 function App() {
-    interface User {
-        firstName: string | null;
-        lastName: string | null;
-        email: string | null;
-    }
-    interface Product {
-        id: number;
-        name: string;
-        price: number;
-        image: string;
-        brand: string;
-        category: string;
-    }
     const [token, setToken] = useState<null | string>(
         localStorage.token || null
     );
@@ -86,6 +76,7 @@ function App() {
             <UserContext.Provider value={{ user, setUser }}>
                 <CartContext.Provider value={{ cart, setCart }}>
                     <Router>
+                        <Header />
                         <Switch>
                             <Route exact path="/">
                                 <Home />
@@ -96,8 +87,11 @@ function App() {
                             <Route path="/logIn">
                                 <LogIn />
                             </Route>
-                            <Route path="/products/:categoryID">
-                                <Products />
+                            <Route path="/category/:categoryID">
+                                <CategoryProducts />
+                            </Route>
+                            <Route path="/brand/:brandID">
+                                <BrandProducts />
                             </Route>
                             <Route path="/cart">
                                 <Cart />
@@ -112,6 +106,7 @@ function App() {
                                 <Redirect to="/" />
                             </Route>
                         </Switch>
+                        <Footer />
                     </Router>
                 </CartContext.Provider>
             </UserContext.Provider>
