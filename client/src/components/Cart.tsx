@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import _ from "lodash";
-import { HiTruck } from "react-icons/hi";
-import { Button } from "./Button";
 import { useHistory, Link } from "react-router-dom";
+import { Button } from "./Button";
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
+import _ from "lodash";
+import { HiTruck } from "react-icons/hi";
 
 export const Cart = () => {
     const { cart, setCart } = useContext(CartContext)!;

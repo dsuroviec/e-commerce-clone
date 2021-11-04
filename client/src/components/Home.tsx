@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Input } from "./Input";
 import { Link } from "react-router-dom";
+import { Input } from "./Input";
 import { Button } from "./Button";
-import { Category, Brand } from "../types";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,7 +10,7 @@ import {
     // HiMoon,
     HiChevronRight,
 } from "react-icons/hi";
-
+import { Category, Brand } from "../types";
 // function SampleNextArrow(props: any) {
 //     const { className, style, onClick } = props;
 //     return (

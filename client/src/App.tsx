@@ -10,15 +10,15 @@ import { LogIn } from "./components/LogIn";
 import { ContactUs } from "./components/ContactUs";
 import { SignUp } from "./components/SignUp";
 import { Cart } from "./components/Cart";
+import { CategoryProducts } from "./components/CategoryProducts";
+import { BrandProducts } from "./components/BrandProducts";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { Checkout } from "./components/Checkout";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
 import CartContext from "./contexts/CartContext";
-import { CategoryProducts } from "./components/CategoryProducts";
 import { Product, User } from "./types";
-import { BrandProducts } from "./components/BrandProducts";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
 import "./App.css";
 
 // TO DO, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.

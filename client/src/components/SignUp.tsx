@@ -1,9 +1,8 @@
 import { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 import { Button } from "./Button";
 import { Input } from "./Input";
-import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
 export const SignUp = () => {

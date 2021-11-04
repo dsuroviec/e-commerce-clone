@@ -1,6 +1,6 @@
-import { Products } from "./Products";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Products } from "./Products";
 import { Product, Category } from "../types";
 
 export const CategoryProducts = () => {

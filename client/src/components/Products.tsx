@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
-import _ from "lodash";
 import { Transition, Dialog } from "@headlessui/react";
+import _ from "lodash";
 import { HiCheck, HiOutlineX } from "react-icons/hi";
 import { Product, Category } from "../types";
 

@@ -1,10 +1,10 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Popper } from "./Popper";
 // import TokenContext from "../contexts/TokenContext";
 // import UserContext from "../contexts/UserContext";
 import CartContext from "../contexts/CartContext";
 import { Input } from "./Input";
-import { Link } from "react-router-dom";
 import {
     HiMail,
     HiChatAlt2,
