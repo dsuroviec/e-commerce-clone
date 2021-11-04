@@ -1,5 +1,4 @@
 import express from "express";
-import _, { identity } from "lodash";
 const app = express();
 app.use(express.json());
 import {
@@ -13,6 +12,7 @@ import {
     getProductsByCategory,
     getProductsByBrand,
     getBrands,
+    getBrand,
 } from "./databasepg";
 
 app.post("/api/login", (req, res, next) => {
@@ -43,21 +43,27 @@ app.get("/api/brandproducts/:brandID", (req, res, next) => {
         .catch((error) => next(error));
 });
 
+app.get("/api/categories/:categoryID", (req, res, next) => {
+    getCategory(req.params)
+        .then((category) => res.send(category))
+        .catch((error) => next(error));
+});
+
 app.get("/api/categories", (req, res, next) => {
     getCategories()
         .then((categories) => res.send(categories))
         .catch((error) => next(error));
 });
 
-app.get("/api/brands", (req, res, next) => {
-    getBrands()
-        .then((brands) => res.send(brands))
+app.get("/api/brand/:brandID", (req, res, next) => {
+    getBrand(req.params)
+        .then((brand) => res.send(brand))
         .catch((error) => next(error));
 });
 
-app.get("/api/categories/:categoryID", (req, res, next) => {
-    getCategory(req.params)
-        .then((category) => res.send(category))
+app.get("/api/brands", (req, res, next) => {
+    getBrands()
+        .then((brands) => res.send(brands))
         .catch((error) => next(error));
 });
 

@@ -1,11 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Products } from "./Products";
-import { Product } from "../types";
+import { Product, Brand } from "../types";
 
 export const BrandProducts = () => {
     const { brandID } = useParams<{ brandID: string }>();
     const [products, setProducts] = useState<Product[] | null>(null);
+    const [brand, setBrand] = useState<Brand | null>(null);
+
+    useEffect(() => {
+        (async () => {
+            const brand = await fetch(`/api/brand/${brandID}`).then(
+                (response) => response.json()
+            );
+            setBrand(brand);
+        })();
+    }, [brandID]);
+    console.log(brand, "brand");
 
     // Gets products that match the the category param on the path
     useEffect(() => {
@@ -17,5 +28,12 @@ export const BrandProducts = () => {
         })();
     }, [brandID]);
 
-    return <Products products={products} />;
+    return (
+        <>
+            {brand && (
+                <h1 className="p-4 text-xl">{brand.name}&nbsp;Products</h1>
+            )}
+            <Products products={products} />
+        </>
+    );
 };
