@@ -23,7 +23,8 @@ import { GlobalErrorDialog } from "./components/GlobalErrorDialog";
 import { Product, User } from "./types";
 import "./App.css";
 
-// TO DO, set up alert for when trying to create duplicate account, or make db cas insensitive or something. Ask tim.
+// TO DO
+// Create a duplicate home page, and remove some features for now
 // Finish connecting up the authorization for requests for security
 // Fix the buttons and stuff on the carousel
 // Get it deployed somewhere
