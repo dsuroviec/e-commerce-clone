@@ -162,7 +162,7 @@ export const getBrand = async ({ brandID }: { brandID: string }) => {
         text: "SELECT * FROM brands where id=$1",
         values: [brandID],
     });
-    console.log(res.rows[0], "sfutrsdt");
+
     return res.rows[0];
 };
 

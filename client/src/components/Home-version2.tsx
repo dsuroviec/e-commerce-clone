@@ -119,28 +119,23 @@ export const Home = () => {
                         });
                     })()} */}
                     <div className="flex gap-2 min-w-max">
-                        {categories
-                            ?.filter(
-                                (category) =>
-                                    category.id !== 10 && category.id !== 9
-                            )
-                            .map((category, index) => (
-                                <Link
-                                    key={index}
-                                    to={`/category/${category?.id}`}
-                                    className="block pt-3 text-md text-chewyBlue-dark"
-                                >
-                                    <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
-                                        <img
-                                            className="block"
-                                            src={`/images/${category.tile}`}
-                                            alt={category.tile}
-                                        />
+                        {categories?.map((category, index) => (
+                            <Link
+                                key={index}
+                                to={`/category/${category?.id}`}
+                                className="block pt-3 text-md text-chewyBlue-dark"
+                            >
+                                <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
+                                    <img
+                                        className="block"
+                                        src={`/images/${category.tile}`}
+                                        alt={category.tile}
+                                    />
 
-                                        {category.name}
-                                    </div>
-                                </Link>
-                            ))}
+                                    {category.name}
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                     <h1 className="text-xl font-semibold">
                         Customer Favorites
@@ -199,7 +194,7 @@ export const Home = () => {
                         <h1 className="text-xl font-semibold">
                             New Puppy or Kitten?
                         </h1>
-                        <Link to="/category/9">
+                        <Link to="/">
                             <img
                                 src="/images/new-puppy.jpg"
                                 alt="new puppy"
@@ -208,7 +203,7 @@ export const Home = () => {
                                 Puppy Shop
                             </span>
                         </Link>
-                        <Link to="/category/10">
+                        <Link to="/">
                             <img
                                 src="/images/new-kitten.jpg"
                                 alt="new kitten"
@@ -262,7 +257,45 @@ export const Home = () => {
                             Sign Up
                         </Button>
                     </div>
-
+                    <div>
+                        <h2 className="text-xl font-semibold">
+                            Spooky Chewy Exclusives 🦇
+                        </h2>
+                        <div className="flex">
+                            {[0, 1, 2, 3, 4].map((article, index) => (
+                                <Link key={index} to="">
+                                    <article className="p-3.5 mr-1.5 border rounded-md w-36 bg-white ">
+                                        <div>
+                                            <img
+                                                className="w-20 h-20 m-auto"
+                                                src="/images/goody-bag.jpg"
+                                                alt="goody bag"
+                                            ></img>
+                                            <span className="text-sm font-medium">
+                                                Goody Box
+                                            </span>
+                                            <p className="text-xs">
+                                                Halloween Toys, Treats, and
+                                                Bandanas
+                                            </p>
+                                            <div className="p-1 my-2 text-xs text-white rounded bg-chewyGreen">
+                                                Save 40% at Checkout
+                                            </div>
+                                            <span className="font-semibold text-chewyRed ">
+                                                $24.99
+                                            </span>
+                                            <div className="flex items-center">
+                                                <>Stars</>&nbsp;
+                                                <span className="text-xs text-chewyGray">
+                                                    88
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                     <div className="">
                         <h1 className="text-xl font-semibold">Pet Health</h1>
                         <img
@@ -282,7 +315,82 @@ export const Home = () => {
                             Connect with a Vet
                         </Link>
                     </div>
-
+                    <div>
+                        <h1 className="text-xl font-semibold">
+                            Autoship & Save on Favorites
+                        </h1>
+                        <Link
+                            to="/"
+                            className="flex items-center text-chewyBlue-darker"
+                        >
+                            <span className="mt-0.5 text-sm hover:underline ">
+                                Shop All
+                            </span>
+                            <HiChevronRight size={24} />
+                        </Link>
+                        <div className="flex">
+                            {[0, 1, 2, 3, 4].map((article, index) => (
+                                <Link key={index} to="">
+                                    <article className="p-3.5 mr-1.5 border rounded-md bg-white w-36 ">
+                                        <div>
+                                            <img
+                                                className="w-16 h-24 m-auto"
+                                                src="/images/taste-wild-dog-food.jpg"
+                                                alt="Dog Food"
+                                            ></img>
+                                            <span className="text-sm font-medium">
+                                                Taste Of the Wild
+                                            </span>
+                                            <p className="text-xs">
+                                                High Prarie Grain-Free Dry Dog
+                                                Food
+                                            </p>
+                                            <div className="p-1 my-2 text-xs text-white rounded bg-chewyGreen">
+                                                Save 40% at Checkout
+                                            </div>
+                                            <span className="font-semibold text-chewyRed ">
+                                                $24.99
+                                            </span>
+                                            <div className="flex items-center">
+                                                <>Stars</>&nbsp;
+                                                <span className="text-xs text-chewyGray">
+                                                    88
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-semibold">Explore More</h1>
+                        <div className="flex">
+                            {[
+                                "Holiday Shop",
+                                "Our Current Favorites",
+                                2,
+                                3,
+                                4,
+                            ].map((article, index) => (
+                                <Link key={index} to="">
+                                    <article className="p-3.5 mr-1.5 border rounded-md bg-white w-36 h-full text-center">
+                                        <img
+                                            src="/images/holiday-shop.webp"
+                                            className="mb-3"
+                                            alt="Holiday Shop"
+                                        ></img>
+                                        <Link
+                                            to=""
+                                            className="text-chewyBlue-dark"
+                                        >
+                                            {article}
+                                        </Link>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                     <img
                         src="/images/adopt-a-dog-month-small.webp"
                         className="object-none h-32"
