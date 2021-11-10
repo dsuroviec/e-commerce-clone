@@ -35,7 +35,12 @@ export const Header = () => {
                         </button>
                     </div>
                     &nbsp;&nbsp;
-                    <h1 className="text-3xl font-Fruktur">Crunchy</h1>
+                    <h1
+                        onClick={() => (window.location.href = "/")}
+                        className="text-3xl font-Fruktur"
+                    >
+                        Crunchy
+                    </h1>
                     <div className="flex">
                         &nbsp;&nbsp;
                         <Link to="/logIn">

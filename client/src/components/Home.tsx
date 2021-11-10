@@ -51,7 +51,7 @@ export const Home = () => {
 
     return (
         <>
-            <div className="">
+            <div className="mb-8">
                 <Slider {...carouselProps}>
                     {[
                         "autoshipping.jpg",
@@ -72,13 +72,15 @@ export const Home = () => {
                 </Slider>
             </div>
 
-            <section
-                className="w-full overflow-hidden bg-chewyGray-lighter "
-                id="home-content"
-            >
-                <div className="p-3">
-                    <h1 className="text-xl font-semibold">Shop by Category</h1>
-                    <div className="flex gap-2 overflow-auto min-w-max">
+            <section className=" bg-chewyGray-lighter " id="home-content">
+                <div className="w-full p-3">
+                    <h1 className="w-full text-xl font-semibold">
+                        Shop by Category
+                    </h1>
+                    <div
+                        style={{ scrollSnapType: "x mandatory" }}
+                        className="flex gap-3 overflow-auto"
+                    >
                         {categories
                             ?.filter(
                                 (category) =>
@@ -86,25 +88,23 @@ export const Home = () => {
                             )
                             .map((category, index) => (
                                 <Link
+                                    className="p-4 mb-3 text-center border rounded text-chewyBlue-dark "
+                                    style={{
+                                        scrollSnapAlign: "center",
+                                    }}
                                     key={index}
                                     to={`/category/${category?.id}`}
-                                    className="block pt-3 text-md text-chewyBlue-dark"
                                 >
-                                    <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
+                                    <div className="rounded w-36 h-36 none">
                                         <img
-                                            className="block"
                                             src={`/images/${category.tile}`}
                                             alt={category.tile}
                                         />
-
-                                        {category.name}
                                     </div>
+                                    {category.name}
                                 </Link>
                             ))}
                     </div>
-
-                    <div className="border">Hello</div>
-
                     <div className="p-1">
                         <h1 className="mb-3 text-xl font-semibold">
                             New Puppy or Kitten?
