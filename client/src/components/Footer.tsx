@@ -1,13 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";
+import GlobalErrorContext from "../contexts/GlobalErrorContext";
 
 export const Footer = () => {
+    const { setIsErrorOpen } = useContext(GlobalErrorContext)!;
     return (
         <>
-            <footer className="bg-white ">
+            <footer
+                onClick={() => setIsErrorOpen(true)}
+                className="grid gap-4 bg-white "
+            >
                 <a
                     href="#top"
-                    className="block w-full m-auto text-center border-t-2 "
+                    className="block w-full m-auto text-center border-t "
                     rel="noreferrer"
                 >
                     <HiChevronUp
@@ -94,15 +100,14 @@ export const Footer = () => {
                         />
                     ))}
                 </div>
-                <div className="text-sm text-center border-t-2 text-chewyGray-darker">
-                    <p>Copyright © 2021 Chewy, Inc.</p>
-
+                <div className="text-sm text-center border-t text-chewyGray-darker">
+                    <p>Copyright © 2021 Crunchy, Inc.</p>
                     <nav className="">
                         <ul className="flex justify-center ">
                             <li>
                                 <a
                                     className="underline "
-                                    href="/app/content/terms"
+                                    href="javascript:void(0)"
                                 >
                                     Terms
                                 </a>
@@ -111,7 +116,7 @@ export const Footer = () => {
                             <li className=" dash">
                                 <a
                                     className="underline "
-                                    href="/app/content/privacy"
+                                    href="javascript:void(0)"
                                 >
                                     Privacy
                                 </a>
@@ -120,27 +125,18 @@ export const Footer = () => {
                             <li className=" dash">
                                 <a
                                     className="underline "
-                                    href="/app/content/accessibility-information"
+                                    href="javascript:void(0)"
                                 >
                                     Accessibility
                                 </a>
                             </li>
                         </ul>
+
                         <ul className="flex justify-center">
                             <li>
                                 <a
                                     className="underline "
-                                    href="/app/content/ca-supply-chain-disclosure"
-                                >
-                                    California Supply Chains Act
-                                </a>
-                            </li>
-                        </ul>
-                        <ul className="flex justify-center">
-                            <li>
-                                <a
-                                    className="underline "
-                                    href="/app/content/about-us"
+                                    href="javascript:void(0)"
                                 >
                                     About
                                 </a>
@@ -149,26 +145,26 @@ export const Footer = () => {
                             <li className="dash">
                                 <a
                                     className="underline "
-                                    href="//investor.chewy.com"
+                                    href="javascript:void(0)"
                                 >
-                                    Investor Relations
-                                </a>
-                            </li>
-                            &nbsp;
-                            <li className="dash">
-                                <a className="underline " href="/jobs">
                                     Jobs
                                 </a>
                             </li>
                             &nbsp;
                             <li className="dash">
-                                <a className="underline " href="//be.chewy.com">
+                                <a
+                                    className="underline "
+                                    href="javascript:void(0)"
+                                >
                                     Blog
                                 </a>
                             </li>
                             &nbsp;
                             <li className="dash">
-                                <a className="underline " href="/gift-guide">
+                                <a
+                                    className="underline "
+                                    href="javascript:void(0)"
+                                >
                                     Gift Guide
                                 </a>
                             </li>
@@ -176,6 +172,7 @@ export const Footer = () => {
                     </nav>
                 </div>
             </footer>
+
             <br />
             <br />
             <br />
