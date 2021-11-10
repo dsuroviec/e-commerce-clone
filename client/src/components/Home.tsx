@@ -6,32 +6,11 @@ import { Button } from "./Button";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {
-    // HiSun,
-    // HiMoon,
-    HiChevronRight,
-} from "react-icons/hi";
+import // HiSun,
+// HiMoon,
+"react-icons/hi";
 import { Category, Brand } from "../types";
-// function SampleNextArrow(props: any) {
-//     const { className, style, onClick } = props;
-//     return (
-//         <div
-//             className={className}
-//             style={{ ...style, display: "block", background: "red" }}
-//             onClick={onClick}
-//         />
-//     );
-// }
-// function SamplePrevArrow(props: any) {
-//     const { className, style, onClick } = props;
-//     return (
-//         <div
-//             className={className}
-//             style={{ ...style, display: "block", background: "green" }}
-//             onClick={onClick}
-//         />
-//     );
-// }
+
 export const Home = () => {
     const [categories, setCategories] = useState<Category[] | null>(null);
     const [brands, setBrands] = useState<Brand[] | null>(null);
@@ -67,10 +46,7 @@ export const Home = () => {
         pauseOnDotsHover: true,
         pauseOnHover: true,
         arrows: true,
-        // nextArrow: <SampleNextArrow />,
-        // prevArrow: <SamplePrevArrow />,
         dotsClass: "slick-dots",
-        // appendDots: (dots: any) => <ul>{dots}</ul>,
     };
 
     return (
@@ -95,30 +71,14 @@ export const Home = () => {
                     ))}
                 </Slider>
             </div>
+
             <section
                 className="w-full overflow-hidden bg-chewyGray-lighter "
                 id="home-content"
             >
-                {/* <div className="relative p-0 h-44">
-                            className={clsx(
-                                "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
-                                {
-                                    "bg-chewyBlue": index === carouselIndex,
-                                }
-                            )}
-                </div> */}
                 <div className="p-3">
                     <h1 className="text-xl font-semibold">Shop by Category</h1>
-
-                    {/* {(() => {
-                        const data = fetch("api/products/3").then((response) =>
-                            response.json()
-                        );
-                        Promise.resolve(data).then((stuff) => {
-                            return <div>{stuff[0].name}</div>;
-                        });
-                    })()} */}
-                    <div className="flex gap-2 min-w-max">
+                    <div className="flex gap-2 overflow-auto min-w-max">
                         {categories
                             ?.filter(
                                 (category) =>
@@ -142,61 +102,11 @@ export const Home = () => {
                                 </Link>
                             ))}
                     </div>
-                    <h1 className="text-xl font-semibold">
-                        Customer Favorites
-                    </h1>
-                    <div className="flex min-w-max">
-                        {[
-                            "Dog Food",
-                            "Dog Toys",
-                            "Dog Treats",
-                            "Cat Litter",
-                            "Cat Food",
-                            "Cat Trees, Condos & Scratchers",
-                            "Dog Beds",
-                            "Dog Flea & Ticks",
-                            "Cat Toys",
-                            "Dog Supplements",
-                            "Football Shop",
-                            "Chewy Pharmacy",
-                        ]
-                            .slice(0, 3)
-                            .map((category, index) => (
-                                <div
-                                    key={index}
-                                    className="w-40 h-auto p-4 bg-white mr-1.5 text-center border rounded-md hover:border-opacity-1 "
-                                >
-                                    <img
-                                        className="block"
-                                        src={`/images/${
-                                            [
-                                                "dog-food-tile.webp",
-                                                "dog-toys-tile.webp",
-                                                "dog-treats-tile.webp",
-                                                "cat-litter-tile.webp",
-                                                "cat-food-tile.webp",
-                                                "cat-trees-tile.webp",
-                                                "dog-beds-tile.webp",
-                                                "dog-flea-tick-tile.webp",
-                                                "cat-toys-tile.webp",
-                                                "dog-supplements-tile.webp",
-                                                "football-shop-tile.webp",
-                                                "chewy-pharmacy-tile.webp",
-                                            ][index]
-                                        }`}
-                                        alt={category}
-                                    />
-                                    <Link
-                                        to="/"
-                                        className="block pt-3 text-md text-chewyBlue-dark"
-                                    >
-                                        {category}
-                                    </Link>
-                                </div>
-                            ))}
-                    </div>
+
+                    <div className="border">Hello</div>
+
                     <div className="p-1">
-                        <h1 className="text-xl font-semibold">
+                        <h1 className="mb-3 text-xl font-semibold">
                             New Puppy or Kitten?
                         </h1>
                         <Link to="/category/9">
@@ -219,23 +129,14 @@ export const Home = () => {
                         </Link>
                     </div>
                     <div>
-                        <h1 className="text-xl font-semibold">
-                            2,000+ Brands in Stock!
+                        <h1 className="mb-3 text-xl font-semibold">
+                            Find Products by Your Favorite Brand!
                         </h1>
-                        <Link
-                            to="/"
-                            className="flex items-center text-chewyBlue-dark"
-                        >
-                            <span className="mt-0.5 text-sm hover:underline ">
-                                Shop All
-                            </span>
-                            <HiChevronRight size={24} />
-                        </Link>
 
                         <div className="flex flex-wrap w-full ">
                             {brands?.slice(0 - 9)?.map((brand) => (
                                 <Link key={brand.id} to={`/brand/${brand.id}`}>
-                                    <picture className="flex justify-center text-center bg-white border-1">
+                                    <picture className="flex justify-center text-center bg-white border">
                                         <img
                                             className="p-2 w-28 h-28"
                                             src={`/images/${brand.logo}`}
@@ -246,11 +147,11 @@ export const Home = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="p-3 bg-chewyBlue-light">
+                    <div className="p-5 bg-chewyBlue-light">
                         <h1 className="text-xl font-semibold">
                             Join the Chewy Pack
                         </h1>
-                        <p className="text-sm">
+                        <p className="text-sm ">
                             Sign up to get emails about the latest deals,
                             product drops, pet health tips and more!
                         </p>
@@ -262,28 +163,8 @@ export const Home = () => {
                             Sign Up
                         </Button>
                     </div>
-
-                    <div className="">
-                        <h1 className="text-xl font-semibold">Pet Health</h1>
-                        <img
-                            src="/images/pet-wellness.jpg"
-                            alt="pet wellness"
-                        ></img>
-                        &nbsp;
-                        <Link className="text-sm text-chewyBlue-darker" to="">
-                            Pet Wellness
-                        </Link>
-                        <img
-                            src="/images/connect-with-vet.jpg"
-                            alt="Connect With a Vet"
-                        />
-                        &nbsp;
-                        <Link className="text-sm text-chewyBlue-darker" to="">
-                            Connect with a Vet
-                        </Link>
-                    </div>
-
                     <img
+                        onClick={() => setIsErrorOpen(true)}
                         src="/images/adopt-a-dog-month-small.webp"
                         className="object-none h-32"
                         alt="adopt a dog"
