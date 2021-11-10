@@ -6,10 +6,6 @@ module.exports = {
     },
     darkMode: "class", // or 'media' or 'class'
     theme: {
-        borderWidth: {
-            DEFAULT: "2px",
-            1: "1px",
-        },
         fontFamily: {
             Fruktur: ["Fruktur"],
         },

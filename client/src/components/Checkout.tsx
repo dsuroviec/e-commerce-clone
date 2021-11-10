@@ -32,7 +32,7 @@ export const Checkout = () => {
                         Shipping Address
                     </h1>
                     <div className="flex items-center justify-between">
-                        <button className="flex items-center justify-between border-opacity-50 rounded-sm border-1 text-chewyGray-darker">
+                        <button className="flex items-center justify-between border-opacity-50 rounded-sm border text-chewyGray-darker">
                             <address className="w-2/3 p-1 text-left">
                                 <strong>John Doe</strong> 867 Yellow Brick Road,
                                 FunkyTown, Pennsylvania 5309
