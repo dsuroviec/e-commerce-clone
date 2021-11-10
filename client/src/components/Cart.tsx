@@ -42,7 +42,7 @@ export const Cart = () => {
                         Your Shopping Cart
                     </h1>
 
-                    <div className="p-4 border-t-2 bg-chewyGray-lighter">
+                    <div className="p-4 border-t bg-chewyGray-lighter">
                         <span className="flex items-center justify-center text-chewyGray-darkest text-chewyGray-dark">
                             <strong>
                                 {`$${Math.max(
@@ -106,7 +106,7 @@ export const Cart = () => {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="mt-3 border-t-1 ">
+                                <div className="mt-3 border-t ">
                                     <div className="flex my-4 text-sm">
                                         <img
                                             className="w-20"

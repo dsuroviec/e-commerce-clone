@@ -230,7 +230,7 @@ export const Home = () => {
                         <div className="flex flex-wrap w-full ">
                             {brands?.slice(0 - 9)?.map((brand) => (
                                 <Link key={brand.id} to={`/brand/${brand.id}`}>
-                                    <picture className="flex justify-center text-center bg-white border-1">
+                                    <picture className="flex justify-center text-center bg-white border">
                                         <img
                                             className="p-2 w-28 h-28"
                                             src={`/images/${brand.logo}`}
