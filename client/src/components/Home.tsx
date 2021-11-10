@@ -73,13 +73,13 @@ export const Home = () => {
             </div>
 
             <section className=" bg-chewyGray-lighter " id="home-content">
-                <div className="w-full p-3">
-                    <h1 className="w-full text-xl font-semibold">
+                <div className="w-full p-3 ">
+                    <h1 className="w-full mb-3 text-xl font-semibold">
                         Shop by Category
                     </h1>
                     <div
                         style={{ scrollSnapType: "x mandatory" }}
-                        className="flex gap-3 overflow-auto"
+                        className="flex gap-3 mb-3 overflow-auto"
                     >
                         {categories
                             ?.filter(
@@ -105,7 +105,7 @@ export const Home = () => {
                                 </Link>
                             ))}
                     </div>
-                    <div className="p-1">
+                    <div className="p-1 mb-3 ">
                         <h1 className="mb-3 text-xl font-semibold">
                             New Puppy or Kitten?
                         </h1>
@@ -128,7 +128,7 @@ export const Home = () => {
                             </span>
                         </Link>
                     </div>
-                    <div>
+                    <div className="mb-6 ">
                         <h1 className="mb-3 text-xl font-semibold">
                             Find Products by Your Favorite Brand!
                         </h1>
@@ -147,7 +147,7 @@ export const Home = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="p-5 bg-chewyBlue-light">
+                    <div className="p-5 mb-6 bg-chewyBlue-light">
                         <h1 className="text-xl font-semibold">
                             Join the Chewy Pack
                         </h1>

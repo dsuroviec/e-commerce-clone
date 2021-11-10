@@ -7,13 +7,10 @@ export const Footer = () => {
     const { setIsErrorOpen } = useContext(GlobalErrorContext)!;
     return (
         <>
-            <footer
-                onClick={() => setIsErrorOpen(true)}
-                className="grid gap-4 bg-white "
-            >
+            <footer onClick={() => setIsErrorOpen(true)} className="bg-white ">
                 <a
                     href="#top"
-                    className="block w-full m-auto text-center border-t "
+                    className="block w-full m-auto mb-3 text-center border-t "
                     rel="noreferrer"
                 >
                     <HiChevronUp
@@ -25,7 +22,7 @@ export const Footer = () => {
                     </span>
                 </a>
                 <section
-                    className="flex items-center px-3 py-4"
+                    className="flex items-center px-3 py-4 mb-3"
                     style={{
                         backgroundImage: 'url("/images/mobile-background.jpg")',
                     }}
@@ -67,7 +64,7 @@ export const Footer = () => {
                         </a>
                     </div>
                 </section>
-                <div className="text-center">
+                <div className="mb-3 text-center">
                     <span className="block font-medium text-chewyGray-darker">
                         We're here 24/7
                     </span>
@@ -83,7 +80,7 @@ export const Footer = () => {
                         Message Us
                     </Link>
                 </div>
-                <div className="flex items-center justify-center border-t-8 border-chewyGray-light ">
+                <div className="flex items-center justify-center pt-3 mb-3 border-t-8 border-chewyGray-light ">
                     {[
                         { image: "pharmacy.jpg", w: "w-24" },
                         { image: "legitscript.png", w: "w-16" },
@@ -100,7 +97,7 @@ export const Footer = () => {
                         />
                     ))}
                 </div>
-                <div className="text-sm text-center border-t text-chewyGray-darker">
+                <div className="pt-4 text-sm text-center border-t text-chewyGray-darker">
                     <p>Copyright © 2021 Crunchy, Inc.</p>
                     <nav className="">
                         <ul className="flex justify-center ">
