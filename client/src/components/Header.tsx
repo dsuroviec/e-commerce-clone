@@ -9,6 +9,7 @@ import {
     HiMail,
     HiChatAlt2,
     HiShoppingCart,
+    HiChevronDown,
     // HiSun,
     // HiMoon,
     HiMenu,
@@ -30,9 +31,23 @@ export const Header = () => {
             >
                 <div className="flex items-center justify-between h-10 px-1.5 ">
                     <div id="menu">
-                        <button className="flex items-centertext-white">
-                            <HiMenu size={27} />
-                        </button>
+                        <Popper icon={<HiMenu size={27} title="" />}>
+                            <div className="p-4 border-t text-chewyGray-darker w-80">
+                                Fish
+                            </div>
+                            <div className="p-4 border-t text-chewyGray-darker w-80">
+                                Fish
+                            </div>
+                            <div className="p-4 border-t text-chewyGray-darker w-80">
+                                Fish
+                            </div>
+                            <div className="p-4 border-t text-chewyGray-darker w-80">
+                                Fish
+                            </div>
+                            <div className="p-4 border-t text-chewyGray-darker w-80">
+                                Fish
+                            </div>
+                        </Popper>
                     </div>
                     &nbsp;&nbsp;
                     <h1
