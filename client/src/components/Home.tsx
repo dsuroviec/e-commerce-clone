@@ -110,13 +110,15 @@ export const Home = () => {
                             New Puppy or Kitten?
                         </h1>
                         <Link to="/category/9">
-                            <img
-                                src="/images/new-puppy.jpg"
-                                alt="new puppy"
-                            ></img>
-                            <span className="text-sm hover:underline text-chewyBlue-dark">
-                                Puppy Shop
-                            </span>
+                            <div className="mb-3">
+                                <img
+                                    src="/images/new-puppy.jpg"
+                                    alt="new puppy"
+                                ></img>
+                                <span className="mb-3 text-sm hover:underline text-chewyBlue-dark">
+                                    Puppy Shop
+                                </span>
+                            </div>
                         </Link>
                         <Link to="/category/10">
                             <img
@@ -155,7 +157,7 @@ export const Home = () => {
                             Sign up to get emails about the latest deals,
                             product drops, pet health tips and more!
                         </p>
-                        <Input placeholder="Email"></Input>
+                        <Input className="my-2" placeholder="Email"></Input>
                         <Button
                             onClick={() => setIsErrorOpen(true)}
                             className="bg-chewyBlue-darker"

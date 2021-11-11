@@ -169,27 +169,10 @@ export const Footer = () => {
                     </nav>
                 </div>
             </footer>
-
             <br />
             <br />
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <br /> <br /> <br /> <br /> <br /> <br /> <br />
         </>
     );
 };
