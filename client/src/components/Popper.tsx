@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
 
@@ -38,28 +37,16 @@ export const Popper = (props: any) => {
     return (
         <>
             <div
-                className=" 2xl:flex 2xl:px-2 2xl:items-center 2xl:border-r 2xl:border-opacity-30"
                 onMouseEnter={() => setHoverLink(true)}
                 onMouseLeave={() => setHoverLink(false)}
                 onFocus={() => setHoverLink(true)}
             >
-                {/* THIS IS SUPPOSED TO BE THE GLOBAL OVERLAY, NEEDS WORK, doesn't allow to close options */}
-                {/* {showOptions && (
-                <div className="fixed inset-0 z-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
-            )} */}
-                {props.title && (
-                    <Link to="/">
-                        <span className="2xl:font-bold">{props.title} </span>
-                    </Link>
-                )}
                 <button
                     ref={setReferenceLink}
                     onClick={() => {
                         setShowOptions(!showOptions);
                     }}
-                >
-                    {props.icon && props.icon}
-                </button>
+                ></button>
             </div>
 
             {showOptions &&
