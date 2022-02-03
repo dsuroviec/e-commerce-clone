@@ -3,10 +3,16 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "dev": "node-dev --inspect src/server.ts"
+        "dev": "node-dev -r dotenv/config --inspect src/server.ts",
+        "postinstall": "cd client && npm i",
+        "build": "npm run migrate-db && npm run build:server && npm run build:client",
+        "build:client": "cd client && npm run build",
+        "build:server": "tsc",
+        "start": "node dist/server.js",
+        "migrate-db": "node scripts/migrate-db.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "Darren Suroviec",
     "license": "ISC",
     "dependencies": {
         "@types/bcryptjs": "^2.4.2",
