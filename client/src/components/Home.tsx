@@ -50,7 +50,7 @@ export const Home = () => {
     };
 
     return (
-        <>
+        <div className="m-auto xl:w-10/12">
             <div className="mb-8">
                 <Slider {...carouselProps}>
                     {[
@@ -63,7 +63,7 @@ export const Home = () => {
                     ].map((item, index) => (
                         <div key={index}>
                             <img
-                                className=""
+                                className="w-full"
                                 src={`/images/${item}`}
                                 alt="hero"
                             ></img>
@@ -105,42 +105,44 @@ export const Home = () => {
                                 </Link>
                             ))}
                     </div>
-                    <div className="p-1 mb-3 ">
+                    <div className="p-1 mb-3">
                         <h1 className="mb-3 text-xl font-semibold">
                             New Puppy or Kitten?
                         </h1>
-                        <Link to="/category/9">
-                            <div className="mb-3">
+                        <div className="sm:flex sm:gap-4">
+                            <Link to="/category/9">
+                                <div className="mb-3">
+                                    <img
+                                        src="/images/new-puppy.jpg"
+                                        alt="new puppy"
+                                    ></img>
+                                    <span className="mb-3 text-sm hover:underline text-chewyBlue-dark">
+                                        Puppy Shop
+                                    </span>
+                                </div>
+                            </Link>
+                            <Link to="/category/10">
                                 <img
-                                    src="/images/new-puppy.jpg"
-                                    alt="new puppy"
+                                    src="/images/new-kitten.jpg"
+                                    alt="new kitten"
                                 ></img>
-                                <span className="mb-3 text-sm hover:underline text-chewyBlue-dark">
-                                    Puppy Shop
+                                <span className="text-sm hover:underline text-chewyBlue-dark">
+                                    Kitten Shop
                                 </span>
-                            </div>
-                        </Link>
-                        <Link to="/category/10">
-                            <img
-                                src="/images/new-kitten.jpg"
-                                alt="new kitten"
-                            ></img>
-                            <span className="text-sm hover:underline text-chewyBlue-dark">
-                                Kitten Shop
-                            </span>
-                        </Link>
+                            </Link>
+                        </div>
                     </div>
                     <div className="mb-6 ">
                         <h1 className="mb-3 text-xl font-semibold">
                             Find Products by Your Favorite Brand!
                         </h1>
 
-                        <div className="flex flex-wrap w-full ">
+                        <div className="flex flex-wrap w-full gap-3 xl:justify-center ">
                             {brands?.slice(0 - 9)?.map((brand) => (
                                 <Link key={brand.id} to={`/brand/${brand.id}`}>
-                                    <picture className="flex justify-center text-center bg-white border">
+                                    <picture className="flex justify-center text-center bg-white border rounded">
                                         <img
-                                            className="p-2 w-28 h-28"
+                                            className="p-3 w-28 h-28"
                                             src={`/images/${brand.logo}`}
                                             alt={brand.name}
                                         />
@@ -149,21 +151,29 @@ export const Home = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="p-5 mb-6 bg-chewyBlue-light">
-                        <h1 className="text-xl font-semibold">
-                            Join the Chewy Pack
-                        </h1>
-                        <p className="text-sm ">
-                            Sign up to get emails about the latest deals,
-                            product drops, pet health tips and more!
-                        </p>
-                        <Input className="my-2" placeholder="Email"></Input>
-                        <Button
-                            onClick={() => setIsErrorOpen(true)}
-                            className="bg-chewyBlue-darker"
-                        >
-                            Sign Up
-                        </Button>
+                    <div className="gap-4 p-5 mb-6 text-center bg-chewyBlue-light lg:flex lg:px-40 lg:items-center ">
+                        <div className="m-auto lg:w-1/3">
+                            <h1 className="text-xl font-semibold">
+                                Join the Chewy Pack
+                            </h1>
+                            <p className="text-sm ">
+                                clearTimeout Sign up to get emails about the
+                                latest deals, product drops, pet health tips and
+                                more!
+                            </p>
+                        </div>
+                        <div className="lg:flex lg:w-2/3">
+                            <Input
+                                className="w-6/12 mr-2 md:w-8/12 lg:w-full "
+                                placeholder="Email"
+                            ></Input>
+                            <Button
+                                onClick={() => setIsErrorOpen(true)}
+                                className="bg-chewyBlue-darker"
+                            >
+                                Sign&nbsp;Up
+                            </Button>
+                        </div>
                     </div>
                     <img
                         onClick={() => setIsErrorOpen(true)}
@@ -173,6 +183,6 @@ export const Home = () => {
                     />
                 </div>
             </section>
-        </>
+        </div>
     );
 };
