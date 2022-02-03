@@ -7,7 +7,11 @@ export const Footer = () => {
     const { setIsErrorOpen } = useContext(GlobalErrorContext)!;
     return (
         <>
-            <footer onClick={() => setIsErrorOpen(true)} className="bg-white ">
+            <footer
+                id="mobile-footer"
+                onClick={() => setIsErrorOpen(true)}
+                className="bg-white sm:hidden "
+            >
                 <a
                     href="#top"
                     className="block w-full m-auto mb-3 text-center border-t "
@@ -22,7 +26,7 @@ export const Footer = () => {
                     </span>
                 </a>
                 <section
-                    className="flex items-center px-3 py-4 mb-3"
+                    className="flex items-center justify-center px-3 py-4 mb-3"
                     style={{
                         backgroundImage: 'url("/images/mobile-background.jpg")',
                     }}
