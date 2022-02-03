@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import {
-    Route,
-    BrowserRouter as Router,
-    Switch,
-    Redirect,
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
 } from "react-router-dom";
 import { Home } from "./components/Home";
 import { LogIn } from "./components/LogIn";
@@ -27,104 +27,105 @@ import "./App.css";
 // Create a duplicate home page, and remove some features for now
 // Finish connecting up the authorization for requests for security
 // Fix the buttons and stuff on the carousel
-// Get it deployed somewhere
 // build in responsiveness
 // put testing in one day
+// Fix images on home page for when screen sizes get larger. either find out how to scale, or use bigger images
+// Create readme for github account and figure out how to get dev setup going for other people who want to work on in. docker? docker compose?
+// when can I delete other project on old computer
+// Connect railway to main branch in e-commerce-clone repo
 
 function App() {
-    const [token, setToken] = useState<null | string>(
-        localStorage.token || null
-    );
-    const [cart, setCart] = useState<Product[] | null>(null);
+  const [token, setToken] = useState<null | string>(localStorage.token || null);
+  const [cart, setCart] = useState<Product[] | null>(null);
 
-    const [user, setUser] = useState<User>({
-        firstName: null,
-        lastName: null,
-        email: null,
-    });
+  const [user, setUser] = useState<User>({
+    firstName: null,
+    lastName: null,
+    email: null,
+  });
 
-    const [isErrorOpen, setIsErrorOpen] = useState<boolean>(false);
-    console.log(isErrorOpen, "error open");
-    // Get cart items from local storage upon initial render of cart page
-    useEffect(() => {
-        const item: any = localStorage.getItem("cart");
-        setCart(JSON.parse(item));
-    }, []);
+  const [isErrorOpen, setIsErrorOpen] = useState<boolean>(false);
+  console.log(isErrorOpen, "error open");
+  // Get cart items from local storage upon initial render of cart page
+  useEffect(() => {
+    const item: any = localStorage.getItem("cart");
+    setCart(JSON.parse(item));
+  }, []);
 
-    // // Updates local storage with cart changes
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
+  // // Updates local storage with cart changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-    useEffect(() => {
-        if (token) {
-            const user = async () => {
-                const user = await fetch("/api/me", {
-                    headers: {
-                        Authorization: `token ${token}`,
-                    },
-                }).then((response) => response.json());
-                if (user) {
-                    setUser({
-                        firstName: user.firstname,
-                        lastName: user.lastname,
-                        email: user.email,
-                    });
-                }
-            };
-            user();
+  useEffect(() => {
+    if (token) {
+      const user = async () => {
+        const user = await fetch("/api/me", {
+          headers: {
+            Authorization: `token ${token}`,
+          },
+        }).then((response) => response.json());
+        if (user) {
+          setUser({
+            firstName: user.firstname,
+            lastName: user.lastname,
+            email: user.email,
+          });
         }
-    }, [token]);
+      };
+      user();
+    }
+  }, [token]);
 
-    return (
-        <TokenContext.Provider value={{ token, setToken }}>
-            <UserContext.Provider value={{ user, setUser }}>
-                <CartContext.Provider value={{ cart, setCart }}>
-                    <GlobalErrorContext.Provider
-                        value={{
-                            isErrorOpen,
-                            setIsErrorOpen,
-                        }}
-                    >
-                        <Router>
-                            <Header />
-                            <GlobalErrorDialog />
-                            <Switch>
-                                <Route exact path="/">
-                                    <Home />
-                                </Route>
-                                <Route path="/contactUs">
-                                    <ContactUs />
-                                </Route>
-                                <Route path="/logIn">
-                                    <LogIn />
-                                </Route>
-                                <Route path="/category/:categoryID">
-                                    <CategoryProducts />
-                                </Route>
-                                <Route path="/brand/:brandID">
-                                    <BrandProducts />
-                                </Route>
-                                <Route path="/cart">
-                                    <Cart />
-                                </Route>
-                                <Route path="/checkout">
-                                    <Checkout />
-                                </Route>
-                                <Route path="/signUp">
-                                    <SignUp />
-                                </Route>
-                                <Route>
-                                    <Redirect to="/" />
-                                </Route>
-                            </Switch>
-                            <Footer />
-                        </Router>
-                    </GlobalErrorContext.Provider>
-                </CartContext.Provider>
-            </UserContext.Provider>
-        </TokenContext.Provider>
-    );
+  return (
+    <TokenContext.Provider value={{ token, setToken }}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <CartContext.Provider value={{ cart, setCart }}>
+          <GlobalErrorContext.Provider
+            value={{
+              isErrorOpen,
+              setIsErrorOpen,
+            }}
+          >
+            <Router>
+              <Header />
+              <GlobalErrorDialog />
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route path="/contactUs">
+                  <ContactUs />
+                </Route>
+                <Route path="/logIn">
+                  <LogIn />
+                </Route>
+                <Route path="/category/:categoryID">
+                  <CategoryProducts />
+                </Route>
+                <Route path="/brand/:brandID">
+                  <BrandProducts />
+                </Route>
+                <Route path="/cart">
+                  <Cart />
+                </Route>
+                <Route path="/checkout">
+                  <Checkout />
+                </Route>
+                <Route path="/signUp">
+                  <SignUp />
+                </Route>
+                <Route>
+                  <Redirect to="/" />
+                </Route>
+              </Switch>
+              <Footer />
+            </Router>
+          </GlobalErrorContext.Provider>
+        </CartContext.Provider>
+      </UserContext.Provider>
+    </TokenContext.Provider>
+  );
 }
 
 export default App;

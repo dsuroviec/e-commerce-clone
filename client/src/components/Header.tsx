@@ -25,7 +25,7 @@ export const Header = () => {
   const { cart } = useContext(CartContext)!;
 
   return (
-    <div className="block">
+    <>
       <section
         id="mobile-nav"
         className="w-full p-1 font-medium text-white bg-chewyBlue sm:hidden "
@@ -373,13 +373,6 @@ export const Header = () => {
           </div>
         </div>
       </section>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <div className="p-1 border-b ">
         <button className="flex items-center justify-center w-full">
           <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
@@ -420,6 +413,6 @@ export const Header = () => {
                 </Link>
             </div> */}
       {/* css transition groups */}
-    </div>
+    </>
   );
 };
