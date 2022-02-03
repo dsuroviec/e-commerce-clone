@@ -1,7 +1,6 @@
 import { Pool } from "pg";
 import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import dotenv from "dotenv";
 import { Request } from "express";
 
 interface CreateUserProps {
@@ -11,14 +10,7 @@ interface CreateUserProps {
     password: string;
 }
 
-dotenv.config();
-const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    port: 5432,
-    password: "Darr3nnn",
-    database: "postgres",
-});
+const pool = new Pool();
 
 export const authenticateUser = async ({
     email,

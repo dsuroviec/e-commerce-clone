@@ -1,6 +1,5 @@
 import express from "express";
-const app = express();
-app.use(express.json());
+
 import {
     authenticateUser,
     createUser,
@@ -14,6 +13,7 @@ import {
     getBrands,
     getBrand,
 } from "./databasepg";
+const app = express();
 
 app.post("/api/login", (req, res, next) => {
     authenticateUser(req.body)
@@ -94,6 +94,7 @@ app.get("/api/users", (req, res, next) => {
         .catch((error) => next(error));
 });
 
-app.listen(5000, () => {
-    console.log("The application is listening on port 5000!");
-});
+// Use static assets in the client build due to file architencture for railway integration
+app.use(express.static("client/build"));
+
+app.listen(process.env.PORT || 5000);
