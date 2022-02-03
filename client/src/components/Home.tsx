@@ -137,12 +137,12 @@ export const Home = () => {
                             Find Products by Your Favorite Brand!
                         </h1>
 
-                        <div className="flex flex-wrap w-full ">
+                        <div className="flex flex-wrap w-full gap-3 xl:justify-center ">
                             {brands?.slice(0 - 9)?.map((brand) => (
                                 <Link key={brand.id} to={`/brand/${brand.id}`}>
-                                    <picture className="flex justify-center text-center bg-white border">
+                                    <picture className="flex justify-center text-center bg-white border rounded">
                                         <img
-                                            className="p-2 w-28 h-28"
+                                            className="p-3 w-28 h-28"
                                             src={`/images/${brand.logo}`}
                                             alt={brand.name}
                                         />
@@ -157,8 +157,9 @@ export const Home = () => {
                                 Join the Chewy Pack
                             </h1>
                             <p className="text-sm ">
-                                Sign up to get emails about the latest deals,
-                                product drops, pet health tips and more!
+                                clearTimeout Sign up to get emails about the
+                                latest deals, product drops, pet health tips and
+                                more!
                             </p>
                         </div>
                         <div className="lg:flex lg:w-2/3">
