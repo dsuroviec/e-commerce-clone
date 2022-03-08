@@ -3,12 +3,12 @@ import { Redirect } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 
 export const ContactUs = () => {
-    const { token } = useContext(TokenContext)!;
-    console.log(token);
-    return (
-        <>
-            {!token && <Redirect to="login" />}
-            <h1>THIS IS ContactUs COMPONENT</h1>
-        </>
-    );
+  const { token } = useContext(TokenContext)!;
+  console.log(token);
+  return (
+    <>
+      {!token && <Redirect to="login" />}
+      <h1>THIS IS ContactUs COMPONENT</h1>
+    </>
+  );
 };

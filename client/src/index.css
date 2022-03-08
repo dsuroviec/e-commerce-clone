@@ -3,77 +3,77 @@
 @tailwind utilities;
 
 .slick-thumb {
-    background-color: "red";
-    height: "400px";
+  background-color: "red";
+  height: "400px";
 }
 
 .dash::before {
-    content: " - ";
+  content: " - ";
 }
 
 .carousel-right-enter {
-    transform: translatex(-100%);
+  transform: translatex(-100%);
 }
 .carousel-right-enter-active {
-    transform: translatex(0px);
-    transition-duration: 1000ms;
+  transform: translatex(0px);
+  transition-duration: 1000ms;
 }
 .carousel-right-exit {
-    transform: translatex(0px);
+  transform: translatex(0px);
 }
 .carousel-right-exit-active {
-    transform: translatex(100%);
-    transition-duration: 1000ms;
+  transform: translatex(100%);
+  transition-duration: 1000ms;
 }
 
 .carousel-left-enter {
-    transform: translatex(100%);
+  transform: translatex(100%);
 }
 .carousel-left-enter-active {
-    transform: translatex(0px);
-    transition-duration: 1000ms;
+  transform: translatex(0px);
+  transition-duration: 1000ms;
 }
 .carousel-left-exit {
-    transform: translatex(0px);
+  transform: translatex(0px);
 }
 .carousel-left-exit-active {
-    transform: translatex(-100%);
-    transition-duration: 1000ms;
+  transform: translatex(-100%);
+  transition-duration: 1000ms;
 }
 
 html {
-    font-family: Roboto, Arial, Helvetica, sans-serif, Fruktur;
+  font-family: Roboto, Arial, Helvetica, sans-serif, Fruktur;
 }
 
 [data-arrow],
 [data-arrow]::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: inherit;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
 }
 [data-arrow] {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 [data-arrow]::before {
-    visibility: visible;
-    content: "";
-    transform: rotate(45deg);
+  visibility: visible;
+  content: "";
+  transform: rotate(45deg);
 }
 
 [data-popper-placement^="top"] > [data-arrow] {
-    bottom: -4px;
+  bottom: -4px;
 }
 
 [data-popper-placement^="bottom"] > [data-arrow] {
-    top: -4px;
+  top: -4px;
 }
 
 [data-popper-placement^="left"] > [data-arrow] {
-    right: -4px;
+  right: -4px;
 }
 
 [data-popper-placement^="right"] > [data-arrow] {
-    left: -4px;
+  left: -4px;
 }
