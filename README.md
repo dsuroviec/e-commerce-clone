@@ -6,14 +6,28 @@ Step4. build client with npm run build:client
 
   -->
 
-# Getting Started with Create React App
+# Crunchy - An E-Commerce Clone
 
-## Available Scripts
+Tech Stack: React, Typescript, Node, Express, Postgres, React-Context, React-Router, Tailwindcss
 
-### `yarn start`
+## Notes
 
-### `yarn test`
+You may need version 16 of `node`
 
-### `yarn build`
+## Developing
 
-### `yarn eject`
+```bash
+npm install
+docker-compose-up
+npm run dev
+cd client/ && npm start
+```
+
+The application will be accessible at `:3000`
+
+<!--
+## Testing
+
+```bash
+npm test
+``` -->

@@ -5,7 +5,6 @@ import { NavDropdown } from "./NavDropdown";
 // import UserContext from "../contexts/UserContext";
 import CartContext from "../contexts/CartContext";
 import { Input } from "./Input";
-
 import {
   HiMail,
   HiChatAlt2,
