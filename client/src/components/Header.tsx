@@ -163,14 +163,7 @@ export const Header = () => {
                   FAQs
                 </Link>
                 -
-                <Link
-                  // onBlur={() => {
-                  //     setHoverHelpOptions(false);
-                  //     setHoverHelpLink(false);
-                  // }}
-                  to="/"
-                  className=" hover:underline"
-                >
+                <Link to="/" className=" hover:underline">
                   Shipping Info
                 </Link>
               </div>
@@ -260,10 +253,6 @@ export const Header = () => {
                 <Link
                   to=""
                   className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
-                  // onBlur={() => {
-                  //     setHoverAccountOptions(false);
-                  //     setHoverAccountLink(false);
-                  // }}
                 >
                   Create a Pet Profile
                 </Link>

@@ -38,6 +38,9 @@ export const NavDropdown = (props: any) => {
         onMouseEnter={() => setHoverLink(true)}
         onMouseLeave={() => setHoverLink(false)}
         onFocus={() => setHoverLink(true)}
+        onBlur={() => {
+          setHoverLink(false);
+        }}
         className={`flex items-center ml-1 `}
         ref={setReferenceLink}
         onClick={() => {
@@ -52,7 +55,6 @@ export const NavDropdown = (props: any) => {
           <div
             onMouseEnter={() => setHoverOptions(true)}
             onMouseLeave={() => setHoverOptions(false)}
-            onFocus={() => setHoverLink(true)}
             ref={setPopperLink}
             className="bg-white 2xl:rounded-b-sm 2xl:shadow-lg 2xl:w-80 2xl:ring-1 2xl:ring-black 2xl:ring-opacity-5"
             style={linkStyles.popper}
