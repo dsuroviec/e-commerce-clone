@@ -11,7 +11,7 @@ export const Cart = () => {
   const { token } = useContext(TokenContext)!;
 
   // react-router history for keep shopping button
-  let history = useNavigate();
+  let navigate = useNavigate();
 
   return (
     <>
@@ -22,10 +22,10 @@ export const Cart = () => {
 
           <Button
             className="block m-auto my-6 bg-chewyOrange"
-            onClick={() =>
-              // history.goBack()
-              console.log(history, "history")
-            }
+            onClick={() => {
+              navigate("/");
+              console.log(navigate, "history");
+            }}
           >
             Continue Shopping
           </Button>

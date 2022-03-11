@@ -50,7 +50,7 @@ export const GlobalErrorDialog = () => {
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  The touched feature is still in development. But A for effort!
+                  The touched feature is still in development.
                 </p>
               </div>
 

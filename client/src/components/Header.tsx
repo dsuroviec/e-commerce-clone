@@ -40,15 +40,14 @@ export const Header = () => {
                 </>
               }
             >
-              <div className="p-4 border-t text-chewyGray-darker w-80">
-                Fish
-              </div>
-              <div className="p-4 border-t text-chewyGray-darker w-80">
-                Fish
-              </div>
-              <div className="p-4 border-t text-chewyGray-darker w-80">
-                Fish
-              </div>
+              {categories?.map((category, index) => (
+                <Link
+                  to={`/category/${category?.id}`}
+                  className="p-4 block border-t text-chewyBlue-dark hover:underline w-40"
+                >
+                  {category.name}
+                </Link>
+              ))}
             </NavDropdown>
           </div>
           &nbsp;&nbsp;
