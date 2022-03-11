@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 import { useFormik } from "formik";
 import { Button } from "./Button";
@@ -62,7 +62,7 @@ export const LogIn = () => {
   });
   return (
     <>
-      {token && <Redirect to="/" />}
+      {token && <Navigate to="/" />}
       <div className="p-4">
         <h1 className="mt-4 mb-2 text-2xl font-light">Log In</h1>
         <form className="grid w-full gap-4" onSubmit={formik.handleSubmit}>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "./Button";
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
@@ -11,7 +11,7 @@ export const Cart = () => {
   const { token } = useContext(TokenContext)!;
 
   // react-router history for keep shopping button
-  let history = useHistory();
+  let history = useNavigate();
 
   return (
     <>

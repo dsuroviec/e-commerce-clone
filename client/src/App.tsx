@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import { Home } from "./components/Home";
 import { LogIn } from "./components/LogIn";
 import { ContactUs } from "./components/ContactUs";
@@ -87,40 +82,24 @@ function App() {
               setIsErrorOpen,
             }}
           >
-            <Router>
+            <BrowserRouter>
               <Header />
               <GlobalErrorDialog />
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/contactUs">
-                  <ContactUs />
-                </Route>
-                <Route path="/logIn">
-                  <LogIn />
-                </Route>
-                <Route path="/category/:categoryID">
-                  <CategoryProducts />
-                </Route>
-                <Route path="/brand/:brandID">
-                  <BrandProducts />
-                </Route>
-                <Route path="/cart">
-                  <Cart />
-                </Route>
-                <Route path="/checkout">
-                  <Checkout />
-                </Route>
-                <Route path="/signUp">
-                  <SignUp />
-                </Route>
-                <Route>
-                  <Redirect to="/" />
-                </Route>
-              </Switch>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contactUs" element={<ContactUs />} />
+                <Route path="/logIn" element={<LogIn />} />
+                <Route
+                  path="/category/:categoryID"
+                  element={<CategoryProducts />}
+                />
+                <Route path="/brand/:brandID" element={<BrandProducts />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/signUp" element={<SignUp />} />
+              </Routes>
               <Footer />
-            </Router>
+            </BrowserRouter>
           </GlobalErrorContext.Provider>
         </CartContext.Provider>
       </UserContext.Provider>

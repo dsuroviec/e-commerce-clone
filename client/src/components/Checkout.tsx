@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { HiChevronRight } from "react-icons/hi";
 import { Button } from "./Button";
 import { Input } from "./Input";
@@ -24,7 +24,7 @@ export const Checkout = () => {
   console.log(paymentMethod, "method");
   return (
     <>
-      {!token && <Redirect to="/login" />}
+      {!token && <Navigate to="/login" />}
 
       <div className="grid gap-8 p-3">
         <div className="grid gap-3 p-4 border rounded text-chewyGray-darker">

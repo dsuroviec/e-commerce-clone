@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import TokenContext from "../contexts/TokenContext";
 
 export const ContactUs = () => {
@@ -7,7 +7,7 @@ export const ContactUs = () => {
   console.log(token);
   return (
     <>
-      {!token && <Redirect to="login" />}
+      {!token && <Navigate to="login" />}
       <h1>THIS IS ContactUs COMPONENT</h1>
     </>
   );

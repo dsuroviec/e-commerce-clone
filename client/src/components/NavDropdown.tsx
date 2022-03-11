@@ -27,7 +27,7 @@ export const NavDropdown = (props: any) => {
     } else {
       const hide = setTimeout(() => {
         setShowOptions(false);
-      }, 200);
+      }, 150);
       return () => clearTimeout(hide);
     }
   }, [hoverLink, hoverOptions]);
