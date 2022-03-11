@@ -9,12 +9,13 @@ import "slick-carousel/slick/slick-theme.css";
 import // HiSun,
 // HiMoon,
 "react-icons/hi";
-import { Category, Brand } from "../types";
+import { Brand } from "../types";
+import CategoryContext from "../contexts/CategoryContext";
 
 export const Home = () => {
-  const [categories, setCategories] = useState<Category[] | null>(null);
   const [brands, setBrands] = useState<Brand[] | null>(null);
   const { setIsErrorOpen } = useContext(GlobalErrorContext)!;
+  const { categories } = useContext(CategoryContext)!;
 
   useEffect(() => {
     (async () => {
@@ -22,15 +23,6 @@ export const Home = () => {
         response.json()
       );
       setBrands(brands);
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const categories = await fetch("/api/categories").then((response) =>
-        response.json()
-      );
-      setCategories(categories);
     })();
   }, []);
 

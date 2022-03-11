@@ -13,9 +13,10 @@ import { Checkout } from "./components/Checkout";
 import TokenContext from "./contexts/TokenContext";
 import UserContext from "./contexts/UserContext";
 import CartContext from "./contexts/CartContext";
+import CategoryContext from "./contexts/CategoryContext";
 import GlobalErrorContext from "./contexts/GlobalErrorContext";
 import { GlobalErrorDialog } from "./components/GlobalErrorDialog";
-import { Product, User } from "./types";
+import { Product, User, Category } from "./types";
 import "./App.css";
 
 // TO DO
@@ -32,7 +33,7 @@ import "./App.css";
 function App() {
   const [token, setToken] = useState<null | string>(localStorage.token || null);
   const [cart, setCart] = useState<Product[] | null>(null);
-
+  const [categories, setCategories] = useState<Category[] | null>(null);
   const [user, setUser] = useState<User>({
     firstName: null,
     lastName: null,
@@ -72,36 +73,47 @@ function App() {
     }
   }, [token]);
 
+  useEffect(() => {
+    (async () => {
+      const categories = await fetch("/api/categories").then((response) =>
+        response.json()
+      );
+      setCategories(categories);
+    })();
+  }, []);
+
   return (
     <TokenContext.Provider value={{ token, setToken }}>
       <UserContext.Provider value={{ user, setUser }}>
-        <CartContext.Provider value={{ cart, setCart }}>
-          <GlobalErrorContext.Provider
-            value={{
-              isErrorOpen,
-              setIsErrorOpen,
-            }}
-          >
-            <BrowserRouter>
-              <Header />
-              <GlobalErrorDialog />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/contactUs" element={<ContactUs />} />
-                <Route path="/logIn" element={<LogIn />} />
-                <Route
-                  path="/category/:categoryID"
-                  element={<CategoryProducts />}
-                />
-                <Route path="/brand/:brandID" element={<BrandProducts />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/signUp" element={<SignUp />} />
-              </Routes>
-              <Footer />
-            </BrowserRouter>
-          </GlobalErrorContext.Provider>
-        </CartContext.Provider>
+        <CategoryContext.Provider value={{ categories, setCategories }}>
+          <CartContext.Provider value={{ cart, setCart }}>
+            <GlobalErrorContext.Provider
+              value={{
+                isErrorOpen,
+                setIsErrorOpen,
+              }}
+            >
+              <BrowserRouter>
+                <Header />
+                <GlobalErrorDialog />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/contactUs" element={<ContactUs />} />
+                  <Route path="/logIn" element={<LogIn />} />
+                  <Route
+                    path="/category/:categoryID"
+                    element={<CategoryProducts />}
+                  />
+                  <Route path="/brand/:brandID" element={<BrandProducts />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/signUp" element={<SignUp />} />
+                </Routes>
+                <Footer />
+              </BrowserRouter>
+            </GlobalErrorContext.Provider>
+          </CartContext.Provider>
+        </CategoryContext.Provider>
       </UserContext.Provider>
     </TokenContext.Provider>
   );

@@ -17,7 +17,7 @@ export const NavDropdown = (props: any) => {
     {
       modifiers: [
         { name: "arrow", options: { element: arrowElement } },
-        { name: "offset", options: { offset: [-150, 8] } },
+        { name: "offset", options: { offset: [0, 8] } },
       ],
     }
   );

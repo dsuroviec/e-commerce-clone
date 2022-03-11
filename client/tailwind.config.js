@@ -1,9 +1,7 @@
 module.exports = {
   // mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  options: {
-    safelist: ["color:chewyBlue"],
-  },
+
   darkMode: "class", // or 'media' or 'class'
   theme: {
     fontFamily: {

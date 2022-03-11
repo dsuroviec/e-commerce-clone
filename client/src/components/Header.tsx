@@ -16,8 +16,10 @@ import {
   HiSearch,
   HiUser,
 } from "react-icons/hi";
+import CategoryContext from "../contexts/CategoryContext";
 
 export const Header = () => {
+  const { categories } = useContext(CategoryContext)!;
   // const { token, setToken } = useContext(TokenContext)!;
   // const { user } = useContext(UserContext)!;
   // const [theme, setTheme] = useState(localStorage.theme || "light");
@@ -94,16 +96,20 @@ export const Header = () => {
               </>
             }
           >
-            <div className="p-4 border-t text-chewyGray-darker w-80">Fish</div>
-            <div className="p-4 border-t text-chewyGray-darker w-80">Fish</div>
-            <div className="p-4 border-t text-chewyGray-darker w-80">Fish</div>
-            <div className="p-4 border-t text-chewyGray-darker w-80">Fish</div>
-            <div className="p-4 border-t text-chewyGray-darker w-80">Fish</div>
+            {categories?.map((category, index) => (
+              <Link
+                className="p-4 border-t block text-chewyBlue-dark text-blue-500 border-b hover:underline cursor-pointer w-80"
+                key={index}
+                to={`/category/${category?.id}`}
+              >
+                {category.name}
+              </Link>
+            ))}
           </NavDropdown>
 
           <h1
             onClick={() => (window.location.href = "/")}
-            className="text-3xl font-Fruktur"
+            className="text-3xl font-Fruktur cursor-pointer"
           >
             Crunchy
           </h1>
