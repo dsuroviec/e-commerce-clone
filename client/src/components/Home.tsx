@@ -44,7 +44,7 @@ export const Home = () => {
   return (
     <>
       <div className="m-auto xl:w-10/12">
-        <div className="mb-8">
+        <div className="mb-8 md:hidden">
           <Slider {...carouselProps}>
             {[
               "autoshipping.jpg",
@@ -64,7 +64,21 @@ export const Home = () => {
             ))}
           </Slider>
         </div>
-
+        <div className="mb-8 hidden md:block">
+          <Slider {...carouselProps}>
+            {["hero-large.jpg", "hero-large-1.jpg", "hero-large-2.jpg"].map(
+              (item, index) => (
+                <div key={index}>
+                  <img
+                    className="w-full"
+                    src={`/images/${item}`}
+                    alt="hero"
+                  ></img>
+                </div>
+              )
+            )}
+          </Slider>
+        </div>
         <section className=" bg-chewyGray-lighter " id="home-content">
           <div className="w-full p-3 ">
             <h1 className="w-full mb-3 text-xl font-semibold">
@@ -137,7 +151,7 @@ export const Home = () => {
             </div>
             <div className="gap-4 p-5 mb-6 text-center bg-chewyBlue-light lg:flex lg:px-40 lg:items-center ">
               <div className="m-auto lg:w-1/3">
-                <h1 className="text-xl font-semibold">Join the Chewy Pack</h1>
+                <h1 className="text-xl font-semibold">Join the Crunchy Pack</h1>
                 <p className="text-sm ">
                   clearTimeout Sign up to get emails about the latest deals,
                   product drops, pet health tips and more!
@@ -156,12 +170,6 @@ export const Home = () => {
                 </Button>
               </div>
             </div>
-            <img
-              onClick={() => setIsErrorOpen(true)}
-              src="/images/adopt-a-dog-month-small.webp"
-              className="object-none h-32"
-              alt="adopt a dog"
-            />
           </div>
         </section>
       </div>
