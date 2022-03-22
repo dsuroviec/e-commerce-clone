@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavDropdown } from "./NavDropdown";
 // import TokenContext from "../contexts/TokenContext";
 // import UserContext from "../contexts/UserContext";
 import CartContext from "../contexts/CartContext";
+import { Combobox } from "@headlessui/react";
+import Search from "./Search";
 import { Input } from "./Input";
 import {
   HiMail,
@@ -24,6 +26,16 @@ export const Header = () => {
   // const { user } = useContext(UserContext)!;
   // const [theme, setTheme] = useState(localStorage.theme || "light");
   const { cart } = useContext(CartContext)!;
+
+  const inputOptions = ["hey", "there"];
+  const [selectedInputValue, setSelectedInputValue] = useState(inputOptions[0]);
+  const [query, setQuery] = useState("");
+  const filteredOptions =
+    query === ""
+      ? inputOptions
+      : inputOptions.filter((option) => {
+          return option.toLowerCase().includes(query.toLowerCase());
+        });
 
   return (
     <>
@@ -76,14 +88,16 @@ export const Header = () => {
             className="absolute text-chewyBlue-dark right-3"
             size={24}
           />
+
           <Input
+            onChange={(e) => console.log(e.target.value)}
             className=" placeholder-gray-500 w-full h-10 pl-1.5 pr-10"
             placeholder="Search"
           ></Input>
         </div>
       </section>
       {/* END MOBILE NAV */}
-      <section className="hidden h-auto p-3 text-lg text-white bg-blue-500 sm:block">
+      <section className="hidden h-auto p-3 text-lg text-white bg-chewyBlue sm:block">
         <div
           id="topNav"
           className="items-center justify-between hidden sm:flex h-11"
@@ -113,16 +127,7 @@ export const Header = () => {
             Crunchy
           </h1>
 
-          <div className="relative flex items-center w-1/3 md:w-7/12">
-            <HiSearch
-              className="absolute text-chewyBlue-dark right-3"
-              size={24}
-            />
-            <Input
-              className=" placeholder-gray-500 ml-2 w-full h-10 pl-1.5 pr-10"
-              placeholder="Search"
-            ></Input>
-          </div>
+          <Search />
           <div className="flex justify-between w-1/3 ml-1 mr-2 md:w-3/12">
             <NavDropdown
               buttonContent={
