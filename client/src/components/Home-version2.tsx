@@ -1,6 +1,5 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import GlobalErrorContext from "../contexts/GlobalErrorContext";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import Slider from "react-slick";
@@ -35,7 +34,6 @@ import { Category, Brand } from "../types";
 export const Home = () => {
   const [categories, setCategories] = useState<Category[] | null>(null);
   const [brands, setBrands] = useState<Brand[] | null>(null);
-  const { setIsErrorOpen } = useContext(GlobalErrorContext)!;
 
   useEffect(() => {
     (async () => {

@@ -40,7 +40,7 @@ function App() {
     email: null,
   });
 
-  const [isErrorOpen, setIsErrorOpen] = useState<boolean>(false);
+  const [isErrorOpen, setIsErrorOpen] = useState<boolean>(true);
   console.log(isErrorOpen, "error open");
   // Get cart items from local storage upon initial render of cart page
   useEffect(() => {

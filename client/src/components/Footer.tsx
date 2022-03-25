@@ -1,17 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";
-import GlobalErrorContext from "../contexts/GlobalErrorContext";
 
 export const Footer = () => {
-  const { setIsErrorOpen } = useContext(GlobalErrorContext)!;
   return (
     <>
-      <footer
-        id="mobile-footer"
-        onClick={() => setIsErrorOpen(true)}
-        className="bg-white sm:hidden "
-      >
+      <footer id="mobile-footer" className="bg-white sm:hidden ">
         <a
           href="#top"
           className="block w-full m-auto mb-3 text-center border-t "
@@ -69,7 +63,7 @@ export const Footer = () => {
             We're here 24/7
           </span>
           <Link to="" className="font-bold text-chewyBlue-dark">
-            1-800-672-4399
+            1-800-555-5555
           </Link>
           &nbsp;
           <span className="font-medium text-chewyGray-darker">or</span>

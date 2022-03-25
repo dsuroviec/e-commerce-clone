@@ -46,14 +46,16 @@ export const GlobalErrorDialog = () => {
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Sorry, friend!
+                Welcome!
               </Dialog.Title>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  The touched feature is still in development.
+                  Some features are for showcasing styling skills only. Auth,
+                  cart management, search, and categories are functional.
+                  Postgres handles mutations and the display is driven by it's
+                  data.
                 </p>
               </div>
-
               <div className="mt-4">
                 <button
                   type="button"

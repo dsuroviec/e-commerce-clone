@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import GlobalErrorContext from "../contexts/GlobalErrorContext";
+
 import { Input } from "./Input";
 import { Button } from "./Button";
 import Slider from "react-slick";
@@ -14,7 +14,6 @@ import CategoryContext from "../contexts/CategoryContext";
 
 export const Home = () => {
   const [brands, setBrands] = useState<Brand[] | null>(null);
-  const { setIsErrorOpen } = useContext(GlobalErrorContext)!;
   const { categories } = useContext(CategoryContext)!;
 
   useEffect(() => {
@@ -162,12 +161,7 @@ export const Home = () => {
                   className="w-6/12 mr-2 md:w-8/12 lg:w-full "
                   placeholder="Email"
                 ></Input>
-                <Button
-                  onClick={() => setIsErrorOpen(true)}
-                  className="bg-chewyBlue-darker"
-                >
-                  Sign&nbsp;Up
-                </Button>
+                <Button className="bg-chewyBlue-darker">Sign&nbsp;Up</Button>
               </div>
             </div>
           </div>
