@@ -12,8 +12,6 @@ import {
   HiChatAlt2,
   HiShoppingCart,
   HiChevronDown,
-  // HiSun,
-  // HiMoon,
   HiMenu,
   HiSearch,
   HiUser,
@@ -24,7 +22,6 @@ export const Header = () => {
   const { categories } = useContext(CategoryContext)!;
   // const { token, setToken } = useContext(TokenContext)!;
   // const { user } = useContext(UserContext)!;
-  // const [theme, setTheme] = useState(localStorage.theme || "light");
   const { cart } = useContext(CartContext)!;
 
   const inputOptions = ["hey", "there"];

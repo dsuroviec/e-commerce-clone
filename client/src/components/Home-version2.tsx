@@ -5,11 +5,7 @@ import { Button } from "./Button";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {
-  // HiSun,
-  // HiMoon,
-  HiChevronRight,
-} from "react-icons/hi";
+import { HiChevronRight } from "react-icons/hi";
 import { Category, Brand } from "../types";
 // function SampleNextArrow(props: any) {
 //     const { className, style, onClick } = props;
