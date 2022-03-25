@@ -85,7 +85,7 @@ export const Home = () => {
             </h1>
             <div
               style={{ scrollSnapType: "x mandatory" }}
-              className="flex gap-3 mb-3 overflow-auto"
+              className="flex gap-3 mb-3 overflow-auto lg:justify-center"
             >
               {categories
                 ?.filter((category) => category.id !== 10 && category.id !== 9)

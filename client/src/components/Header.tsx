@@ -172,8 +172,7 @@ export const Header = () => {
                 <div className="overflow-y-auto max-h-80">
                   <div className="p-3 border-b ">
                     <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded">
-                      <Link to="" />
-                      Sign In
+                      <Link to="/login">Log In</Link>
                     </button>
                     <div className="flex pt-3 text-xs">
                       <span className="min-w-max">New Customer?</span>

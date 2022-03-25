@@ -31,7 +31,7 @@ export const Cart = () => {
           </Button>
         </>
       ) : (
-        <>
+        <div className="max-w-[700px] mx-auto">
           <h1 className="px-4 pt-4 pb-1 text-2xl font-medium">
             Your Shopping Cart
           </h1>
@@ -142,7 +142,7 @@ export const Cart = () => {
               </div>
             </div>
           ))}
-        </>
+        </div>
       )}
     </>
   );

@@ -61,7 +61,7 @@ export const LogIn = () => {
     },
   });
   return (
-    <>
+    <div className="max-w-[700px] mx-auto">
       {token && <Navigate to="/" />}
       <div className="p-4">
         <h1 className="mt-4 mb-2 text-2xl font-light">Log In</h1>
@@ -110,6 +110,6 @@ export const LogIn = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
