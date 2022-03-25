@@ -33,7 +33,6 @@ export const Header = () => {
       : inputOptions.filter((option) => {
           return option.toLowerCase().includes(query.toLowerCase());
         });
-
   return (
     <>
       <section
@@ -51,6 +50,7 @@ export const Header = () => {
             >
               {categories?.map((category, index) => (
                 <Link
+                  key={index}
                   to={`/category/${category?.id}`}
                   className="p-4 block border-t text-chewyBlue-dark hover:underline w-40"
                 >
@@ -125,7 +125,7 @@ export const Header = () => {
                     to=""
                     className="flex justify-center text-3xl font-medium text-yellow-600 hover:underline"
                   >
-                    1-800-672-4399
+                    1-800-555-5555
                   </Link>
                 </div>
                 <div className="flex bg-gray-50">
@@ -179,7 +179,7 @@ export const Header = () => {
                       <span className="min-w-max">New Customer?</span>
                       &nbsp;
                       <Link
-                        to=""
+                        to="/signup"
                         className="text-blue-500 min-w-max hover:underline"
                       >
                         Start Here
@@ -266,43 +266,45 @@ export const Header = () => {
                     </>
                   }
                 >
-                  {true ? ( // Items in your cart? Show items
+                  {cart?.length ? ( // Items in your cart? Show items
                     <div className="overflow-y-auto w-80 max-h-80">
                       <div className="p-4 bg-gray-50">
                         <div className="flex mb-4">
                           <div className="font-bold flex-2">
                             Cart Subtotal:
-                            <span className="text-red-700">&nbsp; $80.80</span>
+                            <span className="text-red-700">
+                              &nbsp;
+                              {cart?.reduce((sum, next) => sum + next.price, 0)}
+                            </span>
                           </div>
                           <Link
-                            to="/"
+                            to="/cart"
                             className="flex justify-end flex-1 w-full text-blue-500 hover:underline"
                           >
                             Edit Cart
                           </Link>
                         </div>
                         <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded ">
-                          <Link to="/">Proceed to Checkout</Link>
+                          <Link to="/checkout">Proceed to Checkout</Link>
                         </button>
                       </div>
                       <div className="flex justify-between px-4 pt-4 font-medium">
                         <span>Recently Added:</span>
-                        <span>{`Total Items (${"3"})`}</span>
+                        <span>{`Total Items (${cart?.length})`}</span>
                       </div>
-                      {[2, 3, 4, 5].map((item, index) => (
+                      {cart?.map((item, index) => (
                         <div key={index} className="p-4 border-b ">
                           <Link to="/" className="flex">
                             <img
                               className="w-12 h-12 mt-1"
-                              src="https://d1e4pidl3fu268.cloudfront.net/4eed2f6d-4fe3-48a2-bc3f-709ff9e20d0a/TEST.jpg"
+                              src={`/images/${item.image}`}
                               alt="product"
                             ></img>
                             <div className="ml-4 text-sm">
-                              This is the desciption of the item and it is
-                              really cool because it smells like chicken
+                              {item.name}
                               <div className="block pt-1">
                                 <span className="font-bold text-red-700 ">
-                                  $55.49
+                                  {item.price}
                                 </span>
                                 &nbsp; (Qty:1)
                               </div>
@@ -329,7 +331,7 @@ export const Header = () => {
             </div>
           </div>
           <div id="bottomNav" className="hidden w-9/12 mt-4 lg:block ">
-            <div className="flex items-center justify-between font-bold">
+            <div className="flex items-center justify-start font-bold space-x-16">
               <NavDropdown
                 buttonContent={
                   <>
@@ -338,16 +340,22 @@ export const Header = () => {
                   </>
                 }
               >
-                <div>Hello!</div>
+                {categories?.map((category, index) => (
+                  <Link
+                    key={index}
+                    to={`/category/${category?.id}`}
+                    className="p-4 block border-t text-chewyBlue-dark hover:underline w-40"
+                  >
+                    {category.name}
+                  </Link>
+                ))}
               </NavDropdown>
-
+              <Link to="#brands">brands</Link>
               <Link to="/">pharmacy</Link>
-              <Link to="/">brands</Link>
-              <Link to="/">today's deals</Link>
-              <Link to="/">chewy picks</Link>
-              <Link to="/">give back</Link>
-              <Link to="/">halloween shop</Link>
-              <Link to="/">FREE 1-3 DAY SHIPPING OVER $49</Link>
+
+              {/* <Link to="/">today's deals</Link>
+              <Link to="/">chewy picks</Link> */}
+              {/* <Link to="/">give back</Link> */}
             </div>
           </div>
         </div>

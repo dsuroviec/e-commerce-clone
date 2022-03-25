@@ -17,7 +17,6 @@ export const BrandProducts = () => {
       setBrand(brand);
     })();
   }, [brandID]);
-  console.log(brand, "brand");
 
   // Gets products that match the the category param on the path
   useEffect(() => {

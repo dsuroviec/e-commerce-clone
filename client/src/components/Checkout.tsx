@@ -21,7 +21,6 @@ export const Checkout = () => {
   const { cart } = useContext(CartContext)!;
   const { token } = useContext(TokenContext)!;
   const [paymentMethod, setPaymentMethod] = useState(plans[0]);
-  console.log(paymentMethod, "method");
   return (
     <>
       {!token && <Navigate to="/login" />}

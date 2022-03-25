@@ -221,12 +221,7 @@ export const Home = () => {
               health tips and more!
             </p>
             <Input placeholder="Email"></Input>
-            <Button
-              onClick={() => setIsErrorOpen(true)}
-              className="bg-chewyBlue-darker"
-            >
-              Sign Up
-            </Button>
+            <Button className="bg-chewyBlue-darker">Sign Up</Button>
           </div>
           <div>
             <h2 className="text-xl font-semibold">

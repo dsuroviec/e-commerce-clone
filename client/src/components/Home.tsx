@@ -134,7 +134,10 @@ export const Home = () => {
                 Find Products by Your Favorite Brand!
               </h1>
 
-              <div className="flex flex-wrap w-full gap-3 xl:justify-center ">
+              <div
+                id="brands"
+                className="flex flex-wrap w-full gap-3 xl:justify-center "
+              >
                 {brands?.slice(0 - 9)?.map((brand) => (
                   <Link key={brand.id} to={`/brand/${brand.id}`}>
                     <picture className="flex justify-center text-center bg-white border rounded">

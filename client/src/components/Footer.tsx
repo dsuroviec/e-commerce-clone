@@ -94,19 +94,19 @@ export const Footer = () => {
           <nav className="">
             <ul className="flex justify-center ">
               <li>
-                <a className="underline " href="javascript:void(0)">
+                <a className="underline " href="#/">
                   Terms
                 </a>
               </li>
               &nbsp;
               <li className=" dash">
-                <a className="underline " href="javascript:void(0)">
+                <a className="underline " href="#/">
                   Privacy
                 </a>
               </li>
               &nbsp;
               <li className=" dash">
-                <a className="underline " href="javascript:void(0)">
+                <a className="underline " href="#/">
                   Accessibility
                 </a>
               </li>
@@ -114,25 +114,25 @@ export const Footer = () => {
 
             <ul className="flex justify-center">
               <li>
-                <a className="underline " href="javascript:void(0)">
+                <a className="underline " href="#/">
                   About
                 </a>
               </li>
               &nbsp;
               <li className="dash">
-                <a className="underline " href="javascript:void(0)">
+                <a className="underline " href="#/">
                   Jobs
                 </a>
               </li>
               &nbsp;
               <li className="dash">
-                <a className="underline " href="javascript:void(0)">
+                <a className="underline " href="#/">
                   Blog
                 </a>
               </li>
               &nbsp;
               <li className="dash">
-                <a className="underline " href="javascript:void(0)">
+                <a className="underline " href="#/">
                   Gift Guide
                 </a>
               </li>
