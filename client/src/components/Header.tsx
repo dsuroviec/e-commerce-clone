@@ -197,13 +197,7 @@ export const Header = () => {
                   >
                     Orders
                   </Link>
-                  <Link
-                    to=""
-                    className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
-                  >
-                    Manage Autoship
-                  </Link>
-                  <Link
+                  {/*  <Link
                     to=""
                     className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
                   >
@@ -219,32 +213,14 @@ export const Header = () => {
                     to=""
                     className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
                   >
-                    Perscriptions
-                  </Link>
-                  <Link
-                    to=""
-                    className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
-                  >
-                    My Pet Health
-                  </Link>
-                  <Link
-                    to=""
-                    className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
-                  >
                     Connect with a Vet
                   </Link>
                   <Link
                     to=""
                     className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
                   >
-                    My Resources
-                  </Link>
-                  <Link
-                    to=""
-                    className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
-                  >
                     Create a Pet Profile
-                  </Link>
+                  </Link> */}
                 </div>
               </NavDropdown>
 
@@ -350,7 +326,7 @@ export const Header = () => {
                 ))}
               </NavDropdown>
               <Link to="#brands">brands</Link>
-              <Link to="/">pharmacy</Link>
+              {/* <Link to="/">pharmacy</Link> */}
 
               {/* <Link to="/">today's deals</Link>
               <Link to="/">chewy picks</Link> */}
