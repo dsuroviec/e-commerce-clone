@@ -14,7 +14,7 @@ import {
   getBrand,
 } from "./databasepg";
 const app = express();
-
+app.use(express.json());
 app.post("/api/login", (req, res, next) => {
   authenticateUser(req.body)
     .then((token) => {
