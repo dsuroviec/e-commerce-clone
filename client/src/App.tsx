@@ -32,7 +32,6 @@ import "./App.css";
 
 function App() {
   const [token, setToken] = useState<null | string>(localStorage.token || null);
-
   const [cart, setCart] = useState<Product[] | null>(null);
   const [categories, setCategories] = useState<Category[] | null>(null);
   const [user, setUser] = useState<User>({
@@ -40,8 +39,7 @@ function App() {
     lastName: null,
     email: null,
   });
-  console.log("now theres a token!", token);
-  console.log("user", user);
+
   const [isErrorOpen, setIsErrorOpen] = useState<boolean>(true);
 
   // Get cart items from local storage upon initial render of cart page

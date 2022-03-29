@@ -16,6 +16,7 @@ import {
   HiUser,
 } from "react-icons/hi";
 import CategoryContext from "../contexts/CategoryContext";
+import { divide } from "lodash";
 
 export const Header = () => {
   const { categories } = useContext(CategoryContext)!;
@@ -110,7 +111,7 @@ export const Header = () => {
               <NavDropdown
                 buttonContent={
                   <>
-                    help
+                    help&nbsp;
                     <HiChevronDown size={22} />
                   </>
                 }
@@ -163,9 +164,12 @@ export const Header = () => {
                 buttonContent={
                   <>
                     <div>
-                      {user.firstName ? <div>{`Hi, Dare!`}</div> : null}
+                      {user.firstName ? (
+                        <div>{`Hi, ${user.firstName}`}</div>
+                      ) : null}
                       account
                     </div>
+                    &nbsp;
                     <HiChevronDown />
                   </>
                 }
@@ -191,20 +195,30 @@ export const Header = () => {
                     className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
                   >
                     Account
+                  </Link>{" "}
+                  <Link
+                    to=""
+                    className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
+                  >
+                    Orders
                   </Link>
                   {user.firstName ? (
-                    <button
-                      onClick={() => {
-                        window.localStorage.removeItem("token");
-                        setUser({
-                          firstName: null,
-                          lastName: null,
-                          email: null,
-                        });
-                      }}
-                    >
-                      {`not ${user.firstName}?  Log Out`}
-                    </button>
+                    <div className="flex lock w-full px-3 py-1 items-center">
+                      <div className="mr-2 text-chewyGray-darker text-sm">{`Not ${user.firstName}?`}</div>
+                      <button
+                        className="text-blue-500 hover:underline"
+                        onClick={() => {
+                          window.localStorage.removeItem("token");
+                          setUser({
+                            firstName: null,
+                            lastName: null,
+                            email: null,
+                          });
+                        }}
+                      >
+                        Log Out
+                      </button>
+                    </div>
                   ) : null}
                   {/* <Link
                     to="/login"
@@ -212,12 +226,6 @@ export const Header = () => {
                   >
                     Log Out
                   </Link> */}
-                  <Link
-                    to=""
-                    className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
-                  >
-                    Orders
-                  </Link>
                   {/*  <Link
                     to=""
                     className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
@@ -257,7 +265,7 @@ export const Header = () => {
                 <NavDropdown
                   buttonContent={
                     <>
-                      cart
+                      cart&nbsp;
                       <HiChevronDown size={22} />
                     </>
                   }
@@ -331,7 +339,7 @@ export const Header = () => {
               <NavDropdown
                 buttonContent={
                   <>
-                    shop
+                    shop&nbsp;
                     <HiChevronDown size={22} />
                   </>
                 }

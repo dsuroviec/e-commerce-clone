@@ -41,7 +41,7 @@ export const NavDropdown = (props: any) => {
         onBlur={() => {
           setHoverLink(false);
         }}
-        className={`flex items-center ml-1 `}
+        className={`flex items-center ml-1  `}
         ref={setReferenceLink}
         onClick={() => {
           setShowOptions(true);
