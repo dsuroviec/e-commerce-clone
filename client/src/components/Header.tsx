@@ -16,8 +16,7 @@ import {
   HiUser,
 } from "react-icons/hi";
 import CategoryContext from "../contexts/CategoryContext";
-import { divide } from "lodash";
-
+import _ from "lodash";
 export const Header = () => {
   const { categories } = useContext(CategoryContext)!;
   const { token, setToken } = useContext(TokenContext)!;
@@ -165,7 +164,7 @@ export const Header = () => {
                   <>
                     <div>
                       {user.firstName ? (
-                        <div>{`Hi, ${user.firstName}`}</div>
+                        <div>{`Hi, ${_.startCase(user.firstName)}`}</div>
                       ) : null}
                       account
                     </div>
@@ -176,9 +175,12 @@ export const Header = () => {
               >
                 <div className="overflow-y-auto max-h-80">
                   <div className="p-3 border-b ">
-                    <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded">
-                      <Link to="/login">Log In</Link>
-                    </button>
+                    <Link to="/login">
+                      {" "}
+                      <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded">
+                        Log In
+                      </button>
+                    </Link>
                     <div className="flex pt-3 text-xs">
                       <span className="min-w-max">New Customer?</span>
                       &nbsp;
@@ -204,11 +206,14 @@ export const Header = () => {
                   </Link>
                   {user.firstName ? (
                     <div className="flex lock w-full px-3 py-1 items-center">
-                      <div className="mr-2 text-chewyGray-darker text-sm">{`Not ${user.firstName}?`}</div>
+                      <div className="mr-2 text-chewyGray-darker text-sm">{`Not ${_.startCase(
+                        user.firstName
+                      )}?`}</div>
                       <button
                         className="text-blue-500 hover:underline"
                         onClick={() => {
                           window.localStorage.removeItem("token");
+                          setToken(null);
                           setUser({
                             firstName: null,
                             lastName: null,

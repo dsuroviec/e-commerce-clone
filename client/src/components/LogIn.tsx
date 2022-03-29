@@ -60,6 +60,7 @@ export const LogIn = () => {
       }
     },
   });
+  console.log(token, "token in the login");
   return (
     <div className="max-w-[700px] mx-auto">
       {token && <Navigate to="/" />}
