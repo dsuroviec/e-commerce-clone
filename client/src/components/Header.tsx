@@ -1,10 +1,9 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavDropdown } from "./NavDropdown";
-// import TokenContext from "../contexts/TokenContext";
-// import UserContext from "../contexts/UserContext";
+import TokenContext from "../contexts/TokenContext";
 import CartContext from "../contexts/CartContext";
-import { Combobox } from "@headlessui/react";
+import UserContext from "../contexts/UserContext";
 import Search from "./Search";
 import { Input } from "./Input";
 import {
@@ -20,10 +19,9 @@ import CategoryContext from "../contexts/CategoryContext";
 
 export const Header = () => {
   const { categories } = useContext(CategoryContext)!;
-  // const { token, setToken } = useContext(TokenContext)!;
-  // const { user } = useContext(UserContext)!;
+  const { token, setToken } = useContext(TokenContext)!;
+  const { user, setUser } = useContext(UserContext)!;
   const { cart } = useContext(CartContext)!;
-
   const inputOptions = ["hey", "there"];
   const [selectedInputValue, setSelectedInputValue] = useState(inputOptions[0]);
   const [query, setQuery] = useState("");
@@ -164,7 +162,10 @@ export const Header = () => {
               <NavDropdown
                 buttonContent={
                   <>
-                    account
+                    <div>
+                      {user.firstName ? <div>{`Hi, Dare!`}</div> : null}
+                      account
+                    </div>
                     <HiChevronDown />
                   </>
                 }
@@ -191,6 +192,26 @@ export const Header = () => {
                   >
                     Account
                   </Link>
+                  {user.firstName ? (
+                    <button
+                      onClick={() => {
+                        window.localStorage.removeItem("token");
+                        setUser({
+                          firstName: null,
+                          lastName: null,
+                          email: null,
+                        });
+                      }}
+                    >
+                      {`not ${user.firstName}?  Log Out`}
+                    </button>
+                  ) : null}
+                  {/* <Link
+                    to="/login"
+                    className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
+                  >
+                    Log Out
+                  </Link> */}
                   <Link
                     to=""
                     className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
@@ -225,7 +246,7 @@ export const Header = () => {
               </NavDropdown>
 
               <div className="border-r border-opacity-30" />
-              <div className="flex ">
+              <div className="flex items-center ">
                 <Link className="relative mr-2" to="/cart">
                   <HiShoppingCart size={27} />
                   <div className="absolute flex items-center justify-center w-5 h-5 text-black rounded-full -top-2 left-3 bg-chewyYellow">
