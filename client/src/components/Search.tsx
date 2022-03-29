@@ -1,6 +1,6 @@
 import { Fragment, useState, useContext } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import { HiOutlineCheck, HiOutlineSelector } from "react-icons/hi";
+import { HiOutlineCheck, HiOutlineSelector, HiSearch } from "react-icons/hi";
 import CategoryContext from "../contexts/CategoryContext";
 
 export default function Search() {
@@ -17,23 +17,27 @@ export default function Search() {
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
-
+  console.log(selected, "selected");
   return (
-    <div className="w-72 w-1/3 md:w-7/12">
-      <Combobox value={selected} onChange={setSelected}>
-        <div className="relative mt-1">
+    <div className="w-full relative flex items-center md:w-7/12">
+      <HiSearch
+        className="absolute text-chewyBlue-dark right-3 z-10"
+        size={24}
+      />
+      <Combobox value={selected} onChange={(event) => setSelected(event)}>
+        <div className="relative w-full mt-1">
           <div className="relative w-full text-left bg-white rounded-lg shadow-md cursor-default  overflow-hidden">
             <Combobox.Input
               className="w-full py-2 pl-3 pr-10  text-gray-900"
               displayValue={(person: any) => person.name}
               onChange={(event) => setQuery(event.target.value)}
             />
-            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+            {/* <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <HiOutlineSelector
                 className="w-5 h-5 text-gray-400"
                 aria-hidden="true"
               />
-            </Combobox.Button>
+            </Combobox.Button> */}
           </div>
           <Transition
             as={Fragment}
@@ -61,7 +65,7 @@ export default function Search() {
                     {({ selected, active }) => (
                       <>
                         <span
-                          className={`block truncate ${
+                          className={`block truncate pl-3 ${
                             selected ? "font-medium" : "font-normal"
                           }`}
                         >

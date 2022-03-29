@@ -22,15 +22,7 @@ export const Header = () => {
   const { token, setToken } = useContext(TokenContext)!;
   const { user, setUser } = useContext(UserContext)!;
   const { cart } = useContext(CartContext)!;
-  const inputOptions = ["hey", "there"];
-  const [selectedInputValue, setSelectedInputValue] = useState(inputOptions[0]);
-  const [query, setQuery] = useState("");
-  const filteredOptions =
-    query === ""
-      ? inputOptions
-      : inputOptions.filter((option) => {
-          return option.toLowerCase().includes(query.toLowerCase());
-        });
+
   return (
     <>
       <section
@@ -78,18 +70,7 @@ export const Header = () => {
             </Link>
           </div>
         </div>
-        <div className="relative flex items-center">
-          <HiSearch
-            className="absolute text-chewyBlue-dark right-3"
-            size={24}
-          />
-
-          <Input
-            onChange={(e) => console.log(e.target.value)}
-            className=" placeholder-gray-500 w-full h-10 pl-1.5 pr-10"
-            placeholder="Search"
-          ></Input>
-        </div>
+        <Search />
       </section>
       {/* END MOBILE NAV */}
       <section className="hidden h-auto p-3 text-lg text-white bg-chewyBlue sm:block">
