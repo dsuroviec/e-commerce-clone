@@ -176,7 +176,6 @@ export const Header = () => {
                 <div className="overflow-y-auto max-h-80">
                   <div className="p-3 border-b ">
                     <Link to="/login">
-                      {" "}
                       <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded">
                         Log In
                       </button>
@@ -325,14 +324,24 @@ export const Header = () => {
                   ) : (
                     <div className="px-4 py-8 w-80">
                       <h1 className="pb-5 font-medium">Your Cart is Empty.</h1>
-                      <p>
-                        Something missing?&nbsp;
-                        <Link to="" className="text-blue-500 hover:underline">
-                          Sign in &nbsp;
-                        </Link>
-                        to see items you may have added from another computer or
-                        device.
-                      </p>
+                      {token ? (
+                        <p>
+                          When you add items to your cart, you can preview them
+                          here.
+                        </p>
+                      ) : (
+                        <p>
+                          Something missing?&nbsp;
+                          <Link
+                            to="/login"
+                            className="text-blue-500 hover:underline"
+                          >
+                            Sign in &nbsp;
+                          </Link>
+                          to see items you may have added from another computer
+                          or device.
+                        </p>
+                      )}
                     </div>
                   )}
                 </NavDropdown>
@@ -359,7 +368,7 @@ export const Header = () => {
                   </Link>
                 ))}
               </NavDropdown>
-              <Link to="#brands">brands</Link>
+              <a href="#brands">brands</a>
               {/* <Link to="/">pharmacy</Link> */}
 
               {/* <Link to="/">today's deals</Link>
@@ -369,8 +378,8 @@ export const Header = () => {
           </div>
         </div>
       </section>
-      <div className="p-1">
-        <button className="flex items-center justify-center w-full">
+      <div className="p-1 shadow-md mb-2">
+        <div className="flex items-center justify-center w-full">
           <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
             Save 35%
           </span>
@@ -384,7 +393,7 @@ export const Header = () => {
             src="/images/autoship-logo.svg"
             alt="autoship"
           ></img>
-        </button>
+        </div>
       </div>
       {/* ----------------this starts first section AFTER navbar assuming no token--------- */}
       {/* ONLY SHOW THIS SECTION IF USER IS LOGGED IN AND TOKEN

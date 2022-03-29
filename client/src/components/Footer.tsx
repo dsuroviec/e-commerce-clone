@@ -1,7 +1,7 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";
-
+import { BsTelephone, BsChatDots } from "react-icons/bs";
+import { AiOutlineMail } from "react-icons/ai";
 export const Footer = () => {
   return (
     <>
@@ -140,10 +140,74 @@ export const Footer = () => {
           </nav>
         </div>
       </footer>
-      <br />
-      <br />
-      <br />
-      <br /> <br /> <br /> <br /> <br /> <br /> <br />
+      <footer className="hidden sm:block mt-20" id="lg-nav">
+        <div className="w-full h-28 bg-chewyBlue font-bold flex justify-evenly items-center text-white">
+          <div>24/7 Help Services:</div>
+          <div className="flex items-center">
+            <BsTelephone className="mr-2" />
+            1-800-555-5555
+          </div>
+          <div className="flex items-center">
+            <BsChatDots className="mr-2" />
+            Chat Now
+          </div>
+          <div className="flex items-center">
+            <AiOutlineMail className="mr-2" />
+            Message Us
+          </div>
+          <a href="#" className="flex items-center">
+            <HiChevronUp />
+            To Top
+          </a>
+        </div>
+        <div className="pt-4 text-sm text-center border-t text-chewyGray-darker">
+          <p>Copyright © 2021 Crunchy, Inc.</p>
+          <nav className="">
+            <ul className="flex justify-center ">
+              <li>
+                <a className="underline " href="#/">
+                  Terms
+                </a>
+              </li>
+              &nbsp;
+              <li className=" dash">
+                <a className="underline " href="#/">
+                  Privacy
+                </a>
+              </li>
+              &nbsp;
+              <li className=" dash">
+                <a className="underline " href="#/">
+                  Accessibility
+                </a>
+              </li>
+              <li>
+                <a className="underline " href="#/">
+                  About
+                </a>
+              </li>
+              &nbsp;
+              <li className="dash">
+                <a className="underline " href="#/">
+                  Jobs
+                </a>
+              </li>
+              &nbsp;
+              <li className="dash">
+                <a className="underline " href="#/">
+                  Blog
+                </a>
+              </li>
+              &nbsp;
+              <li className="dash">
+                <a className="underline " href="#/">
+                  Gift Guide
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
     </>
   );
 };

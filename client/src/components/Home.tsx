@@ -42,7 +42,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className="m-auto xl:w-10/12">
+      <div className="m-auto xl:w-10/12 mt-2">
         <div className="mb-8 md:hidden">
           <Slider {...carouselProps}>
             {[
@@ -91,7 +91,7 @@ export const Home = () => {
                 ?.filter((category) => category.id !== 10 && category.id !== 9)
                 .map((category, index) => (
                   <Link
-                    className="p-4 mb-3 text-center border rounded text-chewyBlue-dark "
+                    className="p-4 mb-3 text-center border rounded text-chewyBlue-dark shadow-md"
                     style={{
                       scrollSnapAlign: "center",
                     }}
@@ -140,7 +140,7 @@ export const Home = () => {
               >
                 {brands?.slice(0 - 9)?.map((brand) => (
                   <Link key={brand.id} to={`/brand/${brand.id}`}>
-                    <picture className="flex justify-center text-center bg-white border rounded">
+                    <picture className="flex justify-center text-center bg-white border rounded shadow-md">
                       <img
                         className="p-3 w-28 h-28"
                         src={`/images/${brand.logo}`}

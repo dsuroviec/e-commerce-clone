@@ -30,7 +30,7 @@ export const CategoryProducts = () => {
   }, [categoryID]);
 
   return (
-    <>
+    <div className=" w-10/12 mx-auto">
       {category && (
         <div className="p-4 bg-chewyGray-lighter">
           <div>
@@ -42,6 +42,6 @@ export const CategoryProducts = () => {
         </div>
       )}
       <Products products={products} category={category} />
-    </>
+    </div>
   );
 };
