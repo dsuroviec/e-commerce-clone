@@ -1,4 +1,5 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Combobox, Transition } from "@headlessui/react";
 import { HiOutlineCheck, HiOutlineSelector, HiSearch } from "react-icons/hi";
 import CategoryContext from "../contexts/CategoryContext";
@@ -7,6 +8,7 @@ export default function Search() {
   const { categories } = useContext(CategoryContext)!;
   const [selected, setSelected] = useState();
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
   const filteredPeople =
     query === ""
@@ -24,7 +26,13 @@ export default function Search() {
         className="absolute text-chewyBlue-dark right-3 z-10"
         size={24}
       />
-      <Combobox value={selected} onChange={(event) => setSelected(event)}>
+      <Combobox
+        value={selected}
+        onChange={(event: any) => {
+          setSelected(event);
+          navigate(`/category/${event.id}`);
+        }}
+      >
         <div className="relative w-full mt-1">
           <div className="relative w-full text-left bg-white rounded-lg shadow-md cursor-default  overflow-hidden">
             <Combobox.Input

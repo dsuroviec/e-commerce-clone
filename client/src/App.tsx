@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { Home } from "./components/Home";
 import { LogIn } from "./components/LogIn";
 import { ContactUs } from "./components/ContactUs";
