@@ -129,26 +129,27 @@ export const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="mb-6 ">
+            <div className="mb-6">
               <h1 className="mb-3 text-xl font-semibold">
                 Find Products by Your Favorite Brand!
               </h1>
-
-              <div
-                id="brands"
-                className="flex flex-wrap w-full gap-3 xl:justify-center "
-              >
-                {brands?.slice(0 - 9)?.map((brand) => (
-                  <Link key={brand.id} to={`/brand/${brand.id}`}>
-                    <picture className="flex justify-center text-center bg-white border rounded shadow-md">
-                      <img
-                        className="p-3 w-28 h-28"
-                        src={`/images/${brand.logo}`}
-                        alt={brand.name}
-                      />
-                    </picture>
-                  </Link>
-                ))}
+              <div className=" overflow-auto">
+                <div
+                  id="brands"
+                  className="flex flex-wrap w-full gap-3 xl:justify-center min-w-[380px] "
+                >
+                  {brands?.slice(0 - 9)?.map((brand) => (
+                    <Link key={brand.id} to={`/brand/${brand.id}`}>
+                      <picture className="flex justify-center text-center bg-white border rounded shadow-md">
+                        <img
+                          className="p-3 w-28 h-28"
+                          src={`/images/${brand.logo}`}
+                          alt={brand.name}
+                        />
+                      </picture>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="gap-4 p-5 mb-6 text-center bg-chewyBlue-light lg:flex lg:px-40 lg:items-center ">
