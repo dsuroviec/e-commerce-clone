@@ -156,8 +156,8 @@ export const Home = () => {
               <div className="m-auto lg:w-1/3">
                 <h1 className="text-xl font-semibold">Join the Crunchy Pack</h1>
                 <p className="text-sm ">
-                  clearTimeout Sign up to get emails about the latest deals,
-                  product drops, pet health tips and more!
+                  Sign up to get emails about the latest deals, product drops,
+                  pet health tips and more!
                 </p>
               </div>
               <div className="lg:flex lg:w-2/3">
