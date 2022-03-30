@@ -114,7 +114,7 @@ export const Cart = () => {
                         setCart(newCart);
                       }}
                       name="quantity"
-                      className="w-8"
+                      className="w-12"
                     >
                       <option value={1}>1</option>
                       <option value={2}>2</option>
