@@ -50,7 +50,7 @@ export const Header = () => {
           </div>
           <h1
             onClick={() => (window.location.href = "/")}
-            className="text-3xl font-Fruktur"
+            className="text-3xl text-crunchyYellow font-Fruktur"
           >
             Crunchy
           </h1>
@@ -65,7 +65,7 @@ export const Header = () => {
               <div className="overflow-y-auto max-h-80">
                 <div className="p-3 border-b ">
                   <Link to="/login">
-                    <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded">
+                    <button className="w-full px-4 py-2 m-auto font-bold text-white bg-crunchyOrange-light rounded">
                       Log In
                     </button>
                   </Link>
@@ -135,7 +135,7 @@ export const Header = () => {
           >
             <h1
               onClick={() => (window.location.href = "/")}
-              className="text-3xl font-Fruktur cursor-pointer"
+              className="text-4xl font-Fruktur text-crunchyYellow cursor-pointer"
             >
               Crunchy
             </h1>
@@ -405,7 +405,7 @@ export const Header = () => {
                   </Link>
                 ))}
               </NavDropdown>
-              <a href="#brands">brands</a>
+              <a href="/#brands">brands</a>
               {/* <Link to="/">pharmacy</Link> */}
 
               {/* <Link to="/">today's deals</Link>
