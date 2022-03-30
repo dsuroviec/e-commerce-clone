@@ -29,9 +29,9 @@ export const BrandProducts = () => {
   }, [brandID]);
 
   return (
-    <>
+    <div className="md:w-10/12 mx-auto">
       {brand && <h1 className="p-4 text-xl">{brand.name}&nbsp;Products</h1>}
       <Products products={products} />
-    </>
+    </div>
   );
 };

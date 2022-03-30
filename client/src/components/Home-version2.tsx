@@ -86,14 +86,14 @@ export const Home = () => {
         </Slider>
       </div>
       <section
-        className="w-full overflow-hidden bg-chewyGray-lighter "
+        className="w-full overflow-hidden bg-crunchyGray-lighter "
         id="home-content"
       >
         {/* <div className="relative p-0 h-44">
                             className={clsx(
-                                "w-2.5 h-2.5 m-0.5 border rounded-full border-chewyBlue",
+                                "w-2.5 h-2.5 m-0.5 border rounded-full border-crunchyBlue",
                                 {
-                                    "bg-chewyBlue": index === carouselIndex,
+                                    "bg-crunchyBlue": index === carouselIndex,
                                 }
                             )}
                 </div> */}
@@ -113,7 +113,7 @@ export const Home = () => {
               <Link
                 key={index}
                 to={`/category/${category?.id}`}
-                className="block pt-3 text-md text-chewyBlue-dark"
+                className="block pt-3 text-md text-crunchyBlue-dark"
               >
                 <div className="w-40 h-auto p-4 text-center bg-white border rounded-md hover:border-opacity-1 ">
                   <img
@@ -141,7 +141,7 @@ export const Home = () => {
               "Cat Toys",
               "Dog Supplements",
               "Football Shop",
-              "Chewy Pharmacy",
+              "crunchy Pharmacy",
             ]
               .slice(0, 3)
               .map((category, index) => (
@@ -164,14 +164,14 @@ export const Home = () => {
                         "cat-toys-tile.webp",
                         "dog-supplements-tile.webp",
                         "football-shop-tile.webp",
-                        "chewy-pharmacy-tile.webp",
+                        "crunchy-pharmacy-tile.webp",
                       ][index]
                     }`}
                     alt={category}
                   />
                   <Link
                     to="/"
-                    className="block pt-3 text-md text-chewyBlue-dark"
+                    className="block pt-3 text-md text-crunchyBlue-dark"
                   >
                     {category}
                   </Link>
@@ -182,20 +182,20 @@ export const Home = () => {
             <h1 className="text-xl font-semibold">New Puppy or Kitten?</h1>
             <Link to="/">
               <img src="/images/new-puppy.jpg" alt="new puppy"></img>
-              <span className="text-sm hover:underline text-chewyBlue-dark">
+              <span className="text-sm hover:underline text-crunchyBlue-dark">
                 Puppy Shop
               </span>
             </Link>
             <Link to="/">
               <img src="/images/new-kitten.jpg" alt="new kitten"></img>
-              <span className="text-sm hover:underline text-chewyBlue-dark">
+              <span className="text-sm hover:underline text-crunchyBlue-dark">
                 Kitten Shop
               </span>
             </Link>
           </div>
           <div>
             <h1 className="text-xl font-semibold">2,000+ Brands in Stock!</h1>
-            <Link to="/" className="flex items-center text-chewyBlue-dark">
+            <Link to="/" className="flex items-center text-crunchyBlue-dark">
               <span className="mt-0.5 text-sm hover:underline ">Shop All</span>
               <HiChevronRight size={24} />
             </Link>
@@ -214,18 +214,18 @@ export const Home = () => {
               ))}
             </div>
           </div>
-          <div className="p-3 bg-chewyBlue-light">
-            <h1 className="text-xl font-semibold">Join the Chewy Pack</h1>
+          <div className="p-3 bg-crunchyBlue-light">
+            <h1 className="text-xl font-semibold">Join the crunchy Pack</h1>
             <p className="text-sm">
               Sign up to get emails about the latest deals, product drops, pet
               health tips and more!
             </p>
             <Input placeholder="Email"></Input>
-            <Button className="bg-chewyBlue-darker">Sign Up</Button>
+            <Button className="bg-crunchyBlue-darker">Sign Up</Button>
           </div>
           <div>
             <h2 className="text-xl font-semibold">
-              Spooky Chewy Exclusives 🦇
+              Spooky crunchy Exclusives 🦇
             </h2>
             <div className="flex">
               {[0, 1, 2, 3, 4].map((article, index) => (
@@ -241,15 +241,15 @@ export const Home = () => {
                       <p className="text-xs">
                         Halloween Toys, Treats, and Bandanas
                       </p>
-                      <div className="p-1 my-2 text-xs text-white rounded bg-chewyGreen">
+                      <div className="p-1 my-2 text-xs text-white rounded bg-crunchyGreen">
                         Save 40% at Checkout
                       </div>
-                      <span className="font-semibold text-chewyRed ">
+                      <span className="font-semibold text-crunchyRed ">
                         $24.99
                       </span>
                       <div className="flex items-center">
                         <>Stars</>&nbsp;
-                        <span className="text-xs text-chewyGray">88</span>
+                        <span className="text-xs text-crunchyGray">88</span>
                       </div>
                     </div>
                   </article>
@@ -261,12 +261,12 @@ export const Home = () => {
             <h1 className="text-xl font-semibold">Pet Health</h1>
             <img src="/images/pet-wellness.jpg" alt="pet wellness"></img>
             &nbsp;
-            <Link className="text-sm text-chewyBlue-darker" to="">
+            <Link className="text-sm text-crunchyBlue-darker" to="">
               Pet Wellness
             </Link>
             <img src="/images/connect-with-vet.jpg" alt="Connect With a Vet" />
             &nbsp;
-            <Link className="text-sm text-chewyBlue-darker" to="">
+            <Link className="text-sm text-crunchyBlue-darker" to="">
               Connect with a Vet
             </Link>
           </div>
@@ -274,7 +274,7 @@ export const Home = () => {
             <h1 className="text-xl font-semibold">
               Autoship & Save on Favorites
             </h1>
-            <Link to="/" className="flex items-center text-chewyBlue-darker">
+            <Link to="/" className="flex items-center text-crunchyBlue-darker">
               <span className="mt-0.5 text-sm hover:underline ">Shop All</span>
               <HiChevronRight size={24} />
             </Link>
@@ -294,15 +294,15 @@ export const Home = () => {
                       <p className="text-xs">
                         High Prarie Grain-Free Dry Dog Food
                       </p>
-                      <div className="p-1 my-2 text-xs text-white rounded bg-chewyGreen">
+                      <div className="p-1 my-2 text-xs text-white rounded bg-crunchyGreen">
                         Save 40% at Checkout
                       </div>
-                      <span className="font-semibold text-chewyRed ">
+                      <span className="font-semibold text-crunchyRed ">
                         $24.99
                       </span>
                       <div className="flex items-center">
                         <>Stars</>&nbsp;
-                        <span className="text-xs text-chewyGray">88</span>
+                        <span className="text-xs text-crunchyGray">88</span>
                       </div>
                     </div>
                   </article>
@@ -322,7 +322,7 @@ export const Home = () => {
                         className="mb-3"
                         alt="Holiday Shop"
                       ></img>
-                      <Link to="" className="text-chewyBlue-dark">
+                      <Link to="" className="text-crunchyBlue-dark">
                         {article}
                       </Link>
                     </article>

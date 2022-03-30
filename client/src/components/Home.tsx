@@ -78,7 +78,7 @@ export const Home = () => {
             )}
           </Slider>
         </div>
-        <section className=" bg-chewyGray-lighter " id="home-content">
+        <section className=" bg-crunchyGray-lighter " id="home-content">
           <div className="w-full p-3 ">
             <h1 className="w-full mb-3 text-xl font-semibold">
               Shop by Category
@@ -91,7 +91,7 @@ export const Home = () => {
                 ?.filter((category) => category.id !== 10 && category.id !== 9)
                 .map((category, index) => (
                   <Link
-                    className="p-4 mb-3 text-center border rounded text-chewyBlue-dark shadow-md"
+                    className="p-4 mb-3 text-center border rounded text-crunchyBlue-dark shadow-md"
                     style={{
                       scrollSnapAlign: "center",
                     }}
@@ -116,14 +116,14 @@ export const Home = () => {
                 <Link to="/category/9">
                   <div className="mb-3">
                     <img src="/images/new-puppy.jpg" alt="new puppy"></img>
-                    <span className="mb-3 text-sm hover:underline text-chewyBlue-dark">
+                    <span className="mb-3 text-sm hover:underline text-crunchyBlue-dark">
                       Puppy Shop
                     </span>
                   </div>
                 </Link>
                 <Link to="/category/10">
                   <img src="/images/new-kitten.jpg" alt="new kitten"></img>
-                  <span className="text-sm hover:underline text-chewyBlue-dark">
+                  <span className="text-sm hover:underline text-crunchyBlue-dark">
                     Kitten Shop
                   </span>
                 </Link>
@@ -152,7 +152,7 @@ export const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="gap-4 p-5 mb-6 text-center bg-chewyBlue-light lg:flex lg:px-40 lg:items-center ">
+            <div className="gap-4 p-5 mb-6 text-center bg-crunchyBlue-light lg:flex lg:px-40 lg:items-center ">
               <div className="m-auto lg:w-1/3">
                 <h1 className="text-xl font-semibold">Join the Crunchy Pack</h1>
                 <p className="text-sm ">
@@ -165,7 +165,7 @@ export const Home = () => {
                   className="w-6/12 mr-2 md:w-8/12 lg:w-full "
                   placeholder="Email"
                 ></Input>
-                <Button className="bg-chewyBlue-darker">Sign&nbsp;Up</Button>
+                <Button className="bg-crunchyBlue-darker">Sign&nbsp;Up</Button>
               </div>
             </div>
           </div>

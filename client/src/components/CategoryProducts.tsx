@@ -30,13 +30,13 @@ export const CategoryProducts = () => {
   }, [categoryID]);
 
   return (
-    <div className=" w-10/12 mx-auto">
+    <div className=" md:w-10/12 mx-auto">
       {category && (
-        <div className="p-4 bg-chewyGray-lighter">
+        <div className="p-4 bg-crunchyGray-lighter">
           <div>
             <img src={`/images/${category?.banner}`} alt=""></img>
           </div>
-          <h2 className="py-6 text-2xl text-chewyGray-dark">
+          <h2 className="py-6 text-2xl text-crunchyGray-dark">
             {category?.title}
           </h2>
         </div>

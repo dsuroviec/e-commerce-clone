@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Combobox, Transition } from "@headlessui/react";
 import { HiOutlineCheck, HiOutlineSelector, HiSearch } from "react-icons/hi";
@@ -19,13 +19,8 @@ export default function Search() {
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
-  console.log(selected, "selected");
   return (
-    <div className="w-full relative flex items-center md:w-7/12">
-      <HiSearch
-        className="absolute text-chewyBlue-dark right-3 z-10"
-        size={24}
-      />
+    <div className="w-full relative flex items-center md:w-7/12 z-0">
       <Combobox
         value={selected}
         onChange={(event: any) => {
@@ -34,7 +29,11 @@ export default function Search() {
         }}
       >
         <div className="relative w-full mt-1">
-          <div className="relative w-full text-left bg-white rounded-lg shadow-md cursor-default  overflow-hidden">
+          <div className="relative w-full text-left bg-white items-center flex rounded-lg shadow-md cursor-default  overflow-hidden">
+            <HiSearch
+              className="absolute text-crunchyBlue-dark right-3"
+              size={24}
+            />
             <Combobox.Input
               className="w-full py-2 pl-3 pr-10  text-gray-900"
               displayValue={(person: any) => person.name}
@@ -65,7 +64,7 @@ export default function Search() {
                     key={person.id}
                     className={({ active }) =>
                       `cursor-default select-none relative py-2 pl-6 pr-4 ${
-                        active ? "text-white bg-chewyBlue" : "text-gray-900"
+                        active ? "text-white bg-crunchyBlue" : "text-gray-900"
                       }`
                     }
                     value={person}

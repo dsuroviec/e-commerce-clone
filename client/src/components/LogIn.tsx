@@ -95,16 +95,16 @@ export const LogIn = () => {
           ) : null}
 
           <div className="grid gap-8 ">
-            <Button className="w-full bg-chewyOrange" type="submit">
+            <Button className="w-full bg-crunchyOrange" type="submit">
               Log In
             </Button>
             <div className="relative items-center ">
               <hr />
-              <div className="absolute w-12 font-bold text-center transform -translate-x-1/2 bg-white left-1/2 text-chewyGray-dark -top-3 ">
+              <div className="absolute w-12 font-bold text-center transform -translate-x-1/2 bg-white left-1/2 text-crunchyGray-dark -top-3 ">
                 OR
               </div>
             </div>
-            <Button className="w-full bg-chewyBlue">
+            <Button className="w-full bg-crunchyBlue">
               <Link to="/signUp">Sign Up</Link>
             </Button>
           </div>

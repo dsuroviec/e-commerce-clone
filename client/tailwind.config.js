@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         transparent: "transparent",
         current: "currentColor",
-        chewyBlue: {
+        crunchyBlue: {
           light: "#dbebf9",
           DEFAULT: "#128ced",
           dark: "#0e70be",
@@ -20,22 +20,23 @@ module.exports = {
           evenDarker: "#163977",
         },
 
-        chewyGreen: {
+        crunchyGreen: {
           light: "#ff7ce5",
           DEFAULT: "#327435",
           dark: "#ff16d1",
         },
-        chewyOrange: {
+        crunchyOrange: {
+          light: "#ff9800",
           DEFAULT: "#ef6c00",
         },
-        chewyRed: {
+        crunchyRed: {
           DEFAULT: "#d0021b",
         },
 
-        chewyYellow: {
+        crunchyYellow: {
           DEFAULT: "#f8d81c",
         },
-        chewyGray: {
+        crunchyGray: {
           lightest: "#fff",
           lighter: "#f9f9f9",
           light: "#ddd",

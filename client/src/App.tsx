@@ -40,7 +40,9 @@ function App() {
     email: null,
   });
 
-  const [isErrorOpen, setIsErrorOpen] = useState<boolean>(true);
+  const [isErrorOpen, setIsErrorOpen] = useState<boolean>(
+    !localStorage.hideGlobalMessage ? true : false
+  );
 
   // Get cart items from local storage upon initial render of cart page
   useEffect(() => {
@@ -51,6 +53,7 @@ function App() {
   // // Updates local storage with cart changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("hideGlobalMessage", "true");
   }, [cart]);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ export const Cart = () => {
           <img className="m-auto" src="/images/empty-cart.png" alt=""></img>
 
           <Button
-            className="block m-auto my-6 bg-chewyOrange"
+            className="block m-auto my-6 bg-crunchyOrange"
             onClick={() => {
               navigate("/");
               console.log(navigate, "history");
@@ -36,8 +36,8 @@ export const Cart = () => {
             Your Shopping Cart
           </h1>
 
-          <div className="p-4 border-t bg-chewyGray-lighter">
-            <span className="flex items-center justify-center text-chewyGray-darkest text-chewyGray-dark">
+          <div className="p-4 border-t bg-crunchyGray-lighter">
+            <span className="flex items-center justify-center text-crunchyGray-darkest text-crunchyGray-dark">
               <strong>
                 {`$${Math.max(
                   50.0 -
@@ -51,7 +51,7 @@ export const Cart = () => {
 
             <div className="flex items-center justify-between">
               <span>Subtotal ({cart?.length} items):</span>
-              <span className="flex text-lg font-bold text-chewyRed">
+              <span className="flex text-lg font-bold text-crunchyRed">
                 {`$${cart
                   .reduce((total, product) => total + product.price, 0)
                   .toFixed(2)}`}
@@ -59,7 +59,7 @@ export const Cart = () => {
             </div>
 
             <Link to={token ? "/checkout" : "/logIn"}>
-              <Button className="block w-full mt-4 bg-chewyOrange">
+              <Button className="block w-full mt-4 bg-crunchyOrange">
                 Proceed to Checkout
               </Button>
             </Link>
@@ -73,7 +73,7 @@ export const Cart = () => {
                     src={`/images/${product.image}`}
                     alt=""
                   ></img>
-                  <span className="test-sm text text-chewyGreen">
+                  <span className="test-sm text text-crunchyGreen">
                     In&nbsp;Stock
                   </span>
                 </div>
@@ -83,7 +83,7 @@ export const Cart = () => {
                     &nbsp;
                     {product.name}
                   </div>
-                  <span className="text-lg font-bold text-chewyRed">
+                  <span className="text-lg font-bold text-crunchyRed">
                     ${product.price}
                   </span>
                 </div>
@@ -124,7 +124,7 @@ export const Cart = () => {
                     </select>
                   </div>
                   <Button
-                    className="bg-chewyBlue-darker "
+                    className="bg-crunchyBlue-darker "
                     onClick={() => {
                       const updatedCart = [...cart].filter(
                         (item) => item.id !== product.id

@@ -12,7 +12,6 @@ import {
   HiShoppingCart,
   HiChevronDown,
   HiMenu,
-  HiSearch,
   HiUser,
 } from "react-icons/hi";
 import CategoryContext from "../contexts/CategoryContext";
@@ -27,7 +26,7 @@ export const Header = () => {
     <>
       <section
         id="mobile-nav"
-        className="w-full p-1 font-medium text-white bg-chewyBlue sm:hidden "
+        className="w-full p-1 font-medium text-white bg-crunchyBlue sm:hidden "
       >
         <div className="flex items-center justify-between h-10 px-1.5 ">
           <div id="menu">
@@ -42,14 +41,13 @@ export const Header = () => {
                 <Link
                   key={index}
                   to={`/category/${category?.id}`}
-                  className="p-4 block border-t text-chewyBlue-dark hover:underline w-40"
+                  className="p-4 block border-t text-crunchyBlue-dark hover:underline w-40"
                 >
                   {category.name}
                 </Link>
               ))}
             </NavDropdown>
           </div>
-          &nbsp;&nbsp;
           <h1
             onClick={() => (window.location.href = "/")}
             className="text-3xl font-Fruktur"
@@ -57,14 +55,70 @@ export const Header = () => {
             Crunchy
           </h1>
           <div className="flex">
-            &nbsp;&nbsp;
-            <Link to="/logIn">
-              <HiUser size={27} />
-            </Link>
+            <NavDropdown
+              buttonContent={
+                <>
+                  <HiUser size={27} />
+                </>
+              }
+            >
+              <div className="overflow-y-auto max-h-80">
+                <div className="p-3 border-b ">
+                  <Link to="/login">
+                    <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded">
+                      Log In
+                    </button>
+                  </Link>
+                  <div className="flex pt-3 text-xs">
+                    <span className="min-w-max">New Customer?</span>
+                    &nbsp;
+                    <Link
+                      to="/signup"
+                      className="text-blue-500 min-w-max hover:underline"
+                    >
+                      Start Here
+                    </Link>
+                  </div>
+                </div>
+                <Link
+                  to=""
+                  className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
+                >
+                  Account
+                </Link>{" "}
+                <Link
+                  to=""
+                  className="block w-full px-3 py-1 text-blue-500 border-b hover:underline"
+                >
+                  Orders
+                </Link>
+                {user.firstName ? (
+                  <div className="flex lock w-full px-3 py-1 items-center">
+                    <div className="mr-2 text-crunchyGray-darker text-sm">{`Not ${_.startCase(
+                      user.firstName
+                    )}?`}</div>
+                    <button
+                      className="text-blue-500 hover:underline"
+                      onClick={() => {
+                        window.localStorage.removeItem("token");
+                        setToken(null);
+                        setUser({
+                          firstName: null,
+                          lastName: null,
+                          email: null,
+                        });
+                      }}
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            </NavDropdown>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <Link className="relative mr-2" to="/cart">
               <HiShoppingCart size={27} />
-              <div className="absolute flex items-center justify-center w-5 h-5 text-black rounded-full -top-2 left-3 bg-chewyYellow">
+              <div className="absolute flex items-center justify-center w-5 h-5 text-black rounded-full -top-2 left-3 bg-crunchyYellow">
                 {cart ? cart?.length : 0}
               </div>
             </Link>
@@ -73,7 +127,7 @@ export const Header = () => {
         <Search />
       </section>
       {/* END MOBILE NAV */}
-      <section className="hidden h-auto p-3 text-lg text-white bg-chewyBlue sm:block">
+      <section className="hidden h-auto p-3 text-lg text-white bg-crunchyBlue sm:block">
         <div className="max-w-[1540px] m-auto">
           <div
             id="topNav"
@@ -85,7 +139,7 @@ export const Header = () => {
             >
               Crunchy
             </h1>
-
+            &nbsp;
             <Search />
             <div className="flex justify-between w-1/3 ml-1 mr-2 md:w-3/12">
               <NavDropdown
@@ -102,7 +156,7 @@ export const Header = () => {
                   </div>
                   <Link
                     to=""
-                    className="flex justify-center text-3xl font-medium text-yellow-600 hover:underline"
+                    className="flex justify-center text-3xl font-medium text-crunchyOrange-light hover:underline"
                   >
                     1-800-555-5555
                   </Link>
@@ -145,7 +199,9 @@ export const Header = () => {
                   <>
                     <div>
                       {user.firstName ? (
-                        <div>{`Hi, ${_.startCase(user.firstName)}`}</div>
+                        <div className="whitespace-nowrap">{`Hi, ${_.startCase(
+                          user.firstName
+                        )}`}</div>
                       ) : null}
                       account
                     </div>
@@ -157,7 +213,7 @@ export const Header = () => {
                 <div className="overflow-y-auto max-h-80">
                   <div className="p-3 border-b ">
                     <Link to="/login">
-                      <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded">
+                      <button className="w-full px-4 py-2 m-auto font-bold text-white bg-crunchyOrange-light rounded">
                         Log In
                       </button>
                     </Link>
@@ -186,7 +242,7 @@ export const Header = () => {
                   </Link>
                   {user.firstName ? (
                     <div className="flex lock w-full px-3 py-1 items-center">
-                      <div className="mr-2 text-chewyGray-darker text-sm">{`Not ${_.startCase(
+                      <div className="mr-2 text-crunchyGray-darker text-sm">{`Not ${_.startCase(
                         user.firstName
                       )}?`}</div>
                       <button
@@ -242,7 +298,7 @@ export const Header = () => {
               <div className="flex items-center ">
                 <Link className="relative mr-2" to="/cart">
                   <HiShoppingCart size={27} />
-                  <div className="absolute flex items-center justify-center w-5 h-5 text-black rounded-full -top-2 left-3 bg-chewyYellow">
+                  <div className="absolute flex items-center justify-center w-5 h-5 text-black rounded-full -top-2 left-3 bg-crunchyYellow">
                     {cart ? cart?.length : 0}
                   </div>
                 </Link>
@@ -273,7 +329,7 @@ export const Header = () => {
                             Edit Cart
                           </Link>
                         </div>
-                        <button className="w-full px-4 py-2 m-auto font-bold text-white bg-yellow-500 rounded ">
+                        <button className="w-full px-4 py-2 m-auto font-bold text-white bg-crunchyOrange-light rounded ">
                           <Link to="/checkout">Proceed to Checkout</Link>
                         </button>
                       </div>
@@ -283,7 +339,7 @@ export const Header = () => {
                       </div>
                       {cart?.map((item, index) => (
                         <div key={index} className="p-4 border-b ">
-                          <Link to="/" className="flex">
+                          <Link to="/cart" className="flex">
                             <img
                               className="w-12 h-12 mt-1"
                               src={`/images/${item.image}`}
@@ -343,7 +399,7 @@ export const Header = () => {
                   <Link
                     key={index}
                     to={`/category/${category?.id}`}
-                    className="p-4 block border-t text-chewyBlue-dark hover:underline w-40"
+                    className="p-4 block border-t text-crunchyBlue-dark hover:underline w-40"
                   >
                     {category.name}
                   </Link>
@@ -353,7 +409,7 @@ export const Header = () => {
               {/* <Link to="/">pharmacy</Link> */}
 
               {/* <Link to="/">today's deals</Link>
-              <Link to="/">chewy picks</Link> */}
+              <Link to="/">crunchy picks</Link> */}
               {/* <Link to="/">give back</Link> */}
             </div>
           </div>
@@ -361,11 +417,11 @@ export const Header = () => {
       </section>
       <div className="p-1 shadow-md mb-2">
         <div className="flex items-center justify-center w-full">
-          <span className="px-2 py-.5 text-xl font-bold text-white bg-chewyOrange rounded-2xl">
+          <span className="px-2 py-.5 text-xl font-bold text-white bg-crunchyOrange rounded-2xl">
             Save 35%
           </span>
           &nbsp;
-          <span className="font-medium text-chewyBlue-evenDarker">
+          <span className="font-medium text-crunchyBlue-evenDarker">
             on your first
           </span>
           &nbsp; &nbsp;
@@ -380,14 +436,14 @@ export const Header = () => {
       {/* ONLY SHOW THIS SECTION IF USER IS LOGGED IN AND TOKEN
             <div id="afterToggle" className="flex">
                 <Link to="" className="flex-1">
-                    <div className="flex items-center p-3 text-sm font-medium border text-chewyGray-dark">
+                    <div className="flex items-center p-3 text-sm font-medium border text-crunchyGray-dark">
                         <HiSwitchHorizontal size={44} />
                         &nbsp;
                         <div className="block">
-                            <span className="block text-chewyGray-darker">
+                            <span className="block text-crunchyGray-darker">
                                 Save 35% Today
                             </span>
-                            <span className="block text-chewyBlue-dark">
+                            <span className="block text-crunchyBlue-dark">
                                 Set up Autoship
                             </span>
                         </div>

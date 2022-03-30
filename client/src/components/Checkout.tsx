@@ -22,14 +22,14 @@ export const Checkout = () => {
   const { token } = useContext(TokenContext)!;
   const [paymentMethod, setPaymentMethod] = useState(plans[0]);
   return (
-    <>
+    <div className="md:max-w-[900px] mx-auto">
       {!token && <Navigate to="/login" />}
 
       <div className="grid gap-8 p-3">
-        <div className="grid gap-3 p-4 border rounded text-chewyGray-darker">
-          <h1 className="text-xl text-chewyGray-darker">Shipping Address</h1>
+        <div className="grid gap-3 p-4 border rounded text-crunchyGray-darker">
+          <h1 className="text-xl text-crunchyGray-darker">Shipping Address</h1>
           <div className="flex items-center justify-between">
-            <button className="flex items-center justify-between border-opacity-50 rounded-sm border text-chewyGray-darker">
+            <button className="flex items-center justify-between border-opacity-50 rounded-sm border text-crunchyGray-darker">
               <address className="w-2/3 p-1 text-left">
                 <strong>John Doe</strong> 867 Yellow Brick Road, FunkyTown,
                 Pennsylvania 5309
@@ -41,12 +41,12 @@ export const Checkout = () => {
           </div>
         </div>
         <div className="grid w-full gap-3 p-4 border rounded">
-          <h1 className="text-xl text-chewyGray-darker">Gift Card</h1>
+          <h1 className="text-xl text-crunchyGray-darker">Gift Card</h1>
           <Input placeholder="Gift Card Number" />
           <Input placeholder="8-Digit PIN" />
         </div>
         <div className="grid gap-6 p-4 border rounded">
-          <h1 className="text-xl text-chewyGray-darker">
+          <h1 className="text-xl text-crunchyGray-darker">
             Your Payment Information
           </h1>
           <RadioGroup
@@ -67,8 +67,8 @@ export const Checkout = () => {
                     }
                   ${
                     checked
-                      ? "bg-chewyOrange bg-opacity-75 text-white"
-                      : "bg-chewyBlue-light"
+                      ? "bg-crunchyOrange bg-opacity-75 text-white"
+                      : "bg-crunchyBlue-light"
                   }
                     relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex focus:outline-none`
                   }
@@ -147,7 +147,7 @@ export const Checkout = () => {
                                   </Button>
                                   <span className="block">
                                     Then you'll review and place your order on
-                                    Chewy.com
+                                    crunchy.com
                                   </span>
                                 </div>
                               )}
@@ -167,11 +167,11 @@ export const Checkout = () => {
             </div>
           </RadioGroup>
           <div className="flex items-center m-auto">
-            <span className="font-bold text-chewyGray-darker">
+            <span className="font-bold text-crunchyGray-darker">
               Order Total:
             </span>
             &nbsp;
-            <span className="flex m-auto text-lg font-bold text-chewyRed">
+            <span className="flex m-auto text-lg font-bold text-crunchyRed">
               {`$${
                 cart &&
                 cart
@@ -184,14 +184,14 @@ export const Checkout = () => {
             onClick={() =>
               alert("For security reasons, this button does nothing")
             }
-            className="bg-chewyOrange"
+            className="bg-crunchyOrange"
           >
             {" "}
             Place Order
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 function CheckIcon(props: any) {

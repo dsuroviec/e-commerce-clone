@@ -145,16 +145,16 @@ export const SignUp = () => {
           ) : null}
 
           <div className="grid gap-8">
-            <Button className="w-full bg-chewyOrange">Create Account</Button>
+            <Button className="w-full bg-crunchyOrange">Create Account</Button>
 
             <div className="relative items-center ">
               <hr />
-              <div className="absolute inline w-auto w-8/12 font-light text-center transform -translate-x-1/2 bg-white left-1/2 text-chewyGray-dark -top-3 ">
+              <div className="absolute inline w-auto w-8/12 font-light text-center transform -translate-x-1/2 bg-white left-1/2 text-crunchyGray-dark -top-3 ">
                 Already have an account?
               </div>
             </div>
             <Link to="/logIn">
-              <Button className="w-full bg-chewyBlue" type="submit">
+              <Button className="w-full bg-crunchyBlue" type="submit">
                 Log In
               </Button>
             </Link>

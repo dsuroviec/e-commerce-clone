@@ -30,7 +30,7 @@ export const Products = (props: {
                 alt=""
               ></img>
               <Button
-                className="block m-auto bg-chewyOrange"
+                className="block m-auto bg-crunchyOrange"
                 onClick={() => {
                   const quantityOfSelectedProductAlreadyInCart = _.countBy(
                     cart,
@@ -54,13 +54,13 @@ export const Products = (props: {
                 <strong>{product.brand}</strong>&nbsp;
                 {product.name}
               </h2>
-              <span className="font-semibold text-chewyRed ">
+              <span className="font-semibold text-crunchyRed ">
                 {`$${product.price}`}
               </span>
               <div className="flex items-center">
                 <img src="/images/rating.svg" alt=""></img>
                 &nbsp;
-                <span className=" text-chewyGray">48</span>
+                <span className=" text-crunchyGray">48</span>
               </div>
               <span className="text-xs">FREE 1-3 day shipping over $49</span>
             </div>
@@ -118,7 +118,7 @@ export const Products = (props: {
                     </div>
                   </Transition.Child>
                   <div className="flex flex-col h-auto py-6 overflow-y-scroll bg-white shadow-xl">
-                    <div className="flex items-center justify-center px-4 text-chewyGreen sm:px-6">
+                    <div className="flex items-center justify-center px-4 text-crunchyGreen sm:px-6">
                       <HiCheck size={26} />
                       &nbsp;
                       <h2
@@ -137,19 +137,19 @@ export const Products = (props: {
                           src={`/images/${productAddedToCart?.image}`}
                           alt=""
                         ></img>
-                        <div className=" text-chewyGray-dark">
+                        <div className=" text-crunchyGray-dark">
                           <strong>{productAddedToCart?.brand}</strong>
                           &nbsp;
                           {productAddedToCart?.name}
                         </div>
                       </div>
-                      <div className="grid gap-6 p-4 mt-4 bg-chewyGray-lighter">
+                      <div className="grid gap-6 p-4 mt-4 bg-crunchyGray-lighter">
                         <div className="flex items-center justify-between">
-                          <span className="text-lg text-chewyGray-dark">
+                          <span className="text-lg text-crunchyGray-dark">
                             <strong>Subtotal</strong>
                             &nbsp; ({cart?.length} items):
                           </span>
-                          <span className="flex text-lg font-bold text-chewyRed">
+                          <span className="flex text-lg font-bold text-crunchyRed">
                             {`$${
                               cart &&
                               cart
@@ -163,12 +163,12 @@ export const Products = (props: {
                         </div>
                         <div className="flex justify-evenly">
                           <Link to="/cart">
-                            <Button className="p-4 bg-white text-chewyGray-dark">
+                            <Button className="p-4 bg-white text-crunchyGray-dark">
                               Cart
                             </Button>
                           </Link>
                           <Link to={token ? "/checkout" : "/login"}>
-                            <Button className="p-4 bg-chewyOrange">
+                            <Button className="p-4 bg-crunchyOrange">
                               Proceed to Checkout
                             </Button>
                           </Link>
