@@ -94,7 +94,7 @@ app.get("/api/users", (req, res, next) => {
     .catch((error) => next(error));
 });
 
-// Use static assets in the client build due to file architencture for railway integration
+// Serve static React build
 app.use(express.static("client/build"));
 
 app.listen(process.env.PORT || 5000);

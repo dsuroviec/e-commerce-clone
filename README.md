@@ -18,7 +18,7 @@ You may need version 16 of `node`
 
 ```bash
 npm install
-docker-compose-up
+docker-compose up
 npm run dev
 cd client/ && npm start
 ```

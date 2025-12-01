@@ -28,7 +28,6 @@ import "./App.css";
 // Fix images on home page for when screen sizes get larger. either find out how to scale, or use bigger images
 // Create readme for github account and figure out how to get dev setup going for other people who want to work on in. docker? docker compose?
 // when can I delete other project on old computer
-// Connect railway to main branch in e-commerce-clone repo
 
 function App() {
   const [token, setToken] = useState<null | string>(localStorage.token || null);

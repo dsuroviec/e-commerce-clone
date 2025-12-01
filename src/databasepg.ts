@@ -10,7 +10,19 @@ interface CreateUserProps {
   password: string;
 }
 
-const pool = new Pool();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
+  // Fallback to defaults for local development if DATABASE_URL not set
+  host: process.env.DATABASE_URL ? undefined : "localhost",
+  port: process.env.DATABASE_URL ? undefined : 5432,
+  database: process.env.DATABASE_URL ? undefined : "postgres",
+  user: process.env.DATABASE_URL ? undefined : "postgres",
+  password: process.env.DATABASE_URL ? undefined : "postgres",
+});
 
 export const authenticateUser = async ({
   email,

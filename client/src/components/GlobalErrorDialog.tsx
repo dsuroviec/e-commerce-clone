@@ -52,7 +52,7 @@ export const GlobalErrorDialog = () => {
                 <p className="text-sm text-gray-500">
                   Some features are for showcasing styling skills only. Auth,
                   cart management, search, and categories are functional.
-                  Postgres handles mutations and the display is driven by it's
+                  Postgres handles mutations and the display is driven by its
                   data.
                 </p>
               </div>
